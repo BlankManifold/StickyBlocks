@@ -1,0 +1,212 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scene/base_objects/MainTitleBlock.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/graphic/block/player_block.svg" type="Texture" id=2]
+[ext_resource path="res://scripts/menus/MainMenu.cs" type="Script" id=3]
+[ext_resource path="res://assets/graphic/mainMenu/block_button.svg" type="Texture" id=4]
+
+[sub_resource type="Animation" id=4]
+resource_name = "GoTo"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "OptionsSelected"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 466.838, 326.658 ), Vector2( -170.531, 428.07 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "PlaySelected"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 466.838, 326.658 ), Vector2( -170.575, 235.459 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 466.838, 326.658 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../../..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 484.37, 234.469, 354.65 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 240.075 ]
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0745098, 0.160784, 0.235294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 980.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 279.0
+margin_bottom = 720.0
+custom_constants/separation = 250
+alignment = 1
+
+[node name="Play" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" groups=["buttons"]]
+self_modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
+margin_top = 183.0
+margin_right = 279.0
+margin_bottom = 235.0
+rect_min_size = Vector2( 279, 52 )
+texture_normal = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Play"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+custom_colors/font_color = Color( 0.894118, 0.956863, 1, 1 )
+text = "Play"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" groups=["buttons"]]
+self_modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
+margin_top = 485.0
+margin_right = 279.0
+margin_bottom = 537.0
+rect_min_size = Vector2( 279, 52 )
+texture_normal = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Options"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+custom_colors/font_color = Color( 0.894118, 0.956863, 1, 1 )
+text = "Options"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainTitleBlock" parent="MarginContainer/HBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 283.0
+margin_right = 980.0
+margin_bottom = 720.0
+rect_pivot_offset = Vector2( -1486.68, 15.2203 )
+size_flags_horizontal = 3
+
+[node name="Block" type="TextureRect" parent="MarginContainer/HBoxContainer/MainTitleBlock"]
+self_modulate = Color( 0.560784, 0.243137, 0.243137, 1 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 466.838
+margin_top = 326.658
+margin_right = 1026.84
+margin_bottom = 886.658
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/HBoxContainer/MainTitleBlock/Block"]
+anims/GoTo = SubResource( 4 )
+anims/OptionsSelected = SubResource( 1 )
+anims/PlaySelected = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[connection signal="animation_finished" from="MarginContainer/HBoxContainer/MainTitleBlock/Block/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

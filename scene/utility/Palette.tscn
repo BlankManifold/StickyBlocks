@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=2]
+
+[node name="Node2D" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0745098, 0.160784, 0.235294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RotationStickyBlock" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.5625, 0.24379, 0.24379, 1 )
+position = Vector2( 306, 195 )
+
+[node name="RotationStickyBlock2" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.619608, 0.843137, 1, 1 )
+position = Vector2( 412, 195 )
+
+[node name="RotationStickyBlock3" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
+position = Vector2( 551, 195 )
+
+[node name="RotationStickyBlock5" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.0842775, 0.395456, 0.613281, 1 )
+position = Vector2( 503, 195 )
+
+[node name="RotationStickyBlock6" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.247357, 0.690088, 1, 1 )
+position = Vector2( 456, 195 )
+
+[node name="RotationStickyBlock9" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.0472714, 0.0815663, 0.105469, 1 )
+position = Vector2( 602, 195 )
+
+[node name="RotationStickyBlock11" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.894118, 0.956863, 1, 1 )
+position = Vector2( 363, 195 )

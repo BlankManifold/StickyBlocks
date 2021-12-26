@@ -1,0 +1,156 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/menus/MenuTemplates.cs" type="Script" id=1]
+[ext_resource path="res://assets/graphic/mainMenu/return.svg" type="Texture" id=5]
+[ext_resource path="res://assets/graphic/mainMenu/block_button.svg" type="Texture" id=7]
+
+[node name="OptionsMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -577, -232 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0745098, 0.160784, 0.235294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Return" type="TextureButton" parent="." groups=["buttons"]]
+self_modulate = Color( 0.6, 0.6, 0.6, 1 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 26.0
+margin_top = -45.0
+margin_right = 267.0
+margin_bottom = 33.0
+rect_scale = Vector2( 0.3, 0.3 )
+texture_normal = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -350.0
+margin_top = -257.0
+margin_right = 350.0
+margin_bottom = 257.0
+custom_constants/separation = 200
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_right = 700.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer"]
+margin_left = 324.0
+margin_right = 375.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
+text = "Options"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 214.0
+margin_right = 700.0
+margin_bottom = 264.0
+custom_constants/separation = 100
+alignment = 1
+
+[node name="Option1" type="TextureButton" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
+self_modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
+margin_right = 300.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 300, 50 )
+texture_normal = ExtResource( 7 )
+expand = true
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Option1"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -28.5
+margin_top = -7.0
+margin_right = 28.5
+margin_bottom = 7.0
+custom_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
+text = "Option 1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Option2" type="TextureButton" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
+self_modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
+margin_left = 400.0
+margin_right = 700.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 300, 50 )
+texture_normal = ExtResource( 7 )
+expand = true
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Option2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -28.0
+margin_top = -7.0
+margin_right = 28.0
+margin_bottom = 7.0
+custom_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
+text = "Option 2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
+margin_top = 464.0
+margin_right = 700.0
+margin_bottom = 514.0
+
+[node name="Reset" type="TextureButton" parent="VBoxContainer/CenterContainer2" groups=["buttons"]]
+self_modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
+margin_left = 200.0
+margin_right = 500.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 300, 50 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 7 )
+expand = true
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer2/Reset"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+custom_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
+text = "Reset"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

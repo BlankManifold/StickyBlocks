@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/graphic/mainMenu/pause.png" type="Texture" id=1]
+
+[node name="Pause" type="NinePatchRect"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pause" type="TextureButton" parent="."]
+self_modulate = Color( 0.6, 0.6, 0.6, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.5
+margin_top = -16.0
+margin_right = 12.5
+margin_bottom = 16.0
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

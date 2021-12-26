@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scene/base_objects/HUDStars.tscn" type="PackedScene" id=1]
+
+[node name="HUDData" type="NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_top = 0.947
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 0.039978
+mouse_filter = 2
+custom_constants/separation = 400
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Moves" type="Label" parent="HBoxContainer"]
+self_modulate = Color( 0.6, 0.6, 0.6, 1 )
+margin_left = 9.0
+margin_top = 11.0
+margin_right = 67.0
+margin_bottom = 25.0
+text = "Moves: 0"
+
+[node name="Level" type="Label" parent="HBoxContainer"]
+self_modulate = Color( 0.6, 0.6, 0.6, 1 )
+margin_left = 467.0
+margin_top = 11.0
+margin_right = 517.0
+margin_bottom = 25.0
+text = "Level: 0"
+
+[node name="HUDStars" parent="HBoxContainer" instance=ExtResource( 1 )]
+modulate = Color( 0.6, 0.6, 0.6, 1 )
+margin_left = 917.0
+margin_right = 1030.0

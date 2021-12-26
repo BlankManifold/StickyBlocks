@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/main/Level.cs" type="Script" id=1]
+[ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/base_objects/PlayerBlock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/base_objects/HUDbuttons.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scene/menus/PauseMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scene/base_objects/HUDData.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/graphic/mainMenu/backgroundMain.png" type="Texture" id=7]
+[ext_resource path="res://assets/graphic/block/player_block.svg" type="Texture" id=8]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 1 )
+_movesRequired = PoolIntArray( 0, 0, 0 )
+
+[node name="RotationStickyBlocks" type="Node2D" parent="."]
+
+[node name="InitialBlock" parent="RotationStickyBlocks" instance=ExtResource( 2 )]
+_isFirst = true
+
+[node name="FinalBlock" parent="RotationStickyBlocks" instance=ExtResource( 2 )]
+position = Vector2( 375, 210 )
+_isLast = true
+
+[node name="TextureRect" type="TextureRect" parent="RotationStickyBlocks/FinalBlock"]
+self_modulate = Color( 0.490196, 0.203922, 0.203922, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerBlock" parent="." instance=ExtResource( 3 )]
+position = Vector2( 33, 0 )
+
+[node name="ButtonsLayers" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="HUDbuttons" parent="ButtonsLayers" instance=ExtResource( 4 )]
+
+[node name="PauseMenu" parent="ButtonsLayers" instance=ExtResource( 5 )]
+pause_mode = 2
+
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+
+[node name="HUDData" parent="HUDLayer" instance=ExtResource( 6 )]
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+input_pass_on_modal_close_click = false
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0745098, 0.160784, 0.235294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="AddLine" from="PlayerBlock" to="." method="_on_PlayerBlock_AddLine"]
+[connection signal="ChangeStickyBlock" from="PlayerBlock" to="." method="_on_PlayerBlock_ChangeStickyBlock"]
+[connection signal="ImOnLast" from="PlayerBlock" to="." method="_on_PlayerBlock_ImOnLast"]
+[connection signal="MoveMade" from="PlayerBlock" to="." method="_on_PlayerBlock_MoveMade"]
+[connection signal="PausePressed" from="ButtonsLayers/HUDbuttons" to="." method="_on_HUDbuttons_PausePressed"]
+[connection signal="ResetPressed" from="ButtonsLayers/HUDbuttons" to="." method="_on_HUDbuttons_ResetPressed"]

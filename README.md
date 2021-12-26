@@ -1,0 +1,30 @@
+# StickyBlocks
+
+A first game without ambitions (especially from the point of view of aesthetics and graphics). First attempt to use Godot.
+
+## Objectives
+
+* To build and complete a little puzzle game. 
+* A pretext to learn some basic of Godot and C# (coming from C++/Python/Julia): how to structure a scalable game (multi-levels ect...), a saving-system, level/scene switching, how to export a godot-project.
+
+## Progress updates
+
+### 14/12/2021
+
+* Completed the basic mechanics: input-movement for the player-block and the blocks;  interactions/collisions between the `PlayerBlock` and the `RotationStickyBlock`.
+* Created the basic strucuture of a level (`Level` is the parent-scene of all levels)
+* Created and connected a main-menu, level-selection menu, options-menu: inherit from a `MenuTemplates` (handle from code the signals of the buttons)
+* Created a `GameManager` node to handle all the level-player stuff: load-level, player-data, saving-system. Receives all the signals from level-player
+* Added and connected a pause menu
+* Created a main scene `Main` to handle all the scene-switching and to load all the scenes. Receives all the signals from `GameManager` and all the menus. In `_Ready` loads all the scene, QueueFree the previous scene, instances and adds the next scene. (No performance issue because the scene are few and small).
+* Added and connected same basic HUD elements (only the structure, not the final graphics)
+
+### 21/12/2021
+
+* Refactored some code and scenes.
+* Started thinking about some element of the possible final graphics/colors-palette
+* Introduced some graphics elements: added `RotationStickyBlock` colors
+* Added a reset button in `Level` (retry)
+* Better (not much better!) camera movement
+* Better rotation and movement of `PlayerBlock` and `RotationStickyBlock` (using Tween)
+* Added to `PlayerBlock` a debug property: show `_dashDirection` line (usefull for designing levels) 

@@ -1,0 +1,119 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/menus/LevelTypeMenu.cs" type="Script" id=1]
+[ext_resource path="res://assets/graphic/mainMenu/return.svg" type="Texture" id=4]
+[ext_resource path="res://scene/base_objects/LevelTypeIcon.tscn" type="PackedScene" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="Theme" id=3]
+HScrollBar/styles/scroll = SubResource( 1 )
+VScrollBar/styles/scroll = SubResource( 2 )
+
+[node name="LevelTypeMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0745098, 0.160784, 0.235294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -507.0
+margin_top = -340.0
+margin_right = 507.0
+margin_bottom = 340.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+margin_right = 1014.0
+margin_bottom = 680.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -318.0
+margin_top = -65.0
+margin_right = 318.0
+margin_bottom = 65.0
+rect_clip_content = false
+theme = SubResource( 3 )
+follow_focus = true
+scroll_vertical_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/NinePatchRect/ScrollContainer"]
+margin_right = 636.0
+margin_bottom = 130.0
+custom_constants/separation = 150
+
+[node name="Easy" parent="MarginContainer/NinePatchRect/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 112.0
+margin_bottom = 130.0
+
+[node name="Medium" parent="MarginContainer/NinePatchRect/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 262.0
+margin_top = 0.0
+margin_right = 374.0
+margin_bottom = 130.0
+
+[node name="Hard" parent="MarginContainer/NinePatchRect/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 524.0
+margin_top = 0.0
+margin_right = 636.0
+margin_bottom = 130.0
+
+[node name="Return" type="TextureButton" parent="MarginContainer/NinePatchRect" groups=["buttons"]]
+modulate = Color( 0.6, 0.6, 0.6, 1 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_top = -29.0
+margin_right = 233.0
+margin_bottom = 49.0
+rect_scale = Vector2( 0.3, 0.3 )
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
