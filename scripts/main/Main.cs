@@ -60,10 +60,10 @@ public class Main : Control
         _menu.QueueFree();
         AddMenu(_optionsMenuScene, "OptionsMenu");
     }
-    public void GoToGameEndedMenu(int level, int stars, int moves, int best)
+    public void GoToGameEndedMenu(int level, bool owned, int moves, int best)
     {
         GameEndedMenu menu = _gameEndedMenuscene.Instance<GameEndedMenu>();
-        menu.Init(level, stars, moves, best);
+        menu.Init(level, owned, moves, best);
         AddChild(menu);
         menu.Name = "GameEndedMenu";
         menu.ConnectButtons();
@@ -144,13 +144,13 @@ public class Main : Control
         switch (name)
         {
             case "Return":
-                GoToMainMenu();
+                GoToLevelMenu();
                 break;
         }
     }
-    public void _on_GameManager_LevelCompleted(int level, int stars, int moves, int best)
+    public void _on_GameManager_LevelCompleted(int level, bool owned, int moves, int best)
     {
-        GoToGameEndedMenu(level, stars, moves, best);
+        GoToGameEndedMenu(level, owned, moves, best);
     }
     public void _on_GameEndedMenu_button_pressed(string name)
     {

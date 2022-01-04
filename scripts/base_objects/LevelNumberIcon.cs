@@ -29,19 +29,23 @@ public class LevelNumberIcon : VBoxContainer
         _modulateColor = _button.SelfModulate;
         _label.Text = _levelNumber;
 
+         if (_button.HasFocus())
+        {
+        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b);
+        }
+        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b, 0.2f);
+
+
     }
     
     public void _on_TextureButton_focus_entered()
     {
-        // _button.Modulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b);
-        this.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b);
+        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b);
     }
     public void _on_TextureButton_focus_exited()
     {
-        // _button.Modulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b, 0.2f);
-        this.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b, 0.2f);
+        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b, 0.2f);
     }
-
 
 
 }

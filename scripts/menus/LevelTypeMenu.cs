@@ -5,7 +5,9 @@ public class LevelTypeMenu : MenuTemplates
     public override void _Ready()
     {   
         base._Ready();
-        _buttons[0].GrabFocus();
+        VBoxContainer easy = (VBoxContainer)FindNode("Easy");
+        TextureButton firstbutton = (TextureButton)easy.FindNode("Easy");
+        firstbutton.GrabFocus();
     }
 
 }

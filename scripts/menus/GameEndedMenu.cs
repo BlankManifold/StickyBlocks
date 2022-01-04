@@ -6,41 +6,41 @@ public class GameEndedMenu : MenuTemplates
     private string _outcomeText;
     private string _movesText;
     private string _bestText;
-    private Texture _starsTexture;
-
+   
     private Label _outcomeLabel;
     private Label _bestLabel;
     private Label _movesLabel;
     private TextureRect _starsRect;
 
-    public void Init(int level, int stars, int moves, int best)
+    private AnimationPlayer _animationPlayer;
+    private bool _animationBackwards = false;
+
+
+    public void Init(int level, bool owned, int moves, int best)
     {
-        if (stars != 0)
+            
+        _outcomeText = $"Level {level} Completed!";
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+        if (owned)
         {
-            _outcomeText = $"Level {level} completed!";
-            _movesText = $"Moves: {moves}";
-            _bestText = $"Best: {best}";
-            _starsTexture = ResourceLoader.Load<Texture>($"res://assets/graphic/mainMenu/stars{stars}.png");
-
-            return;
+            _animationPlayer.Play("glow");
+            _outcomeText = $"Level {level} owned!";
         }
-        _outcomeText = "Level not completed!";
-        _movesText = "Moves: -";
-        _starsTexture = ResourceLoader.Load<Texture>("res://assets/graphic/mainMenu/stars0.png");
-
-
+     
+        _movesText = $"Moves: {moves}";
+        _bestText = $"Best: {best}";
         if (best == -1)
         {
             _bestText = "Best: -";
         }
-        _bestText = $"Best: {best}";
 
     }
 
     public override void _Ready()
     {
         base._Ready();
-        
+
         _outcomeLabel = (Label)FindNode("Outcome");
         _bestLabel = (Label)FindNode("Best");
         _movesLabel = (Label)FindNode("Moves");
@@ -49,9 +49,29 @@ public class GameEndedMenu : MenuTemplates
         _outcomeLabel.Text = _outcomeText;
         _bestLabel.Text = _bestText;
         _movesLabel.Text = _movesText;
-        _starsRect.Texture = _starsTexture;
+       
 
     }
 
-
+     public void _on_AnimationPlayer_animation_finished(string name)
+    {
+        if (name == "glow")
+        {
+            if (_animationBackwards)
+            {
+                _animationPlayer.Play("glow");
+            }
+            else
+            {
+                _animationPlayer.PlayBackwards("glow");
+            }
+            
+            _animationBackwards = !_animationBackwards;
+        }
+    }
 }
+
+
+
+
+ 

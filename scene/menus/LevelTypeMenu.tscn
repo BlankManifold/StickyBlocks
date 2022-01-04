@@ -57,7 +57,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -318.0
 margin_top = -65.0
-margin_right = 318.0
+margin_right = 319.0
 margin_bottom = 65.0
 rect_clip_content = false
 theme = SubResource( 3 )
@@ -71,6 +71,7 @@ __meta__ = {
 margin_right = 636.0
 margin_bottom = 130.0
 custom_constants/separation = 150
+alignment = 1
 
 [node name="Easy" parent="MarginContainer/NinePatchRect/ScrollContainer/HBoxContainer" instance=ExtResource( 5 )]
 anchor_left = 0.0

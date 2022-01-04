@@ -1,26 +1,22 @@
 using Godot;
 
-public class LevelGrid : LevelTypeMenu
+public class LevelGrid : MenuTemplates
 {
     [Export]
     private int _levelPerRow = 3;
     private string _levelType;
-    private Texture _star1_texture;
-    public Texture Star1 { get { return _star1_texture; } }
-    private Texture _star2_texture;
-    public Texture Star2 { get { return _star2_texture; } }
-    private Texture _star3_texture;
-    public Texture Star3 { get { return _star3_texture; } }
+    private Texture _star_texture;
+    private AnimationPlayer _animationPlayer;
+    private bool _animationBackwards = false;
 
-    
     public override void _Ready()
     {
 
         base._Ready();
 
-        _star1_texture = ResourceLoader.Load<Texture>("res://assets/graphic/mainMenu/stars1.png");
-        _star2_texture = ResourceLoader.Load<Texture>("res://assets/graphic/mainMenu/stars2.png");
-        _star3_texture = ResourceLoader.Load<Texture>("res://assets/graphic/mainMenu/stars3.png");
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        _animationPlayer.Play("glow");
+        _star_texture = ResourceLoader.Load<Texture>("res://assets/graphic/mainMenu/star.png");
 
         int row = 0;
         int col = 0;
@@ -34,9 +30,15 @@ public class LevelGrid : LevelTypeMenu
                 num = row * _levelPerRow + col;
                 icon.Name = "Level" + num.ToString();
                 TextureButton button = icon.Button;
+                if (num == 0)
+                {
+                    button.GrabFocus();
+                }
                 TextureRect stars = icon.StarsRect;
+                stars.Texture = _star_texture;
                 button.Name = icon.Name;
-                SetStars(stars,num);
+                SetOwned(stars, num);
+                SetCompleted(stars, num);
                 col++;
             }
             row++;
@@ -44,23 +46,39 @@ public class LevelGrid : LevelTypeMenu
         }
     }
 
-    public void SetStars(TextureRect stars, int levelNumber)
+    public void SetOwned(TextureRect star, int levelNumber)
     {
-        int starsNumber = _gameManager.GetStars("Easy",levelNumber);
-        switch (starsNumber)
+        int owned = _gameManager.GetOwned("Easy", levelNumber);
+
+        if (owned == 1)
         {
-            case 0:
-                break;
-            case 1:
-                stars.Texture = _star1_texture;
-                break;
-            case 2:
-                stars.Texture = _star2_texture;
-                break;
-            case 3:
-                stars.Texture = _star3_texture;
-                break;
+            star.SelfModulate = new Color(1.09f, 1.04f, 0.79f);
+        }
+    }
+    public void SetCompleted(TextureRect star, int levelNumber)
+    {
+        int best = _gameManager.GetBest("Easy", levelNumber);
+        int owned = _gameManager.GetOwned("Easy", levelNumber);
+        if (best != -1 && owned != 1)
+        {
+            star.SelfModulate = new Color(0.79f, 0.74f, 0.49f);
         }
     }
 
+    public void _on_AnimationPlayer_animation_finished(string name)
+    {
+        if (name == "glow")
+        {
+            if (_animationBackwards)
+            {
+                _animationPlayer.Play("glow");
+            }
+            else
+            {
+                _animationPlayer.PlayBackwards("glow");
+            }
+            
+            _animationBackwards = !_animationBackwards;
+        }
+    }
 }

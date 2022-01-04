@@ -6,16 +6,14 @@ public class PlayerBlock : KinematicBody2D
     [Export]
     public bool Debug = false;
 
-    [Export]
-    private Vector2 _zoom_limits = new Vector2(1f, 2f);
-
     private Sprite _sprite;
     private int _speed = 10;
     private bool _moving = false;
     private bool _rotating = false;
     public bool Moving { get { return _moving; } }
-    public bool Rotating { 
-        get { return _rotating; } 
+    public bool Rotating
+    {
+        get { return _rotating; }
         set { _rotating = value; }
     }
     // private bool _isMouseOver = false;
@@ -67,8 +65,7 @@ public class PlayerBlock : KinematicBody2D
         _initialDirection = ray.CastTo.Rotated(GlobalRotation).Normalized();
         _dashDirection = _initialDirection;
         _camera = GetNode<PlayerCamera>("PlayerCamera");
-        _camera.ZoomLimits = _zoom_limits;
-
+       
         _initialPosition = GlobalPosition;
         _initialRotation = GlobalRotation;
     }
@@ -116,7 +113,7 @@ public class PlayerBlock : KinematicBody2D
 
     private void MoveAndDirection()
     {
-    
+
         KinematicCollision2D collisionInfo = MoveAndCollide(_dashDirection * _speed);
         if (collisionInfo != null)
         {
@@ -161,35 +158,27 @@ public class PlayerBlock : KinematicBody2D
         Rotate(angle);
 
         _dashDirection = normal;
+
     }
-    // private void ChangeTexture()
-    // {
-    //     if (_isSelected)
-    //     {
-    //         _sprite.Texture = selectedTexture;
-    //     }
-    //     else
-    //     {
-    //         _sprite.Texture = unselectedTexture;
-    //     }
-    // }
 
-
-    public void _on_Tween_tween_started(object _, NodePath node)
+    public void _on_Tween_tween_started(object _, NodePath __)
     {
         _rotating = true;
     }
-    public void _on_Tween_tween_completed(object _, NodePath node)
+    public void _on_Tween_tween_completed(object _, NodePath __)
     {
         _rotating = false;
     }
 
 
-    // public void _on_PlayerBlock_mouse_entered() => _isMouseOver = true;
-    // public void _on_PlayerBlock_mouse_exited() => _isMouseOver = false;
+    [Signal]
+    delegate void OffsetZoom(Vector2 newZoom, Vector2 oldZoom);
 
-
-
+    public void _on_PlayerCamera_OffsetZoom(Vector2 newZoom, Vector2 oldZoom)
+    {
+        EmitSignal(nameof(OffsetZoom), newZoom, oldZoom);
+    }
 
 }
+
 

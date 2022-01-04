@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 652.5, 360 )
@@ -18,20 +17,3 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2( 652.5, 360 )
 shape = SubResource( 1 )
-
-[node name="Blocks" parent="." index="1"]
-follow_viewport_enable = false
-
-[node name="InitialBlock" parent="Blocks/Control/RotationStickyBlocks" index="0"]
-position = Vector2( 270, 180 )
-_type = "Rotation45"
-
-[node name="FinalBlock" parent="Blocks/Control/RotationStickyBlocks" index="1"]
-position = Vector2( 810, 540 )
-
-[node name="RotationStickyBlock" parent="Blocks/Control/RotationStickyBlocks" index="2" instance=ExtResource( 5 )]
-position = Vector2( 1215, 180 )
-_type = "Rotation45"
-
-[node name="PlayerBlock" parent="Blocks/Control" index="1"]
-position = Vector2( 303, 180 )

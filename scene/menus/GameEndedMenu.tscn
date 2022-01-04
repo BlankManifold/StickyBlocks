@@ -1,10 +1,48 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/menus/GameEndedMenu.cs" type="Script" id=1]
 [ext_resource path="res://assets/graphic/mainMenu/block_button.svg" type="Texture" id=2]
-[ext_resource path="res://assets/graphic/mainMenu/stars0.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphic/mainMenu/star.png" type="Texture" id=3]
 
-[node name="OptionsMenu" type="Control"]
+[sub_resource type="Environment" id=4]
+background_mode = 4
+glow_enabled = true
+glow_strength = 0.9
+glow_blend_mode = 0
+glow_bicubic_upscale = true
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("WorldEnvironment:environment:glow_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.9 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "glow"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("WorldEnvironment:environment:glow_strength")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.9, 1.1 ]
+}
+
+[node name="GameEndedMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -46,12 +84,12 @@ valign = 1
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 164.0
 margin_right = 700.0
-margin_bottom = 322.0
+margin_bottom = 332.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
 margin_left = 248.0
 margin_right = 451.0
-margin_bottom = 158.0
+margin_bottom = 168.0
 custom_constants/separation = 50
 alignment = 1
 
@@ -63,16 +101,19 @@ text = "Level 1 completed"
 align = 1
 
 [node name="Stars" type="TextureRect" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+self_modulate = Color( 1.09, 1.04, 0.79, 1 )
 margin_top = 64.0
 margin_right = 203.0
-margin_bottom = 94.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 3 )
-stretch_mode = 4
+expand = true
+stretch_mode = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer/VBoxContainer"]
-margin_top = 144.0
+margin_top = 154.0
 margin_right = 203.0
-margin_bottom = 158.0
+margin_bottom = 168.0
 custom_constants/separation = 100
 alignment = 1
 
@@ -92,9 +133,9 @@ text = "Best: 5"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 472.0
+margin_top = 482.0
 margin_right = 700.0
-margin_bottom = 507.0
+margin_bottom = 517.0
 custom_constants/separation = 50
 
 [node name="Return" type="TextureButton" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
@@ -173,3 +214,15 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/glow = SubResource( 6 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

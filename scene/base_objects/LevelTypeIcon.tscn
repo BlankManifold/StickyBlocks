@@ -1,8 +1,55 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/graphic/block/player_block.svg" type="Texture" id=1]
 [ext_resource path="res://scripts/base_objects/LevelTypeIcon.cs" type="Script" id=2]
 [ext_resource path="res://assets/graphic/block/locked.svg" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CenterContainer/LockedRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.894118, 0.956863, 1, 0.392157 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CenterContainer/LockedRect:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.27, 0.25 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "unlock"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("CenterContainer/LockedRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.894118, 0.956863, 1, 0.392157 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Environment" id=3]
+background_mode = 4
+glow_enabled = true
 
 [node name="VBoxContainer" type="VBoxContainer"]
 anchor_left = 0.5
@@ -37,21 +84,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LockedRect" type="TextureRect" parent="CenterContainer"]
-self_modulate = Color( 0.894118, 0.956863, 1, 0.392157 )
-margin_left = 21.0
-margin_top = 11.0
-margin_right = 91.0
-margin_bottom = 101.0
-rect_min_size = Vector2( 70, 90 )
-mouse_filter = 2
-texture = ExtResource( 3 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="CenterContainer/LockedRect"]
+[node name="Label" type="Label" parent="CenterContainer/TextureButton"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -70,6 +103,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LockedRect" type="TextureRect" parent="CenterContainer"]
+self_modulate = Color( 0.894118, 0.956863, 1, 0.392157 )
+margin_left = 26.0
+margin_top = 21.0
+margin_right = 86.0
+margin_bottom = 91.0
+rect_min_size = Vector2( 60, 70 )
+rect_scale = Vector2( 0.27, 0.25 )
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label" type="Label" parent="."]
 self_modulate = Color( 0.6, 0.6, 0.6, 1 )
 margin_left = 41.0
@@ -79,6 +129,14 @@ margin_bottom = 130.0
 size_flags_horizontal = 4
 text = "5/20"
 align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
+anims/RESET = SubResource( 1 )
+anims/unlock = SubResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
 
 [connection signal="focus_entered" from="CenterContainer/TextureButton" to="." method="_on_TextureButton_focus_entered"]
 [connection signal="focus_exited" from="CenterContainer/TextureButton" to="." method="_on_TextureButton_focus_exited"]

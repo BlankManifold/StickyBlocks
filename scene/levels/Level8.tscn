@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -20,18 +19,11 @@ position = Vector2( 540, 360 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
-position = Vector2( -405, -180 )
+position = Vector2( 135, 181 )
 _type = "IRotation30"
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( -405, 180 )
-
-[node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="2" instance=ExtResource( 1 )]
-position = Vector2( 270, -180 )
-_type = "Rotation45"
-
-[node name="RotationStickyBlock" parent="RotationStickyBlocks" index="3" instance=ExtResource( 1 )]
-position = Vector2( 405, 90 )
+position = Vector2( 720, 195 )
 
 [node name="PlayerBlock" parent="." index="2"]
 position = Vector2( 168, 180 )

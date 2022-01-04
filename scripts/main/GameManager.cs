@@ -10,13 +10,16 @@ public class GameManager : Node2D
     [Export]
     private Dictionary<string, int> _maxLevel; //= new Dictionary<string, int>() { { "Easy", 3 }, { "Medium", 0 }, { "Hard", 0 } };
     public Dictionary<string, int> MaxLevel { get { return _maxLevel; } }
+    private Dictionary<string,   bool> _justUnLocked = new Dictionary<string, bool>() {{ "Easy", false },{ "Medium", false }, { "Hard", false } };
+    public Dictionary<string, bool> JustUnLocked { get { return _justUnLocked; } }
+
     private Level _currentLevel;
     private int _currentLevelNumber = 0;
     public int CurrentLevelNumber { get { return _currentLevelNumber; }}
     private string _currentLevelType = "Easy";
     public string CurrentLevelType { get { return _currentLevelType; } }
     private string[] _levelTypes = { "Easy", "Medium", "Hard" };
-    private Dictionary<string, string> _levelChain = new Dictionary<string, string>()  { { "Easy", "Medium" }, { "Medium", "Hard" },{ "Hard", null }};
+    private Dictionary<string, string> _levelChain = new Dictionary<string, string>()  { { "Easy", "Medium"}, { "Medium", "Hard" },{ "Hard", null }};
     private Godot.Collections.Dictionary _levelLockDictionary = new Godot.Collections.Dictionary() { };
     private string _levelLockPath = "user://levelLock.dat";
     private PlayerDataType _playerDataDictionary = new PlayerDataType() { };
@@ -28,7 +31,7 @@ public class GameManager : Node2D
 
 
     [Signal]
-    public delegate void LevelCompleted(int level, int stars, int moves, int best);
+    public delegate void LevelCompleted(int level, bool owned, int moves, int best);
     [Signal]
     public delegate void QuitPressed();
 
@@ -36,7 +39,7 @@ public class GameManager : Node2D
 
     public void LoadDefaultPlayerData()
     {
-        Dictionary<string, int> dataDictionary = new Dictionary<string, int>() { { "Stars", 0 }, { "Best", -1 } };
+        Dictionary<string, int> dataDictionary = new Dictionary<string, int>() { { "Owned", 0 }, { "Best", -1 } };
         _levelLockDictionary = new Godot.Collections.Dictionary() { };
         _playerDataDictionary = new PlayerDataType() { };
 
@@ -58,7 +61,7 @@ public class GameManager : Node2D
             _levelLockDictionary.Add(type, levelDataDictionary);
 
 
-            for (int i = 0; i < _maxLevel[type]; i++)
+            for (int i = 0; i <= _maxLevel[type]; i++)
             {
                 typeDictionary.Add($"Level{i}", dataDictionary);
             }
@@ -104,17 +107,29 @@ public class GameManager : Node2D
         file2.Close();
     }
 
-    public int GetStars(string type, int level)
+    public int GetOwned(string type, int level)
     {
         Godot.Collections.Dictionary dict1 = (Godot.Collections.Dictionary)_playerDataDictionary[type];
         Godot.Collections.Dictionary dict2 = (Godot.Collections.Dictionary)dict1[$"Level{level}"];
-        return (int)dict2["Stars"];
+        return (int)dict2["Owned"];
     }
-    public void SetStars(string type, int level, int stars)
+    public void SetOwned(string type, int level, int owned)
     {
         Godot.Collections.Dictionary dict1 = (Godot.Collections.Dictionary)_playerDataDictionary[type];
         Godot.Collections.Dictionary dict2 = (Godot.Collections.Dictionary)dict1[$"Level{level}"];
-        dict2["Stars"] = stars;
+        dict2["Owned"] = owned;
+    }
+    public int GetBest(string type, int level)
+    {
+        Godot.Collections.Dictionary dict1 = (Godot.Collections.Dictionary)_playerDataDictionary[type];
+        Godot.Collections.Dictionary dict2 = (Godot.Collections.Dictionary)dict1[$"Level{level}"];
+        return (int)dict2["Best"];
+    }
+    public void SetBest(string type, int level, int best)
+    {
+        Godot.Collections.Dictionary dict1 = (Godot.Collections.Dictionary)_playerDataDictionary[type];
+        Godot.Collections.Dictionary dict2 = (Godot.Collections.Dictionary)dict1[$"Level{level}"];
+        dict2["Best"] = best;
     }
     public int GetData(string type, int level, string data)
     {
@@ -178,7 +193,8 @@ public class GameManager : Node2D
     {
         string nextType = _levelChain[type];
         if (nextType != null)
-        {
+        {   
+            _justUnLocked[nextType] = true;
             SetLevelUnlocked(nextType);
         }
     }
@@ -196,7 +212,7 @@ public class GameManager : Node2D
     }
 
 
-    public void _on_Level_GameCompleted(int stars, int movesCounter)
+    public void _on_Level_GameCompleted(bool owned, int movesCounter)
     {
         string type = _currentLevel.Type;
 
@@ -207,6 +223,7 @@ public class GameManager : Node2D
             AddCompleted(type);
             if (UnlockedCondtion(type))
             {
+                
                 UnLockNextType(type);
             }
         }
@@ -215,15 +232,15 @@ public class GameManager : Node2D
             SetData(type, _currentLevelNumber, "Best", movesCounter);
         }
 
-        if (GetStars(type, _currentLevelNumber) < stars)
+        if (owned && GetOwned(type, _currentLevelNumber) != 1)
         {
-            SetStars(type, _currentLevelNumber, stars);
+            SetOwned(type, _currentLevelNumber, 1);
         }
         
         SavePlayerData();
         _currentLevel.QueueFree();
 
-        EmitSignal(nameof(LevelCompleted), _currentLevelNumber, stars, movesCounter, GetData(type, _currentLevelNumber, "Best"));
+        EmitSignal(nameof(LevelCompleted), _currentLevelNumber, owned, movesCounter, GetData(type, _currentLevelNumber, "Best"));
     }
     public void _on_PauseMenu_button_pressed(string name, PauseMenu pauseMenu)
     {

@@ -11,6 +11,8 @@ public class LevelTypeIcon : VBoxContainer
     protected TextureButton _button;
 
     protected TextureRect _lockedRect;
+
+    private AnimationPlayer _animationPlayer;
     
     private Label _label;
     private Label _typeLabel;
@@ -21,21 +23,29 @@ public class LevelTypeIcon : VBoxContainer
     public bool IsUnlocked { get { return _isUnlocked; } set { _isUnlocked = value; } }
 
 
-    public override void _Ready()
+    public async override void _Ready()
     {
         _gameManager = GetTree().Root.GetNode<GameManager>("Main/GameManager");
         _button = GetNode<TextureButton>("CenterContainer/TextureButton");
         _label = GetNode<Label>("Label");
         _lockedRect = GetNode<TextureRect>("CenterContainer/LockedRect");
-        _typeLabel = _lockedRect.GetNode<Label>("Label");
+        _typeLabel = _button.GetNode<Label>("Label");
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
         _button.Name = this.Name;
         _typeLabel.Text = this.Name;
         _modulateColor = _button.SelfModulate;
 
         _isUnlocked = _gameManager.IsLevelUnlocked(_button.Name);
-        _button.SelfModulate = _modulateColor;
         _button.TextureNormal = _texture;
+
+        if (_gameManager.JustUnLocked[Name])
+        {
+            await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
+            _animationPlayer.Play("unlock");
+            await ToSignal(_animationPlayer,"animation_finished");
+        }
+        
         
         if (_isUnlocked)
         {
@@ -43,6 +53,13 @@ public class LevelTypeIcon : VBoxContainer
         }
 
         _label.Text = $"{_gameManager.NumberOfCompleted(Name)}/{_gameManager.NumberOfLevel(Name)}";
+        
+        if (_button.HasFocus())
+        {
+        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b);
+        }
+        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b, 0.2f);
+
     }
     public void _on_TextureButton_focus_entered()
     {
