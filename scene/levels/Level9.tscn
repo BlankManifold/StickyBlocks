@@ -7,7 +7,6 @@
 extents = Vector2( 540, 360 )
 
 [node name="Level" instance=ExtResource( 1 )]
-_number = 5
 _maxZoomConstraint = 1.0
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
@@ -21,15 +20,18 @@ position = Vector2( 540, 360 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
-position = Vector2( 135, 361 )
+position = Vector2( 270, 181 )
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 945, 361 )
+position = Vector2( 270, 541 )
 
 [node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 2 )]
-position = Vector2( 540, 361 )
-_type = "Rotation180"
+position = Vector2( 810, 181 )
+_type = "IRotation90"
+
+[node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="3" instance=ExtResource( 2 )]
+position = Vector2( 810, 541 )
+_type = "Rotation90"
 
 [node name="PlayerBlock" parent="." index="2"]
-position = Vector2( 168, 360 )
-Debug = true
+position = Vector2( 304, 180 )

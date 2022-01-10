@@ -21,10 +21,22 @@ A first game without ambitions (especially from the point of view of aesthetics 
 
 ### 21/12/2021
 
-* Refactored some code and scenes.
+* Refactored some code and scenes
 * Started thinking about some element of the possible final graphics/colors-palette
 * Introduced some graphics elements: added `RotationStickyBlock` colors
 * Added a reset button in `Level` (retry)
 * Better (not much better!) camera movement
 * Better rotation and movement of `PlayerBlock` and `RotationStickyBlock` (using Tween)
-* Added to `PlayerBlock` a debug property: show `_dashDirection` line (usefull for designing levels) 
+* Added to `PlayerBlock` a debug property: show `_dashDirection` line (usefull for designing levels)
+
+### 04/01/2022
+
+* New simpler Completed/Owned system for levels completion (based on moves counter)
+* Added some WorldEnvironment effects/ animation in: owning a level, new level difficulty unlokced
+* Improved/Changed zooming and camera movement: added `LevelCamera` as child of a Position2D (fixed center of the camera)
+* Improved reset and back-to-last-position functions
+* Created some basic-easy-tutorial levels
+* Created some more complex levels
+* Added initialZoom and MaxZoomConstraint as exported variables
+* Added Undo/BackOneMove (only one) functionality
+

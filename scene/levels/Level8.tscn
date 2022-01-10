@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 540, 360 )
+extents = Vector2( 630, 405 )
 
 [node name="Level" instance=ExtResource( 2 )]
 _number = 8
@@ -15,18 +16,34 @@ input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 540, 360 )
+position = Vector2( 630, 315 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
-position = Vector2( 135, 181 )
+position = Vector2( 315, 545 )
+rotation = -0.523599
 _type = "IRotation30"
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 720, 195 )
+position = Vector2( 1170, 226 )
+
+[node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 1 )]
+position = Vector2( 161, 226 )
+
+[node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="3" instance=ExtResource( 1 )]
+position = Vector2( 720, 541 )
+rotation = 0.785398
+_type = "IRotation45"
+
+[node name="RotationStickyBlock3" parent="RotationStickyBlocks" index="4" instance=ExtResource( 1 )]
+position = Vector2( 720, 1 )
+rotation = 1.5708
+_type = "IRotation60"
 
 [node name="PlayerBlock" parent="." index="2"]
-position = Vector2( 168, 180 )
+position = Vector2( 345, 530 )
+rotation = -0.523599
+Debug = true
 
 [node name="HUDData" parent="HUDLayer" index="0"]
 anchor_left = 0.5
@@ -37,3 +54,6 @@ margin_left = -520.0
 margin_top = -340.0
 margin_right = 520.0
 margin_bottom = 340.0
+
+[node name="Position2D" parent="." index="7"]
+position = Vector2( 630, 315 )

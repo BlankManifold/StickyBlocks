@@ -19,7 +19,7 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -70.0
+margin_left = -115.0
 margin_bottom = 32.0
 custom_constants/separation = 20
 __meta__ = {
@@ -36,10 +36,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="TextureButton" parent="HBoxContainer" groups=["buttons"]]
+[node name="Undo" type="TextureButton" parent="HBoxContainer" groups=["buttons"]]
 self_modulate = Color( 0.6, 0.6, 0.6, 1 )
 margin_left = 45.0
 margin_right = 70.0
+margin_bottom = 32.0
+action_mode = 0
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reset" type="TextureButton" parent="HBoxContainer" groups=["buttons"]]
+self_modulate = Color( 0.6, 0.6, 0.6, 1 )
+margin_left = 90.0
+margin_right = 115.0
 margin_bottom = 32.0
 focus_mode = 0
 texture_normal = ExtResource( 1 )
@@ -48,4 +59,5 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="HBoxContainer/Pause" to="." method="_on_Pause_pressed"]
+[connection signal="pressed" from="HBoxContainer/Undo" to="." method="_on_Undo_pressed"]
 [connection signal="button_down" from="HBoxContainer/Reset" to="." method="_on_Reset_button_down"]

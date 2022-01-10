@@ -20,7 +20,7 @@ __meta__ = {
 
 [node name="GameManager" parent="." instance=ExtResource( 1 )]
 _maxLevel = {
-"Easy": 3,
+"Easy": 15,
 "Hard": 0,
 "Medium": 0
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/main/Level.cs" type="Script" id=1]
 [ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=2]
@@ -8,9 +8,14 @@
 [ext_resource path="res://scene/base_objects/HUDData.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/graphic/mainMenu/backgroundMain.png" type="Texture" id=7]
 [ext_resource path="res://assets/graphic/block/player_block.svg" type="Texture" id=8]
+[ext_resource path="res://scripts/base_objects/LevelCamera.cs" type="Script" id=9]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 360.0, 180.0, 540.0 ],
+"_edit_vertical_guides_": [ 540.0, 270.0, 810.0 ]
+}
 
 [node name="RotationStickyBlocks" type="Node2D" parent="."]
 position = Vector2( 0, -1 )
@@ -47,6 +52,10 @@ position = Vector2( 214, 359 )
 layer = 0
 
 [node name="HUDbuttons" parent="ButtonsLayers" instance=ExtResource( 4 )]
+margin_left = -24.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 32.0
 
 [node name="PauseMenu" parent="ButtonsLayers" instance=ExtResource( 5 )]
 pause_mode = 2
@@ -85,6 +94,15 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 540, 360 )
+
+[node name="Camera2DLevel" type="Camera2D" parent="Position2D"]
+current = true
+script = ExtResource( 9 )
+
+[node name="TweenCamera" type="Tween" parent="Position2D/Camera2DLevel"]
+
 [connection signal="AddLine" from="PlayerBlock" to="." method="_on_PlayerBlock_AddLine"]
 [connection signal="ChangeStickyBlock" from="PlayerBlock" to="." method="_on_PlayerBlock_ChangeStickyBlock"]
 [connection signal="ImOnLast" from="PlayerBlock" to="." method="_on_PlayerBlock_ImOnLast"]
@@ -92,3 +110,7 @@ __meta__ = {
 [connection signal="OffsetZoom" from="PlayerBlock" to="." method="_on_PlayerBlock_OffsetZoom"]
 [connection signal="PausePressed" from="ButtonsLayers/HUDbuttons" to="." method="_on_HUDbuttons_PausePressed"]
 [connection signal="ResetPressed" from="ButtonsLayers/HUDbuttons" to="." method="_on_HUDbuttons_ResetPressed"]
+[connection signal="UndoPressed" from="ButtonsLayers/HUDbuttons" to="." method="_on_HUDbuttons_UndoPressed"]
+[connection signal="ChangeParent" from="Position2D/Camera2DLevel" to="." method="_on_Camera2DLevel_ChangeParent"]
+[connection signal="OffsetZoom" from="Position2D/Camera2DLevel" to="." method="_on_Camera2DLevel_OffsetZoom"]
+[connection signal="tween_completed" from="Position2D/Camera2DLevel/TweenCamera" to="Position2D/Camera2DLevel" method="_on_TweenCamera_tween_completed"]

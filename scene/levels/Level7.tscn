@@ -4,7 +4,7 @@
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 540, 360 )
+extents = Vector2( 540, 832.5 )
 
 [node name="Level" instance=ExtResource( 2 )]
 _number = 7
@@ -16,18 +16,30 @@ input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 540, 360 )
+position = Vector2( 540, 247.5 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
-position = Vector2( -405, 0 )
+position = Vector2( 135, 361 )
+rotation = -0.785398
+_type = "IRotation90"
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 405, 0 )
+position = Vector2( 1035, -359 )
 
 [node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 1 )]
+position = Vector2( 675, 901 )
+rotation = 3.14159
+_type = "IRotation45"
+
+[node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="3" instance=ExtResource( 1 )]
+position = Vector2( 675, -359 )
 rotation = 3.14159
 _type = "Rotation180"
 
 [node name="PlayerBlock" parent="." index="2"]
-position = Vector2( 168, 360 )
+position = Vector2( 159, 337 )
+rotation = -0.785398
+
+[node name="Position2D" parent="." index="7"]
+position = Vector2( 540, 250 )

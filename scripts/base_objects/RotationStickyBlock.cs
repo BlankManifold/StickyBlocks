@@ -20,8 +20,9 @@ public class RotationStickyBlock : StickyBlock
         set { _rotationAngle = value; }
     }
 
-    // private float _lastRotation;
-    // private bool _lastIsRotated = false;
+    private Godot.Collections.Dictionary _lastState = new Godot.Collections.Dictionary() {{"Rotation",null},{"IsRotated",false}, {"CanRotate",true}, {"IsCurrent",false}};
+    public  Godot.Collections.Dictionary LastState { get { return _lastState; } }
+
 
     [Export(PropertyHint.Enum, "Rotation0,Rotation30,Rotation45,Rotation60,Rotation90,Rotation180,IRotation30,IRotation45,IRotation60,IRotation90,IRotation180")]
     private string _type = "Rotation0";
@@ -46,9 +47,6 @@ public class RotationStickyBlock : StickyBlock
         _sprite = GetNode<Sprite>("Sprite");
         _tween = GetNode<Tween>("Tween");
         SetUp();
-        // Level level = GetParent<Node2D>().GetParent<Node2D>().GetParent<Node2D>().GetParent<Level>();
-        // Connect(nameof(ImRotating), level, nameof(level._on_RotationStickyBlock_ImRotating));
-        // _lastRotation = GlobalRotation;
     }
     public override void _Input(InputEvent inputEvent)
     {
@@ -58,11 +56,9 @@ public class RotationStickyBlock : StickyBlock
             {
                 if (_isCurrentBlock)
                 {
+                
                     _isRotated = !_isRotated;
                     Myrotate();
-
-                    // _lastIsRotated = _isRotated;
-                    // _lastRotation = GlobalRotation;
 
                     EmitSignal(nameof(ImRotating));
 
@@ -83,6 +79,22 @@ public class RotationStickyBlock : StickyBlock
 
     }
 
+    public void UpdateState()
+    {
+        _lastState["Rotation"] = GlobalRotation;
+        _lastState["IsRotated"] = _isRotated;
+        _lastState["CanRotate"] = CanRotate;
+        // _lastState["IsCurrent"] = _isCurrentBlock;
+    }
+    public void BackOneMove()
+    {
+        GlobalRotation = (float)_lastState["Rotation"];
+        _isRotated = (bool)_lastState["IsRotated"] ;
+        CanRotate = (bool)_lastState["CanRotate"];
+        _isCurrentBlock = true;
+    }
+
+    
 
     private void SetUp()
     {
@@ -105,13 +117,10 @@ public class RotationStickyBlock : StickyBlock
         if (_isRotated)
         {
             angle = -angle;
-            // Rotate(-_rotationAngle);
-            // return;
         }
 
         _tween.InterpolateProperty(this, "rotation", Rotation, Rotation + angle, 0.3f);
         _tween.Start();
-        // Rotate(angle);
     }
 
     public void _on_Tween_tween_started(object _, NodePath node)

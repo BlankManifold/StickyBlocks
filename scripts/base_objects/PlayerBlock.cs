@@ -21,10 +21,15 @@ public class PlayerBlock : KinematicBody2D
     private Vector2 _offset;
     private bool _isSelected = true;
     private int _movesCounter = 0;
-    private PlayerCamera _camera;
+    // private PlayerCamera _camera;
 
     private Vector2 _lastStationaryPosition;
     public Vector2 LastStationaryPosition { get { return _lastStationaryPosition; } }
+    private Godot.Collections.Dictionary _lastState = new Godot.Collections.Dictionary() { { "Transform", null }, { "DashDirection", null }, { "Block", null } };
+    public Godot.Collections.Dictionary LastState { get { return _lastState; } }
+
+    private RotationStickyBlock _currentBlock;
+    public RotationStickyBlock CurrentBlock { get { return _currentBlock;} set { _currentBlock = value; }}
 
     [Export]
     public Texture selectedTexture;
@@ -64,10 +69,10 @@ public class PlayerBlock : KinematicBody2D
         RayCast2D ray = GetNode<RayCast2D>("RayCast2D");
         _initialDirection = ray.CastTo.Rotated(GlobalRotation).Normalized();
         _dashDirection = _initialDirection;
-        _camera = GetNode<PlayerCamera>("PlayerCamera");
-       
+
         _initialPosition = GlobalPosition;
         _initialRotation = GlobalRotation;
+
     }
 
     public override void _Process(float delta)
@@ -85,8 +90,13 @@ public class PlayerBlock : KinematicBody2D
             if (_isSelected && !_moving && !_rotating)
             {
                 _lastStationaryPosition = GlobalPosition;
+                
+                UpdateTransform();
+                UpdateBlock(_currentBlock);
+
                 _moving = true;
                 _movesCounter++;
+                
                 EmitSignal(nameof(MoveMade));
             }
             inputEvent.Dispose();
@@ -97,6 +107,11 @@ public class PlayerBlock : KinematicBody2D
 
     }
 
+    public void BackOneMove()
+    {
+        GlobalTransform = (Transform2D)_lastState["Transform"];
+        _dashDirection = (Vector2)_lastState["DashDirection"];
+    }
     public void Reset()
     {
         GlobalPosition = _initialPosition;
@@ -109,6 +124,22 @@ public class PlayerBlock : KinematicBody2D
     {
         _moving = false;
         GlobalPosition = _lastStationaryPosition;
+    }
+
+    public void UpdateState(RotationStickyBlock block = null)
+    {
+        _lastState["Transform"] = GlobalTransform;
+        _lastState["DashDirection"] = _dashDirection;
+        _lastState["Block"] = block;
+    }
+    public void UpdateBlock(RotationStickyBlock block)
+    {
+        _lastState["Block"] = block;
+    }
+    public void UpdateTransform()
+    {
+        _lastState["Transform"] = GlobalTransform;
+        _lastState["DashDirection"] = _dashDirection;
     }
 
     private void MoveAndDirection()
@@ -135,6 +166,7 @@ public class PlayerBlock : KinematicBody2D
             CollideAndRotate(normal, pivot);
 
             EmitSignal(nameof(ChangeStickyBlock), collider);
+            _currentBlock = collider;
 
         }
     }

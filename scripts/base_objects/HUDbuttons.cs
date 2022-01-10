@@ -6,6 +6,8 @@ public class HUDbuttons : NinePatchRect
     delegate void PausePressed();
     [Signal]
     delegate void ResetPressed();
+    [Signal]
+    delegate void UndoPressed();
     public override void _Ready()
     {
 
@@ -18,9 +20,12 @@ public class HUDbuttons : NinePatchRect
     {
         EmitSignal(nameof(ResetPressed));
     }
+    public void _on_Undo_pressed()
+    {
+        EmitSignal(nameof(UndoPressed));
+    }
 
 }
-
 
 
 

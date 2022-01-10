@@ -26,43 +26,51 @@ public class Level : Node2D
     public int Number { get { return _number; } set { _number = value; } }
 
     private Line2D _line;
-    private PlayerCamera _camera;
+
+    private LevelCamera _cameraLevel;
     private Vector2 _offsetCamera = Vector2.Zero;
     private Vector2 _areaSize;
     private Vector2 _centerArea;
 
+    private Tween _tween;
+
+    [Export]
+    private float _intialZoom = 0f;
+
     [Signal]
     public delegate void GameCompleted(bool owned, int movesCounter);
+    [Signal]
+    public delegate void RotatingTweenCompleted();
+
+    [Export]
+    private float _maxZoomConstraint = 0f;
 
     private float[] _levelData;
 
     private Label _label;
 
-    private Dictionary<string,int> _bounds = new Dictionary<string,int> {{"bottom",0}, {"top",0}, {"right",0},{"left",0} };
+    private Dictionary<string, int> _bounds = new Dictionary<string, int> { { "bottom", 0 }, { "top", 0 }, { "right", 0 }, { "left", 0 } };
 
 
     public override void _Process(float _)
     {
         if (_playerBlock.Debug)
         {
-            _label.Text = $"Offset: {_camera.Offset} \n PlayerPos: {_playerBlock.GlobalPosition} \n CameraPos: {_camera.Position} \n CenterArea; {_centerArea} \n CenterCamera: {_camera.GetCameraScreenCenter()} \n Direction: {_playerBlock.GlobalPosition.DirectionTo(_centerArea)}";
-        }
-
-        if (IsOutOfBounds())
-        {
-            _camera.Current = false;
+            _label.Text = $"Offset: {_cameraLevel.Offset} \n PlayerPos: {_playerBlock.GlobalPosition} \n CameraPos: {_cameraLevel.GlobalPosition} \n CenterArea; {_centerArea} \n CenterCamera: {_cameraLevel.GetCameraScreenCenter()} \n Direction: {_playerBlock.GlobalPosition.DirectionTo(_centerArea)}";
         }
 
     }
     public override void _Ready()
     {
 
-        // _playerBlock = GetNode<PlayerBlock>("PlayerBlock");
         _playerBlock = (PlayerBlock)FindNode("PlayerBlock");
         _background = GetNode<TextureRect>("Background/TextureRect");
         Node2D nodes = (Node2D)FindNode("RotationStickyBlocks");
         _allStickyBlocks = nodes.GetChildren();
-        _camera = _playerBlock.GetNode<PlayerCamera>("PlayerCamera");
+        _tween = _playerBlock.GetNode<Tween>("Tween");
+
+        _cameraLevel = (LevelCamera)FindNode("Camera2DLevel");
+        _cameraLevel.Current = true;
 
 
         foreach (RotationStickyBlock block in _allStickyBlocks)
@@ -71,8 +79,11 @@ public class Level : Node2D
         }
 
         SetInitialCurrentBlock();
-        SetStarsLabel();
+        _playerBlock.UpdateState(_currentStickyBlock);
+        _playerBlock.CurrentBlock = _currentStickyBlock;
+        _currentStickyBlock.UpdateState();
 
+        SetLabels();
         _movesLabel = (Label)FindNode("Moves");
 
         Area2D area = (Area2D)FindNode("Area2D");
@@ -98,7 +109,7 @@ public class Level : Node2D
     {
         Vector2 pos = _playerBlock.GlobalPosition;
         float border = 50;
-        return (pos.x > _bounds["right"] - border  || pos.x < _bounds["left"] + border 
+        return (pos.x > _bounds["right"] - border || pos.x < _bounds["left"] + border
                 || pos.y < _bounds["top"] + border || pos.y > _bounds["bottom"] - border);
     }
 
@@ -111,8 +122,20 @@ public class Level : Node2D
         foreach (RotationStickyBlock block in _allStickyBlocks)
         {
             _levelData[i] = block.GlobalRotation;
+            block.UpdateState();
             i++;
         }
+    }
+    private void BackOneMove()
+    {
+        _playerBlock.BackOneMove();
+        _currentStickyBlock.IsCurrentBlock = false;
+        RotationStickyBlock lastBlock = (RotationStickyBlock)_playerBlock.LastState["Block"];
+        lastBlock.IsCurrentBlock = true;
+        _currentStickyBlock = lastBlock;
+        _playerBlock.CurrentBlock = lastBlock;
+
+        _currentStickyBlock.BackOneMove();
     }
     private void ResetLevel()
     {
@@ -125,7 +148,8 @@ public class Level : Node2D
         _currentStickyBlock = initialBlock;
 
         _playerBlock.Reset();
-        _camera.Reset();
+        // _camera.Reset();
+        _cameraLevel.Reset();
 
         int i = 0;
         foreach (RotationStickyBlock block in _allStickyBlocks)
@@ -135,14 +159,10 @@ public class Level : Node2D
             i++;
         }
     }
-    private void SetStarsLabel()
+    private void SetLabels()
     {
         Label levelLabel = (Label)FindNode("Level");
         levelLabel.Text = $"Level: {_number}";
-
-        Label stars1Label = (Label)FindNode("stars1Label");
-        stars1Label.Text = _movesRequired.ToString();
-
     }
     private void SetCameraLimits()
     {
@@ -151,24 +171,29 @@ public class Level : Node2D
 
         Vector2 center = shape.Position;
         _centerArea = center;
-        Vector2 extents = rect.Extents;
-        _areaSize = extents * 2;
 
-        _bounds["top"] = (int)(center[1] - extents[1]);;
-        _bounds["bottom"] = (int)(center[1] + extents[1]);
-        _bounds["left"] = (int)(center[0] - extents[0]);;
-        _bounds["right"] = (int)(center[0] + extents[0]);
- 
+        _bounds["top"] = (int)(center[1] - rect.Extents[1]); ;
+        _bounds["bottom"] = (int)(center[1] + rect.Extents[1]);
+        _bounds["left"] = (int)(center[0] - rect.Extents[0]); ;
+        _bounds["right"] = (int)(center[0] + rect.Extents[0]);
+
         Vector2 size = GetViewport().Size;
-        _camera.ZoomLimits = new Vector2(1, Mathf.Max(_areaSize.y / size.y, _areaSize.x / size.x));
+        _areaSize = rect.Extents * 2;
+
+        if (_maxZoomConstraint != 0)
+        {
+            _cameraLevel.Init(_maxZoomConstraint, _intialZoom);
+            return;
+        }
+
+        float maxLevelZoomValue = Mathf.Max(_areaSize.y / size.y, _areaSize.x / size.x) + 0.25f;
+        _cameraLevel.Init(maxLevelZoomValue, _intialZoom);
 
     }
 
     protected void SetInitialCurrentBlock()
     {
         RotationStickyBlock initialBlock = (RotationStickyBlock)FindNode("InitialBlock");
-        // RotationStickyBlock initialBlock = GetNode<RotationStickyBlock>("RotationStickyBlocks/InitialBlock");
-        // RotationStickyBlock initialBlock = GetNode<RotationStickyBlock>("Blocks/Control/RotationStickyBlocks/InitialBlock");
         initialBlock.IsCurrentBlock = true;
         _currentStickyBlock = initialBlock;
     }
@@ -186,13 +211,8 @@ public class Level : Node2D
     {
         Tween tween = _playerBlock.GetNode<Tween>("Tween");
 
-        // tween.InterpolateProperty(this, "position:x", initialPosition.x, finalPosition.x, 0.3f,Tween.TransitionType.Sine);
-        // tween.InterpolateProperty(this, "position:y", initialPosition.y, finalPosition.y, 0.3f,Tween.TransitionType.Sine);
-        //tween.InterpolateProperty(this, "rotation", Rotation, Rotation+angle, 0.3f);
-
         tween.InterpolateMethod(this, "CircularMotion", 0, angle, 0.3f);
         tween.Start();
-
     }
     protected void UpdatePlayerPosition()
     {
@@ -204,14 +224,9 @@ public class Level : Node2D
             angle = -angle;
         }
 
-        // _playerBlock.Rotate(angle);
-        // _playerBlock.GlobalPosition = _currentStickyBlock.GlobalPosition + (_playerBlock.GlobalPosition - _currentStickyBlock.GlobalPosition).Rotated(angle);
         RotateAround(angle);
 
         _playerBlock.DashDirection = _playerBlock.DashDirection.Rotated(angle);
-
-
-
     }
     public void ScaleModulate(float scale, bool down = true)
     {
@@ -235,18 +250,15 @@ public class Level : Node2D
         _currentStickyBlock = newStickyBlock;
         RotationStickyBlock.CanRotate = true;
 
-        // _camera.CallDeferred("align");
-
-
-
     }
-    public void _on_RotationStickyBlock_ImRotating()
+    public async void _on_RotationStickyBlock_ImRotating()
     {
         if (!_playerBlock.Moving && !_playerBlock.Rotating)
         {
             UpdatePlayerPosition();
             if (_playerBlock.Debug)
             {
+                await ToSignal(_tween, "tween_completed");
                 UpdateLine(_playerBlock.GlobalPosition, _playerBlock.DashDirection);
             }
         }
@@ -264,6 +276,7 @@ public class Level : Node2D
     }
     public void _on_PlayerBlock_MoveMade()
     {
+        _currentStickyBlock.UpdateState();
         RotationStickyBlock.CanRotate = false;
         _currentStickyBlock.IsCurrentBlock = false;
         _movesCounter += 1;
@@ -279,44 +292,45 @@ public class Level : Node2D
     {
         ResetLevel();
     }
+    public void _on_HUDbuttons_UndoPressed()
+    {
+        BackOneMove();
+    }  
     public void _on_Area2D_body_exited(Node body)
     {
         if (!_currentStickyBlock.IsLast)
         {
+
             _playerBlock.BackToLastPosition();
+
             _currentStickyBlock.IsCurrentBlock = true;
             RotationStickyBlock.CanRotate = true;
-            _camera.Current = true;
-            // _camera.CallDeferred("align");
-            _camera.BackToLastPosition();
         }
     }
     public void _on_PlayerBlock_AddLine(Vector2 pivot, Vector2 normal)
     {
         UpdateLine(pivot, normal);
     }
-    public void _on_PlayerBlock_OffsetZoom(Vector2 newZoom, Vector2 oldZoom)
+   
+    public void _on_Camera2DLevel_OffsetZoom(Vector2 newZoom, Vector2 oldZoom)
     {
+        Vector2 centerCamera = _cameraLevel.GetCameraScreenCenter();
+        Vector2 direction = centerCamera.DirectionTo(_playerBlock.GlobalPosition);
+        float distance = _playerBlock.GlobalPosition.DistanceTo(centerCamera);
 
-        Vector2 direction = _playerBlock.GlobalPosition.DirectionTo(_centerArea);
-        Vector2 centerCamera = _camera.GetCameraScreenCenter();
-        Vector2 oldOffset = _camera.Offset;
-        Vector2 size = GetViewport().Size;
+        Vector2 oldOffset = _cameraLevel.Offset;
+        Vector2 newOffset = oldOffset - direction * (newZoom - oldZoom) * distance;
 
-
-        
-        Vector2 newOffset = oldOffset + direction * (_centerArea.DistanceTo(centerCamera)) * (newZoom-oldZoom);
-
-        if (newZoom.x-oldZoom.x < 0)
+        if (newZoom.x - oldZoom.x > 0)
         {
-            // direction = -direction;
-           newOffset = newOffset * (1- 1/newZoom.x);  
+            newOffset = newOffset * (_cameraLevel.ZoomLimits.y / newZoom.x - 1);
         }
 
-        Tween tweenCamera = _camera.TweenCamera;
-        float duration = _camera.ZoomAnimationDuration;
-        
-        tweenCamera.InterpolateProperty(_camera, "offset", oldOffset, newOffset, duration,
+        Tween tweenCamera = _cameraLevel.TweenCamera;
+        float duration = _cameraLevel.ZoomAnimationDuration;
+
+
+        tweenCamera.InterpolateProperty(_cameraLevel, "offset", oldOffset, newOffset, duration,
             Tween.TransitionType.Sine, Tween.EaseType.Out);
         tweenCamera.Start();
     }
@@ -327,12 +341,22 @@ public class Level : Node2D
         _line.AddPoint(pivot);
         _line.AddPoint(pivot + normal * 2000);
     }
+    public void _on_Tween_tween_completed(object _, NodePath __)
+    {
+        EmitSignal(nameof(RotatingTweenCompleted));
+    }
+
 }
 
 
 
 
 
+
+
+
+
+	
 
 
 

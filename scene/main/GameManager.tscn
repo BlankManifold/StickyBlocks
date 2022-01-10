@@ -6,7 +6,7 @@
 position = Vector2( 0, 1 )
 script = ExtResource( 3 )
 _maxLevel = {
-"Easy": 3,
+"Easy": 15,
 "Hard": 0,
 "Medium": 0
 }

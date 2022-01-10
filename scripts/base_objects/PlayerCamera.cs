@@ -25,7 +25,7 @@ public class PlayerCamera : Camera2D
 
     private bool _zooming = false;
 
-    private Vector2 _lastZoom;
+    private Vector2 _lastZoom = Vector2.One;
     private Vector2 _lastOffset;
 
 
@@ -35,7 +35,6 @@ public class PlayerCamera : Camera2D
     public void BackToLastPosition()
     {
         Offset = _lastOffset;
-        Zoom = _lastZoom;
         _zooming = false;
     }
     public void Reset()
@@ -74,11 +73,11 @@ public class PlayerCamera : Camera2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (!_zooming)
+        if (!_zooming && Current)
         {
             if (@event.IsActionPressed("zoom_in"))
             {
-                ZoomValue = _zoom_value - _zoom_step*2;
+                ZoomValue = _zoom_value - _zoom_step;
             }
             if (@event.IsActionPressed("zoom_out"))
             {
@@ -92,7 +91,6 @@ public class PlayerCamera : Camera2D
     public void _on_TweenCamera_tween_completed(object _, NodePath __)
     {
         _zooming = false;
-        _lastZoom = Zoom;
         _lastOffset = Offset;
     }
 
