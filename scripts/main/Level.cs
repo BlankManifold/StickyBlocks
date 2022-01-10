@@ -148,6 +148,8 @@ public class Level : Node2D
         _currentStickyBlock = initialBlock;
 
         _playerBlock.Reset();
+        _playerBlock.CurrentBlock = _currentStickyBlock;
+        _playerBlock.UpdateBlock(_currentStickyBlock);
         // _camera.Reset();
         _cameraLevel.Reset();
 
