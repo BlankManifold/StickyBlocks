@@ -4,15 +4,18 @@ public class LevelNumberIcon : VBoxContainer
 {
     private TextureRect _starsRect;
     public TextureRect StarsRect {get { return _starsRect; }}
-    public TextureButton Button { get { return _button; }}
+
 
 
     [Export]
     private Texture _texture;
     [Export]
     private string _levelNumber = "0";
+    public string LevelNumber {get { return _levelNumber;} set { _levelNumber = value; }}
 
     private TextureButton _button;
+    public TextureButton Button { get { return _button; }}
+
     private Color _modulateColor;
     private GameManager _gameManager;
     private Label _label;

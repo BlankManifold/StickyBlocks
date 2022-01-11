@@ -40,10 +40,10 @@ public class Main : Control
         _menu.QueueFree();
         AddMenu(_mainMenuScene, "MainMenu");
     }
-    public void GoToLevel(int level)
+    public void GoToLevel(string type, int level)
     {
         _menu.QueueFree();
-        _gameManager.LoadLevel(level);
+        _gameManager.LoadLevel(type, level);
     }
     public void GoToLevelMenu()
     {
@@ -53,7 +53,12 @@ public class Main : Control
     public void GoToLevelGrid()
     {
         _menu.QueueFree();
-        AddMenu(_levelGridScene, "LevelGrid");
+        LevelGrid menu = _levelGridScene.Instance<LevelGrid>();
+        menu.Init(_gameManager.CurrentLevelType);
+        AddChild(menu);
+        menu.Name = "LevelGrid";
+        menu.ConnectButtons();
+        _menu = menu;
     }
     public void GoToOptionsMenu()
     {
@@ -112,18 +117,21 @@ public class Main : Control
             case "Easy":
                 if (_gameManager.IsLevelUnlocked(name))
                 {
+                    _gameManager.CurrentLevelType = "Easy";
                     GoToLevelGrid();
                 }
                 break;
             case "Medium":
                 if (_gameManager.IsLevelUnlocked(name))
                 {
+                    _gameManager.CurrentLevelType = "Medium";
                     GoToLevelGrid();
                 }
                 break;
             case "Hard":
                 if (_gameManager.IsLevelUnlocked(name))
                 {
+                    _gameManager.CurrentLevelType = "Hard";
                     GoToLevelGrid();
                 }
                 break;
@@ -138,7 +146,7 @@ public class Main : Control
         if (name[0] == 'L')
         {
             string number = name.Split('l').Last();
-            GoToLevel(number.ToInt());
+            GoToLevel(_gameManager.CurrentLevelType, number.ToInt());
             return;
         }
         switch (name)
@@ -172,7 +180,7 @@ public class Main : Control
 
                 break;
             case "Retry":
-                GoToLevel(_gameManager.CurrentLevelNumber);
+                GoToLevel(_gameManager.CurrentLevelType, _gameManager.CurrentLevelNumber);
                 break;
             case "Return":
                 GoToMainMenu();
@@ -180,7 +188,6 @@ public class Main : Control
         }
 
     }
-   
     public void _on_GameManager_QuitPressed()
     {
         AddMenu(_mainMenuScene, "MainMenu");

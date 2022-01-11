@@ -40,3 +40,9 @@ A first game without ambitions (especially from the point of view of aesthetics 
 * Added initialZoom and MaxZoomConstraint as exported variables
 * Added Undo/BackOneMove (only one) functionality
 
+### 11/01/2022
+
+* Created Easy-Medium-Hard levels classification
+* Create some more levels 
+* Improved relation between `MaxLevel` dictionary (in `GameManager`: total number of a specific type of level) and
+  `LevelGrid` (now `LevelGrid` is instanced more programatically)

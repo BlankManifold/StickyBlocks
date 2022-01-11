@@ -6,7 +6,6 @@ public class PlayerBlock : KinematicBody2D
     [Export]
     public bool Debug = false;
 
-    private Sprite _sprite;
     private int _speed = 10;
     private bool _moving = false;
     private bool _rotating = false;
@@ -18,7 +17,6 @@ public class PlayerBlock : KinematicBody2D
     }
     // private bool _isMouseOver = false;
     private Vector2 _dashDirection = new Vector2(1, 0);
-    private Vector2 _offset;
     private bool _isSelected = true;
     private int _movesCounter = 0;
     // private PlayerCamera _camera;
@@ -36,10 +34,6 @@ public class PlayerBlock : KinematicBody2D
     [Export]
     public Texture unselectedTexture;
 
-    public Vector2 Offset
-    {
-        get { return _offset; }
-    }
     public Vector2 DashDirection
     {
         get { return _dashDirection; }

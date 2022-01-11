@@ -20,9 +20,9 @@ __meta__ = {
 
 [node name="GameManager" parent="." instance=ExtResource( 1 )]
 _maxLevel = {
-"Easy": 15,
-"Hard": 0,
-"Medium": 0
+"Easy": 8,
+"Hard": 4,
+"Medium": 3
 }
 
 [connection signal="LevelCompleted" from="GameManager" to="." method="_on_GameManager_LevelCompleted"]

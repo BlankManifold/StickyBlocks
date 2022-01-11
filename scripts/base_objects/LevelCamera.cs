@@ -3,8 +3,6 @@ using Godot;
 public class LevelCamera : Camera2D
 {
     private bool _zooming = false;
-    private bool _followPlayer = false;
-
 
     private float _zoomValue = 1f;
     public float ZoomValue { get { return _zoomValue; } set { SetZoom(value); } }

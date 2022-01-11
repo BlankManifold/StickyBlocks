@@ -8,7 +8,7 @@ using PlayerDataType = Godot.Collections.Dictionary;
 public class GameManager : Node2D
 {
     [Export]
-    private Dictionary<string, int> _maxLevel; //= new Dictionary<string, int>() { { "Easy", 3 }, { "Medium", 0 }, { "Hard", 0 } };
+    private Dictionary<string, int> _maxLevel = new Dictionary<string, int>() { { "Easy", 0 }, { "Medium", 0 }, { "Hard", 0 } };
     public Dictionary<string, int> MaxLevel { get { return _maxLevel; } }
     private Dictionary<string,   bool> _justUnLocked = new Dictionary<string, bool>() {{ "Easy", false },{ "Medium", false }, { "Hard", false } };
     public Dictionary<string, bool> JustUnLocked { get { return _justUnLocked; } }
@@ -17,7 +17,7 @@ public class GameManager : Node2D
     private int _currentLevelNumber = 0;
     public int CurrentLevelNumber { get { return _currentLevelNumber; }}
     private string _currentLevelType = "Easy";
-    public string CurrentLevelType { get { return _currentLevelType; } }
+    public string CurrentLevelType { get { return _currentLevelType; } set { _currentLevelType = value;}}
     private string[] _levelTypes = { "Easy", "Medium", "Hard" };
     private Dictionary<string, string> _levelChain = new Dictionary<string, string>()  { { "Easy", "Medium"}, { "Medium", "Hard" },{ "Hard", null }};
     private Godot.Collections.Dictionary _levelLockDictionary = new Godot.Collections.Dictionary() { };
@@ -172,10 +172,10 @@ public class GameManager : Node2D
     }
 
 
-    public void LoadLevel(int levelNumber)
+    public void LoadLevel(string type, int levelNumber)
     {
 
-        string path = $"res://scene/levels/Level{levelNumber}.tscn";
+        string path = $"res://scene/levels/{type}/Level{levelNumber}.tscn";
         PackedScene scene = ResourceLoader.Load<PackedScene>(path);
 
         Level level = scene.Instance<Level>();
@@ -186,9 +186,9 @@ public class GameManager : Node2D
 
         _currentLevel = level;
         _currentLevelNumber = levelNumber;
-        _currentLevelType = level.Type;
+        // _currentLevelType = level.Type;
     }
-    public void NextLevel() => LoadLevel(_currentLevelNumber + 1);
+    public void NextLevel() => LoadLevel(_currentLevelType, _currentLevelNumber + 1);
     public void UnLockNextType(string type)
     {
         string nextType = _levelChain[type];
@@ -223,7 +223,6 @@ public class GameManager : Node2D
             AddCompleted(type);
             if (UnlockedCondtion(type))
             {
-                
                 UnLockNextType(type);
             }
         }

@@ -6,12 +6,7 @@ public class MenuTemplates : Control
     protected Godot.Collections.Array<TextureButton> _buttons;
     protected GameManager _gameManager;
 
-
-    [Signal]
-    public delegate void PlaySelected();
-
-
-  
+ 
     public override void _Ready()
     {
         _buttons = new Godot.Collections.Array<TextureButton>(GetTree().GetNodesInGroup("buttons"));

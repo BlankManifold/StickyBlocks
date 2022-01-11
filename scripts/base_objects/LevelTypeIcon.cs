@@ -41,7 +41,8 @@ public class LevelTypeIcon : VBoxContainer
 
         if (_gameManager.JustUnLocked[Name])
         {
-            await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
+            _gameManager.JustUnLocked[Name] = false;
+            await ToSignal(GetTree().CreateTimer(1f), "timeout");
             _animationPlayer.Play("unlock");
             await ToSignal(_animationPlayer,"animation_finished");
         }
