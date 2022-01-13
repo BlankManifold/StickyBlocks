@@ -7,6 +7,7 @@
 extents = Vector2( 840, 577.5 )
 
 [node name="Level" instance=ExtResource( 2 )]
+_type = "Hard"
 _maxZoomConstraint = 1.6
 
 [node name="Area2D" type="Area2D" parent="." index="0"]

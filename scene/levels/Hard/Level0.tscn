@@ -7,6 +7,7 @@
 extents = Vector2( 660, 705 )
 
 [node name="Level" instance=ExtResource( 1 )]
+_type = "Hard"
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0

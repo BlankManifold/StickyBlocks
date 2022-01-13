@@ -35,7 +35,7 @@ public class Level : Node2D
     private Tween _tween;
 
     [Export]
-    private float _intialZoom = 0f;
+    protected float _intialZoom = 0f;
 
     [Signal]
     public delegate void GameCompleted(bool owned, int movesCounter);
@@ -43,14 +43,13 @@ public class Level : Node2D
     public delegate void RotatingTweenCompleted();
 
     [Export]
-    private float _maxZoomConstraint = 0f;
+    protected float _maxZoomConstraint = 0f;
 
     private float[] _levelData;
 
     private Label _label;
 
     private Dictionary<string, int> _bounds = new Dictionary<string, int> { { "bottom", 0 }, { "top", 0 }, { "right", 0 }, { "left", 0 } };
-
 
     public override void _Process(float _)
     {
@@ -105,15 +104,7 @@ public class Level : Node2D
         SetLevelData();
     }
 
-    private bool IsOutOfBounds()
-    {
-        Vector2 pos = _playerBlock.GlobalPosition;
-        float border = 50;
-        return (pos.x > _bounds["right"] - border || pos.x < _bounds["left"] + border
-                || pos.y < _bounds["top"] + border || pos.y > _bounds["bottom"] - border);
-    }
-
-
+    
     private void SetLevelData()
     {
         _levelData = new float[_allStickyBlocks.Count];
@@ -137,7 +128,7 @@ public class Level : Node2D
 
         _currentStickyBlock.BackOneMove();
     }
-    private void ResetLevel()
+    protected void ResetLevel()
     {
         _movesCounter = 0;
         _movesLabel.Text = $"Moves: 0";

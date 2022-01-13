@@ -1,13 +1,46 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/levels/Level4.cs" type="Script" id=3]
+[ext_resource path="res://scripts/base_objects/InputPausedAnimation.cs" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 765, 360 )
 
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Position2D/Camera2DLevel:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "tutorial"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Position2D/Camera2DLevel:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 1.1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.75, 1.75 ), Vector2( 1.75, 1.75 ) ]
+}
+
 [node name="Level" instance=ExtResource( 2 )]
-_number = 4
+script = ExtResource( 3 )
 _intialZoom = 1.0
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
@@ -36,5 +69,30 @@ _type = "IRotation90"
 position = Vector2( 270, 213 )
 rotation = 1.5708
 
+[node name="Label" type="Label" parent="HUDLayer" index="1"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -187.0
+margin_top = 52.0
+margin_right = 227.0
+margin_bottom = 117.0
+text = "Lighter the color smaller the rotation angle.
+
+Possible rotation angle are: 0°, 30°, 45°, 60° 90°, 180°."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Camera2DLevel" parent="Position2D" index="0"]
 position = Vector2( 90, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
+pause_mode = 2
+anims/RESET = SubResource( 2 )
+anims/tutorial = SubResource( 3 )
+script = ExtResource( 4 )
+
+[connection signal="ActionPressed" from="AnimationPlayer" to="." method="_on_AnimationPlayer_ActionPressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_AnimationPlayer_animation_finished"]

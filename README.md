@@ -46,3 +46,4 @@ A first game without ambitions (especially from the point of view of aesthetics 
 * Create some more levels 
 * Improved relation between `MaxLevel` dictionary (in `GameManager`: total number of a specific type of level) and
   `LevelGrid` (now `LevelGrid` is instanced more programatically)
+* Added explanation/tutorial animation and texts in some easy-level (new classes child of `Level`)
