@@ -6,7 +6,7 @@ public class PlayerBlock : KinematicBody2D
     [Export]
     public bool Debug = false;
 
-    private int _speed = 10;
+    private int _speed = 12;
     private bool _moving = false;
     private bool _rotating = false;
     public bool Moving { get { return _moving; } }
@@ -168,7 +168,7 @@ public class PlayerBlock : KinematicBody2D
     private void CollideAndRotate(Vector2 normal, Vector2 pivot)
     {
         float cross = normal.Cross(_dashDirection);
-        if (Mathf.Abs(cross) < 0.01f)
+        if (Mathf.Abs(cross) < 0.01f || Mathf.Abs(Mathf.Abs(cross) - 1f) < 0.01f)
         {
             _dashDirection = normal;
             return;

@@ -4,10 +4,11 @@
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 600, 817.5 )
+extents = Vector2( 637.5, 817.5 )
 
 [node name="Level" instance=ExtResource( 2 )]
-_type = "Hard"
+_type = "HARD"
+_name = "LADDER"
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -19,50 +20,52 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 600, 817.5 )
+position = Vector2( 637.5, 817.5 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
-position = Vector2( 615, 1286 )
+position = Vector2( 645, 1286 )
 rotation = -0.785398
 _type = "Rotation90"
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 750, 1501 )
+position = Vector2( 780, 1501 )
 rotation = 1.5708
 
 [node name="RotationStickyBlock6" parent="RotationStickyBlocks" index="2" instance=ExtResource( 1 )]
-position = Vector2( 975, 321 )
+position = Vector2( 1005, 321 )
 _type = "IRotation30"
 
 [node name="RotationStickyBlock7" parent="RotationStickyBlocks" index="3" instance=ExtResource( 1 )]
-position = Vector2( 660, 181 )
+position = Vector2( 690, 181 )
 rotation = 1.5708
 _type = "Rotation60"
 
 [node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="4" instance=ExtResource( 1 )]
-position = Vector2( 975, 706 )
+position = Vector2( 1005, 706 )
 _type = "IRotation30"
 
 [node name="RotationStickyBlock3" parent="RotationStickyBlocks" index="5" instance=ExtResource( 1 )]
-position = Vector2( 255, 706 )
+position = Vector2( 285, 706 )
 _type = "Rotation45"
 
 [node name="RotationStickyBlock4" parent="RotationStickyBlocks" index="6" instance=ExtResource( 1 )]
-position = Vector2( 975, 1026 )
+position = Vector2( 1005, 1026 )
 _type = "IRotation60"
 
 [node name="RotationStickyBlock5" parent="RotationStickyBlocks" index="7" instance=ExtResource( 1 )]
-position = Vector2( 255, 1036 )
+position = Vector2( 285, 1036 )
 _type = "Rotation30"
 
 [node name="PlayerBlock" parent="." index="2"]
-position = Vector2( 637, 1260 )
+position = Vector2( 667, 1260 )
 rotation = -0.785398
-Debug = true
 
-[node name="Position2D" parent="." index="7"]
-position = Vector2( 600, 818 )
+[node name="Name" parent="HUDLayer" index="1"]
+text = "LADDER"
+
+[node name="Position2D" parent="." index="6"]
+position = Vector2( 641, 823 )

@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/levels/Level4.cs" type="Script" id=3]
 [ext_resource path="res://scripts/base_objects/InputPausedAnimation.cs" type="Script" id=4]
+[ext_resource path="res://animation/tutorial4.anim" type="Animation" id=5]
+[ext_resource path="res://fonts/newTutorialFont.tres" type="DynamicFont" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 765, 360 )
+extents = Vector2( 811, 360 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -23,25 +25,14 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "tutorial"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("Position2D/Camera2DLevel:zoom")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6, 1.1, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.75, 1.75 ), Vector2( 1.75, 1.75 ) ]
-}
-
 [node name="Level" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
+_name = "ZOOM: TUTORIAL 4"
 _intialZoom = 1.0
+_text0 = "In some level you might want to zoom-in or zoom-out the camera
+
+PRESS SPACEBAR TO CONTINUE"
+_text1 = "use the MOUSE-WHEEL to handle the zoom"
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -50,7 +41,7 @@ input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 765, 360 )
+position = Vector2( 811, 360 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
@@ -58,7 +49,7 @@ position = Vector2( 270, 181 )
 rotation = 1.5708
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 1440, 541 )
+position = Vector2( 1537, 541 )
 
 [node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 1 )]
 position = Vector2( 270, 541 )
@@ -72,26 +63,34 @@ rotation = 1.5708
 [node name="Label" type="Label" parent="HUDLayer" index="1"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -187.0
-margin_top = 52.0
-margin_right = 227.0
-margin_bottom = 117.0
-text = "Lighter the color smaller the rotation angle.
+margin_left = -544.0
+margin_top = 78.0
+margin_right = 544.0
+margin_bottom = 126.0
+custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
+custom_fonts/font = ExtResource( 6 )
+text = "In some level you might want to zoom-in or zoom-out the camera
 
-Possible rotation angle are: 0°, 30°, 45°, 60° 90°, 180°."
+PRESS SPACEBAR TO CONTINUE"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Name" parent="HUDLayer" index="2"]
+text = "ZOOM: TUTORIAL 4"
+
+[node name="Position2D" parent="." index="6"]
+position = Vector2( 552, 360 )
+
 [node name="Camera2DLevel" parent="Position2D" index="0"]
-position = Vector2( 90, 0 )
+position = Vector2( 173, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 pause_mode = 2
 anims/RESET = SubResource( 2 )
-anims/tutorial = SubResource( 3 )
+anims/tutorial = ExtResource( 5 )
 script = ExtResource( 4 )
 
 [connection signal="ActionPressed" from="AnimationPlayer" to="." method="_on_AnimationPlayer_ActionPressed"]

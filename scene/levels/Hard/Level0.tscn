@@ -4,10 +4,11 @@
 [ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 660, 705 )
+extents = Vector2( 660, 675 )
 
 [node name="Level" instance=ExtResource( 1 )]
-_type = "Hard"
+_type = "HARD"
+_name = "HOOK"
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -19,7 +20,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 660, 585 )
+position = Vector2( 660, 555 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
@@ -63,5 +64,8 @@ _type = "Rotation30"
 [node name="PlayerBlock" parent="." index="2"]
 position = Vector2( 109, 360 )
 
-[node name="Position2D" parent="." index="7"]
+[node name="Name" parent="HUDLayer" index="1"]
+text = "HOOK"
+
+[node name="Position2D" parent="." index="6"]
 position = Vector2( 660, 585 )

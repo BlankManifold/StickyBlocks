@@ -3,6 +3,8 @@ using Godot;
 public class LevelCamera : Camera2D
 {
     private bool _zooming = false;
+    
+    private bool _zoomable = true;
 
     private float _zoomValue = 1f;
     public float ZoomValue { get { return _zoomValue; } set { SetZoom(value); } }
@@ -47,7 +49,6 @@ public class LevelCamera : Camera2D
         _zoomValue = _initialZoom.x;
         _zooming = false;
     }
-
     private void SetZoom(float value)
     {
         var previous_zoom = Zoom;
@@ -63,9 +64,10 @@ public class LevelCamera : Camera2D
         _zooming = true;
     }
 
-
-    public void Init(float maxZoomValue, float initialZoomValue)
+    public void Init(float maxZoomValue, float initialZoomValue, bool zoomable, float minimumZoomValue)
     {
+        _zoomable = zoomable;
+
         Zoom *= maxZoomValue;
         
         if (initialZoomValue != 0f)
@@ -74,8 +76,8 @@ public class LevelCamera : Camera2D
         }
 
         _initialZoom = Zoom;
-        _zoomLimits = new Vector2(1, maxZoomValue);
-        _zoomStep = (maxZoomValue - 1) / 2;
+        _zoomLimits = new Vector2(minimumZoomValue, maxZoomValue);
+        _zoomStep = (maxZoomValue - minimumZoomValue) / 2;
         _zoomValue = maxZoomValue;
     }
 
@@ -86,7 +88,7 @@ public class LevelCamera : Camera2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (!_zooming)
+        if (!_zooming && _zoomable)
         {
             if (@event.IsActionPressed("zoom_in"))
             {
@@ -111,24 +113,6 @@ public class LevelCamera : Camera2D
     {
         _zooming = false;
         _lastOffset = Offset;
-
-        // if (ZoomLimits.y > 1f)
-        // {
-        //     if (Zoom.x == 1 && !_followPlayer)
-        //     {
-        //         EmitSignal(nameof(ChangeParent), true);
-        //         _followPlayer = true;
-        //         return;
-        //     }
-
-        //     if (Zoom.x != 1 && _followPlayer)
-        //     {
-        //         EmitSignal(nameof(ChangeParent), false);
-        //         _followPlayer = false;
-
-        //     }
-        // }
-
     }
 
 

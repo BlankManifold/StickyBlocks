@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/levels/Level0.cs" type="Script" id=2]
 [ext_resource path="res://scripts/base_objects/InputPausedAnimation.cs" type="Script" id=3]
+[ext_resource path="res://animation/tutorial0.anim" type="Animation" id=4]
+[ext_resource path="res://fonts/newTutorialFont.tres" type="DynamicFont" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 540, 360 )
+extents = Vector2( 639.5, 360 )
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -19,30 +21,21 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 303, 360 ) ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "tutorial"
-length = 1.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerBlock:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 1.2, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 303, 360 ), Vector2( 303, 360 ), Vector2( 777, 360 ), Vector2( 777, 360 ) ]
+"values": [ Vector2( 406, 358 ) ]
 }
 
 [node name="Level" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+_name = "BEGINNING: TUTORIAL 0"
+_movesRequired = -144
 _intialZoom = 1.0
 _maxZoomConstraint = 1.0
+_zoomable = false
+_text0 = "Objective: the red block must reach the StickyBlock with the small red block,
+complete the level in as few moves as possible to owned it
+
+PRESS SPACEBAR TO CONTINUE"
+_text1 = "press SPACEBAR to dash along the perpendicular direction"
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -54,39 +47,49 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 540, 360 )
+position = Vector2( 639.5, 360 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
-position = Vector2( 270, 361 )
+position = Vector2( 372.392, 358.592 )
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 810, 361 )
+position = Vector2( 912.392, 358.592 )
 
 [node name="PlayerBlock" parent="." index="2"]
-position = Vector2( 303, 360 )
+position = Vector2( 406, 358 )
 
-[node name="Label" type="Label" parent="HUDLayer" index="1"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -289.0
-margin_top = 48.0
-margin_right = 289.0
-margin_bottom = 113.0
-text = "OBJECTIVE:  the red block must reach the last Stickyblock marked with the small red block,
-complete the level in as few moves as possible to owned it.
+[node name="HUDData" parent="HUDLayer" index="0"]
+margin_left = 22.0
+margin_right = -18.0
 
-Press SPACEBAR to continue"
+[node name="Name" parent="HUDLayer" index="1"]
+text = "BEGINNING: TUTORIAL 0"
+
+[node name="Label" type="Label" parent="HUDLayer" index="2"]
+anchor_right = 1.0
+margin_top = 86.0
+margin_bottom = 151.0
+rect_scale = Vector2( 1, 1.2 )
+custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
+custom_fonts/font = ExtResource( 5 )
+text = "Objective: the red block must reach the StickyBlock with the small red block,
+complete the level in as few moves as possible to owned it
+
+PRESS SPACEBAR TO CONTINUE"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
+[node name="Position2D" parent="." index="6"]
+position = Vector2( 641.396, 360.297 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 pause_mode = 2
 anims/RESET = SubResource( 3 )
-anims/tutorial = SubResource( 2 )
+anims/tutorial = ExtResource( 4 )
 script = ExtResource( 3 )
 
 [connection signal="ActionPressed" from="AnimationPlayer" to="." method="_on_AnimationPlayer_ActionPressed"]

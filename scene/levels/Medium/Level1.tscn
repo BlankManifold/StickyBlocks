@@ -4,11 +4,13 @@
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 630, 405 )
+extents = Vector2( 639.5, 405 )
 
 [node name="Level" instance=ExtResource( 2 )]
-_type = "Medium"
+_type = "MEDIUM"
+_name = "SHORT"
 _number = 8
+_zoomable = false
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -17,7 +19,7 @@ input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 630, 315 )
+position = Vector2( 639.5, 315 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
@@ -56,5 +58,8 @@ margin_top = -340.0
 margin_right = 520.0
 margin_bottom = 340.0
 
-[node name="Position2D" parent="." index="7"]
-position = Vector2( 630, 315 )
+[node name="Name" parent="HUDLayer" index="1"]
+text = "SHORT"
+
+[node name="Position2D" parent="." index="6"]
+position = Vector2( 639, 315 )

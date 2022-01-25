@@ -1,0 +1,43 @@
+"OBJECTIVE: THE RED BLOCK MUST REACH THE STICKYBLOCK WITH THE SMALL RED BLOCK, \nCOMPLETE THE LEVEL IN AS FEW MOVES AS POSSIBLE TO OWNED IT. \n\n PRESS SPACEBAR TO CONTINUE", 
+                                            "PRESS SPACEBAR TO DASH ALONG THE PERPENDICULAR DIRECTION" 
+
+"DIFFERENT COLORS REPRESENT DIFFERENT ROTATION ANGLES. \n\n PRESS SPACEBAR TO CONTINUE", 
+                                            "LEFT CLICK ON THE STICKYBLOCK TO ROTATE IT BACK AND FORTH" 
+
+"YOU CAN ROTATE EVERY STICKYBLOCK, EVEN THE LAST ONE. \n\n LEFT CLICK TO ROTATE IT."
+
+"LIGHTER THE COLOR SMALLER THE ROTATION ANGLE. \n POSSIBLE ROTATION ANGLE ARE IN DEGREE: 0°, 30°, 45°, 60° 90°, 180°."
+
+"IN SOME LEVEL YOU MIGHT WANT TO ZOOM-IN OR ZOOM-OUT THE CAMERA. \n\n PRESS SPACEBAR TO CONTINUE", 
+                                            "USE THE MOUSE-WHEEL TO HANDLE THE ZOOM"
+
+"MANIPULATE THE COLLISION POINT OF THE RED BLOCK ON THE STICKYBLOCKS USING THE DIFFERENT ANGULATIONS."
+
+
+"THE RED BLOCK CAN ALSO STICK ON THE SHORT-SIDE OF THE STICKYBLOCKS"
+
+
+"STICKBLOCKS HAVE LITTLE ROUND CORNERS. STICKING ON A CORNER WILL CAUSE UNIQUE ORIENTATIONS OF THE THE RED BLOCK. \n\n IN SOME RARE CASES YOU COULD USE THIS UNIQUE ORIENTATION IN YOUR FAVOR. IT REQUIRES EXTREME PRECISION."
+
+
+
+"Objective: the red block must reach the StickyBlock with the small red block, \ncomplete the level in as few moves as possible to owned it. \n\n press spacebar to continue", 
+                                            "press SPACEBAR to dash along the perpendicular direction" 
+
+"Different colors represent different rotation angles. \n\n PRESS SPACEBAR TO CONTINUE", 
+                                            "LEFT CLICK on the StickyBlock to rotate it back and forth" 
+
+"You can rotate every StickyBlock, even the last one. \n\n LEFT CLICK to rotate it."
+
+"Lighter the color smaller the rotation angle. \n possible rotation angle are in degree: 0°, 30°, 45°, 60° 90°, 180°."
+
+"In some level you might want to zoom-in or zoom-out the camera. \n\n PRESS SPACEBAR TO CONTINUE", 
+                                            "use the MOUSE-WHEEL to handle the zoom"
+
+"Manipulate the collision point of the red block on the StickyBlocks using the different angulations."
+
+
+"The red block can stick also on the short-side of the StickyBlocks"
+
+
+"StickBlocks have round corners. Sticking on a corner will cause unique orientations of the the red block. \n\n in some rare cases you could use this in your favor. It requires extreme precision."

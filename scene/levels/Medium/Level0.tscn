@@ -4,11 +4,11 @@
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 540, 832.5 )
+extents = Vector2( 593, 597 )
 
 [node name="Level" instance=ExtResource( 2 )]
-_type = "Medium"
-_number = 7
+_type = "MEDIUM"
+_name = "ADJUSTMENTS"
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -17,30 +17,40 @@ input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 540, 247.5 )
+position = Vector2( 595, 365 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
-position = Vector2( 135, 361 )
+position = Vector2( 148, 343 )
 rotation = -0.785398
 _type = "IRotation90"
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 1035, -359 )
+position = Vector2( 1139, -62 )
 
 [node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 1 )]
-position = Vector2( 675, 901 )
-rotation = 3.14159
-_type = "IRotation45"
+position = Vector2( 688, 793 )
+rotation = -0.261799
+_type = "IRotation60"
 
 [node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="3" instance=ExtResource( 1 )]
-position = Vector2( 675, -359 )
+self_modulate = Color( 0.00784314, 0.0470588, 0.0745098, 1 )
+position = Vector2( 775, -62 )
 rotation = 3.14159
 _type = "Rotation180"
 
 [node name="PlayerBlock" parent="." index="2"]
-position = Vector2( 159, 337 )
+position = Vector2( 172, 319 )
 rotation = -0.785398
 
-[node name="Position2D" parent="." index="7"]
-position = Vector2( 540, 250 )
+[node name="HUDData" parent="HUDLayer" index="0"]
+margin_left = 0.0
+margin_top = -3.0
+margin_right = 0.0
+margin_bottom = -15.0
+
+[node name="Name" parent="HUDLayer" index="1"]
+text = "ADJUSTMENTS"
+
+[node name="Position2D" parent="." index="6"]
+position = Vector2( 640, 253 )

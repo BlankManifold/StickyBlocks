@@ -13,20 +13,21 @@ public class MainMenu : MenuTemplates
     {
         base._Ready();
         _animationPlayer = (AnimationPlayer)FindNode("AnimationPlayer");
+        _animationPlayer.Play("RESET");
+
         TextureRect block = (TextureRect)FindNode("Block");
-        block.RectPosition = new Vector2(467, 327);
+        // block.RectPosition = new Vector2(467, 327);
     }
 
     public void StartAnimation(string name)
     {
         if (name == "Play")
         {
-            _animationPlayer.Play("PlaySelected");
-
+            _animationPlayer.Play("play");
         }
-        else if (name == "Options")
+        else if (name == "Settings")
         {
-            _animationPlayer.Play("OptionsSelected");
+             EmitSignal(nameof(AnimationFinished));
         }
 
     }
@@ -37,10 +38,11 @@ public class MainMenu : MenuTemplates
             EmitSignal(nameof(AnimationFinished));
             return;
         }
-        _animationPlayer.Play("GoTo");
+         if (name == "play")
+         {
+            _animationPlayer.Play("GoTo");
+         }
 
     }
 }
-
-
 

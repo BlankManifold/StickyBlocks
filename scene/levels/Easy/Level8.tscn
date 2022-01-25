@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/main/LevelWithTutorial.cs" type="Script" id=3]
+[ext_resource path="res://fonts/newTutorialFont.tres" type="DynamicFont" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 637.5, 405 )
+
+[node name="Level" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+_name = "BUG: TUTORIAL 7"
+_intialZoom = 1.5
+_maxZoomConstraint = 1.5
+_zoomable = false
+_text0 = "StickBlocks have round corners, sticking on a corner will cause unique orientations
+
+In some rare cases you could use this in your favor"
+
+[node name="Area2D" type="Area2D" parent="." index="0"]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+monitorable = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2( 637.5, 405 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
+position = Vector2( 210, 315 )
+
+[node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
+position = Vector2( 473, 646 )
+
+[node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 2 )]
+position = Vector2( 960, 286 )
+_type = "Rotation90"
+
+[node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="3" instance=ExtResource( 2 )]
+position = Vector2( 960, 646 )
+_type = "IRotation60"
+
+[node name="PlayerBlock" parent="." index="2"]
+position = Vector2( 244, 314 )
+
+[node name="Name" parent="HUDLayer" index="1"]
+text = "BUG: TUTORIAL 7"
+
+[node name="Label" type="Label" parent="HUDLayer" index="2"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -587.0
+margin_top = 80.0
+margin_right = 587.0
+margin_bottom = 128.0
+custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "StickBlocks have round corners, sticking on a corner will cause unique orientations
+
+In some rare cases you could use this in your favor"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Position2D" parent="." index="6"]
+position = Vector2( 638, 405 )

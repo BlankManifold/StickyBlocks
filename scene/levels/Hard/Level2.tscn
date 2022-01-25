@@ -4,11 +4,11 @@
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1012.5, 630 )
+extents = Vector2( 937, 667.5 )
 
 [node name="Level" instance=ExtResource( 2 )]
 position = Vector2( 1, 0 )
-_type = "Hard"
+_type = "HARD"
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -20,7 +20,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 1012.5, 360 )
+position = Vector2( 937, 352.5 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -30,61 +30,61 @@ __meta__ = {
 position = Vector2( 0, 0 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
+position = Vector2( 149, 340.627 )
 rotation = 0.523599
 _type = "Rotation60"
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 1920, 360 )
+position = Vector2( 1818.63, 360 )
 
 [node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 1 )]
-position = Vector2( 1080, -90 )
+position = Vector2( 978.627, -150 )
 _type = "Rotation30"
 
 [node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="3" instance=ExtResource( 1 )]
-position = Vector2( 810, 360 )
+position = Vector2( 663.627, 360 )
 _type = "Rotation45"
 
 [node name="RotationStickyBlock3" parent="RotationStickyBlocks" index="4" instance=ExtResource( 1 )]
-position = Vector2( 1080, 810 )
+position = Vector2( 978.627, 855 )
 _type = "Rotation30"
 
 [node name="RotationStickyBlock4" parent="RotationStickyBlocks" index="5" instance=ExtResource( 1 )]
-position = Vector2( 1005, 217 )
+position = Vector2( 903.627, 187 )
 _type = "Rotation90"
 
 [node name="RotationStickyBlock6" parent="RotationStickyBlocks" index="6" instance=ExtResource( 1 )]
-position = Vector2( 1320, 193 )
+position = Vector2( 1218.63, 193 )
 rotation = 0.523599
 _type = "Rotation60"
 
 [node name="RotationStickyBlock7" parent="RotationStickyBlocks" index="7" instance=ExtResource( 1 )]
-position = Vector2( 1320, 527 )
+position = Vector2( 1218.63, 527 )
 rotation = 0.523599
 _type = "Rotation60"
 
 [node name="RotationStickyBlock11" parent="RotationStickyBlocks" index="8" instance=ExtResource( 1 )]
-position = Vector2( 1605, 360 )
+position = Vector2( 1503.63, 360 )
 rotation = 1.5708
 _type = "Rotation180"
 
 [node name="RotationStickyBlock8" parent="RotationStickyBlocks" index="9" instance=ExtResource( 1 )]
-position = Vector2( 540, 525 )
+position = Vector2( 393.627, 525 )
 _type = "IRotation45"
 
 [node name="RotationStickyBlock9" parent="RotationStickyBlocks" index="10" instance=ExtResource( 1 )]
-position = Vector2( 540, 195 )
+position = Vector2( 393.627, 195 )
 _type = "IRotation45"
 
 [node name="RotationStickyBlock5" parent="RotationStickyBlocks" index="11" instance=ExtResource( 1 )]
-position = Vector2( 1005, 504 )
+position = Vector2( 903.627, 534 )
 _type = "IRotation90"
 
 [node name="PlayerBlock" parent="." index="2"]
-position = Vector2( 210, 375 )
+position = Vector2( 179.627, 354 )
 rotation = 0.523599
-Debug = true
 
-[node name="Position2D" parent="." index="7"]
-position = Vector2( 1014, 360 )
+[node name="Position2D" parent="." index="6"]
+position = Vector2( 939, 357 )
 
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

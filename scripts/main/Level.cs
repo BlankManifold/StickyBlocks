@@ -4,11 +4,15 @@ using System.Collections.Generic;
 public class Level : Node2D
 {
     protected PlayerBlock _playerBlock;
-    protected TextureRect _background;
+    // protected TextureRect _background;
 
+    [Export(PropertyHint.Enum, "EASY,MEDIUM,HARD")]
+    protected string _type = "EASY";
+    public string Type { get {return _type; }}
+    
     [Export]
-    protected string _type = "Easy";
-    public string Type { get { return _type; } }
+    private string _name;
+    
     protected RotationStickyBlock _currentStickyBlock;
     protected Godot.Collections.Array _allStickyBlocks;
 
@@ -33,14 +37,19 @@ public class Level : Node2D
     private Vector2 _centerArea;
 
     private Tween _tween;
+    
 
     [Export]
     protected float _intialZoom = 0f;
+    [Export]
+    protected float _minimumZoom = 1f;
 
     [Signal]
     public delegate void GameCompleted(bool owned, int movesCounter);
     [Signal]
     public delegate void RotatingTweenCompleted();
+    [Signal]
+    public delegate void AnimationFinished();
 
     [Export]
     protected float _maxZoomConstraint = 0f;
@@ -48,6 +57,12 @@ public class Level : Node2D
     private float[] _levelData;
 
     private Label _label;
+
+    [Export]
+    protected bool _zoomable = true;
+
+    protected AnimationPlayer _animationPlayerLast;
+    protected string _gotoAnim = "goto";
 
     private Dictionary<string, int> _bounds = new Dictionary<string, int> { { "bottom", 0 }, { "top", 0 }, { "right", 0 }, { "left", 0 } };
 
@@ -63,13 +78,15 @@ public class Level : Node2D
     {
 
         _playerBlock = (PlayerBlock)FindNode("PlayerBlock");
-        _background = GetNode<TextureRect>("Background/TextureRect");
+        // _background = GetNode<TextureRect>("Background/TextureRect");
         Node2D nodes = (Node2D)FindNode("RotationStickyBlocks");
         _allStickyBlocks = nodes.GetChildren();
         _tween = _playerBlock.GetNode<Tween>("Tween");
 
         _cameraLevel = (LevelCamera)FindNode("Camera2DLevel");
         _cameraLevel.Current = true;
+
+        _animationPlayerLast = GetNode<AnimationPlayer>("ImOnLastPlayer");
 
 
         foreach (RotationStickyBlock block in _allStickyBlocks)
@@ -82,8 +99,8 @@ public class Level : Node2D
         _playerBlock.CurrentBlock = _currentStickyBlock;
         _currentStickyBlock.UpdateState();
 
-        SetLabels();
         _movesLabel = (Label)FindNode("Moves");
+        SetLabels();
 
         Area2D area = (Area2D)FindNode("Area2D");
         area.Connect("body_exited", this, nameof(_on_Area2D_body_exited));
@@ -102,9 +119,10 @@ public class Level : Node2D
         }
 
         SetLevelData();
+
     }
 
-    
+
     private void SetLevelData()
     {
         _levelData = new float[_allStickyBlocks.Count];
@@ -131,7 +149,7 @@ public class Level : Node2D
     protected void ResetLevel()
     {
         _movesCounter = 0;
-        _movesLabel.Text = $"Moves: 0";
+        _movesLabel.Text = $"MOVES: 0";
 
         _currentStickyBlock.IsCurrentBlock = false;
         RotationStickyBlock initialBlock = (RotationStickyBlock)FindNode("InitialBlock");
@@ -155,7 +173,15 @@ public class Level : Node2D
     private void SetLabels()
     {
         Label levelLabel = (Label)FindNode("Level");
-        levelLabel.Text = $"Level: {_number}";
+        levelLabel.Text = $"LEVEL: {_number}";
+        _movesLabel.Text = $"MOVES: 0";
+        
+        if (_name != null)
+        {
+            Label nameLabel = (Label)FindNode("Name");
+            nameLabel.Text = _name;
+        }
+
     }
     private void SetCameraLimits()
     {
@@ -172,15 +198,15 @@ public class Level : Node2D
 
         Vector2 size = GetViewport().Size;
         _areaSize = rect.Extents * 2;
+        
+        float maxLevelZoomValue = _maxZoomConstraint;
 
-        if (_maxZoomConstraint != 0)
+        if (_maxZoomConstraint == 0)
         {
-            _cameraLevel.Init(_maxZoomConstraint, _intialZoom);
-            return;
-        }
-
-        float maxLevelZoomValue = Mathf.Max(_areaSize.y / size.y, _areaSize.x / size.x) + 0.25f;
-        _cameraLevel.Init(maxLevelZoomValue, _intialZoom);
+            maxLevelZoomValue = Mathf.Max(_areaSize.y / size.y, _areaSize.x / size.x) + 0.3f;
+        } 
+        
+        _cameraLevel.Init(maxLevelZoomValue, _intialZoom, _zoomable, _minimumZoom);
 
     }
 
@@ -221,15 +247,16 @@ public class Level : Node2D
 
         _playerBlock.DashDirection = _playerBlock.DashDirection.Rotated(angle);
     }
-    public void ScaleModulate(float scale, bool down = true)
+    public virtual void ScaleModulate(bool down = true)
     {
-        if (!down)
+        if (down)
         {
-            scale = 1 / scale;
+           _animationPlayerLast.Play("paused");
+           return;
         }
+        
+        _animationPlayerLast.Play("pausedReset");
 
-        Modulate = scale * Modulate;
-        _background.Modulate = scale * _background.Modulate;
     }
 
     public void _on_PlayerBlock_ChangeStickyBlock(RotationStickyBlock newStickyBlock)
@@ -256,7 +283,7 @@ public class Level : Node2D
             }
         }
     }
-    public void _on_PlayerBlock_ImOnLast(int movesCounter)
+    public async void _on_PlayerBlock_ImOnLast(int movesCounter)
     {
 
         bool owned = false;
@@ -265,21 +292,32 @@ public class Level : Node2D
             owned = true;
         }
 
+        
+        _animationPlayerLast.Play(_gotoAnim);
+        await ToSignal(this, nameof(AnimationFinished)); 
+       
         EmitSignal(nameof(GameCompleted), owned, movesCounter);
     }
+
     public void _on_PlayerBlock_MoveMade()
     {
         _currentStickyBlock.UpdateState();
         RotationStickyBlock.CanRotate = false;
         _currentStickyBlock.IsCurrentBlock = false;
         _movesCounter += 1;
-        _movesLabel.Text = $"Moves: {_movesCounter}";
+        _movesLabel.Text = $"MOVES: {_movesCounter}";
+
+        if (_movesCounter > 99)
+        {
+            _movesLabel.Text = $"MOVES: DUMB";
+        }
     }
-    public void _on_HUDbuttons_PausePressed()
+    public async void _on_HUDbuttons_PausePressed()
     {
+        ScaleModulate(true);
+        await ToSignal(this, nameof(AnimationFinished)); 
         GetTree().Paused = true;
-        ScaleModulate(0.75f);
-        GetNode<Control>("ButtonsLayers/PauseMenu").Show();
+        GetNode<Control>("ButtonsLayer/PauseMenu").Show();
     }
     public void _on_HUDbuttons_ResetPressed()
     {
@@ -288,7 +326,7 @@ public class Level : Node2D
     public void _on_HUDbuttons_UndoPressed()
     {
         BackOneMove();
-    }  
+    }
     public void _on_Area2D_body_exited(Node body)
     {
         if (!_currentStickyBlock.IsLast)
@@ -304,7 +342,7 @@ public class Level : Node2D
     {
         UpdateLine(pivot, normal);
     }
-   
+
     public void _on_Camera2DLevel_OffsetZoom(Vector2 newZoom, Vector2 oldZoom)
     {
         Vector2 centerCamera = _cameraLevel.GetCameraScreenCenter();
@@ -338,6 +376,10 @@ public class Level : Node2D
     {
         EmitSignal(nameof(RotatingTweenCompleted));
     }
+    public void _on_ImOnLastPlayer_animation_finished(string _)
+    {
+        EmitSignal(nameof(AnimationFinished));
+    }
 
 }
 
@@ -349,7 +391,10 @@ public class Level : Node2D
 
 
 
-	
+
+
+
+
 
 
 

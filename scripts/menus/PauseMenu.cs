@@ -1,14 +1,17 @@
 using Godot;
 
-public class PauseMenu : MenuTemplates
+public class PauseMenu : Popup
 {
+    private Godot.Collections.Array<TextureButton> _buttons;
+    private GameManager _gameManager;
+
      public override void _Ready()
     {   
         _buttons = new Godot.Collections.Array<TextureButton>(GetTree().GetNodesInGroup("buttons"));
         _gameManager = GetTree().Root.GetNode<GameManager>("Main/GameManager");
         ConnectButtons();
     }
-    public override void ConnectButtons()
+    public void ConnectButtons()
     {
         string targetMethod = "_on_PauseMenu_button_pressed";
         foreach (TextureButton button in _buttons)

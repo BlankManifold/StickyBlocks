@@ -4,10 +4,14 @@
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 855, 405 )
+extents = Vector2( 837, 393.5 )
 
 [node name="Level" instance=ExtResource( 2 )]
-_type = "Medium"
+_type = "MEDIUM"
+_name = "ON THE LEFT"
+_intialZoom = 1.2
+_minimumZoom = 1.2
+_maxZoomConstraint = 1.6
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -16,31 +20,31 @@ input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 225, 405 )
+position = Vector2( 442, 393.5 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
-position = Vector2( 405, 181 )
+position = Vector2( 636, 201 )
 _type = "Rotation180"
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 90, 281 )
+position = Vector2( 321, 301 )
 
 [node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 1 )]
-position = Vector2( 855, 316 )
+position = Vector2( 1086, 336 )
 _type = "Rotation60"
 
 [node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="3" instance=ExtResource( 1 )]
-position = Vector2( 661, 586 )
+position = Vector2( 892, 606 )
 rotation = 0.523599
 _type = "Rotation90"
 
 [node name="RotationStickyBlock3" parent="RotationStickyBlocks" index="4" instance=ExtResource( 1 )]
-position = Vector2( -540, 181 )
+position = Vector2( -309, 201 )
 _type = "IRotation30"
 
 [node name="PlayerBlock" parent="." index="2"]
-position = Vector2( 439, 300 )
+position = Vector2( 670, 320 )
 
 [node name="HUDData" parent="HUDLayer" index="0"]
 anchor_left = 0.5
@@ -50,4 +54,10 @@ anchor_bottom = 0.5
 margin_left = -540.0
 margin_top = -360.0
 margin_right = 540.0
-margin_bottom = 360.0
+margin_bottom = 348.0
+
+[node name="Name" parent="HUDLayer" index="1"]
+text = "ON THE LEFT"
+
+[node name="Position2D" parent="." index="6"]
+position = Vector2( 639, 362 )

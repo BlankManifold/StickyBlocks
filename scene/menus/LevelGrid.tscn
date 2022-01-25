@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/menus/LevelGrid.cs" type="Script" id=1]
-[ext_resource path="res://assets/graphic/mainMenu/return.svg" type="Texture" id=4]
+[ext_resource path="res://assets/graphic/mainMenu/back.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -58,15 +58,6 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0.0745098, 0.160784, 0.235294, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -100,18 +91,17 @@ custom_constants/separation = 50
 alignment = 1
 
 [node name="Return" type="TextureButton" parent="." groups=["buttons"]]
-self_modulate = Color( 0.6, 0.6, 0.6, 1 )
+self_modulate = Color( 0.560784, 0.243137, 0.243137, 0.784314 )
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 50.0
-margin_top = -50.0
-margin_right = 110.0
-margin_bottom = -20.0
-rect_min_size = Vector2( 60, 30 )
+margin_left = 21.0
+margin_top = -87.0
+margin_right = 288.0
+margin_bottom = 180.0
+rect_scale = Vector2( 0.25, 0.25 )
 focus_mode = 0
 enabled_focus_mode = 0
 texture_normal = ExtResource( 4 )
-expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

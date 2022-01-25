@@ -1,0 +1,116 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1042.5, 772.5 )
+
+[node name="Level" instance=ExtResource( 1 )]
+_type = "HARD"
+_name = "IN THE MIDDLE"
+
+[node name="Area2D" type="Area2D" parent="." index="0"]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2( 1042.5, 412.5 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
+position = Vector2( 105, 422 )
+_type = "Rotation30"
+
+[node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
+position = Vector2( 2032, 422 )
+
+[node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 2 )]
+position = Vector2( 615, 421 )
+_type = "IRotation90"
+
+[node name="RotationStickyBlock15" parent="RotationStickyBlocks" index="3" instance=ExtResource( 2 )]
+position = Vector2( 435, 661 )
+_type = "IRotation45"
+
+[node name="RotationStickyBlock16" parent="RotationStickyBlocks" index="4" instance=ExtResource( 2 )]
+position = Vector2( 435, 196 )
+_type = "Rotation45"
+
+[node name="RotationStickyBlock18" parent="RotationStickyBlocks" index="5" instance=ExtResource( 2 )]
+position = Vector2( 840, 1066 )
+rotation = 1.5708
+_type = "Rotation30"
+
+[node name="RotationStickyBlock19" parent="RotationStickyBlocks" index="6" instance=ExtResource( 2 )]
+position = Vector2( 845, -239 )
+rotation = 1.5708
+_type = "Rotation60"
+
+[node name="RotationStickyBlock4" parent="RotationStickyBlocks" index="7" instance=ExtResource( 2 )]
+position = Vector2( 1195, 121 )
+_type = "IRotation45"
+
+[node name="RotationStickyBlock10" parent="RotationStickyBlocks" index="8" instance=ExtResource( 2 )]
+position = Vector2( 1195, 721 )
+_type = "Rotation45"
+
+[node name="RotationStickyBlock11" parent="RotationStickyBlocks" index="9" instance=ExtResource( 2 )]
+position = Vector2( 1195, 421 )
+_type = "Rotation180"
+
+[node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="10" instance=ExtResource( 2 )]
+position = Vector2( 975, 256 )
+_type = "Rotation30"
+
+[node name="RotationStickyBlock3" parent="RotationStickyBlocks" index="11" instance=ExtResource( 2 )]
+position = Vector2( 975, 601 )
+_type = "IRotation30"
+
+[node name="RotationStickyBlock5" parent="RotationStickyBlocks" index="12" instance=ExtResource( 2 )]
+position = Vector2( 1425, 241 )
+rotation = 0.523599
+_type = "Rotation60"
+
+[node name="RotationStickyBlock6" parent="RotationStickyBlocks" index="13" instance=ExtResource( 2 )]
+position = Vector2( 1425, -89 )
+_type = "Rotation180"
+
+[node name="RotationStickyBlock7" parent="RotationStickyBlocks" index="14" instance=ExtResource( 2 )]
+position = Vector2( 1680, -94 )
+_type = "Rotation45"
+
+[node name="RotationStickyBlock9" parent="RotationStickyBlocks" index="15" instance=ExtResource( 2 )]
+position = Vector2( 1680, 571 )
+_type = "IRotation90"
+
+[node name="RotationStickyBlock14" parent="RotationStickyBlocks" index="16" instance=ExtResource( 2 )]
+position = Vector2( 1680, 916 )
+_type = "IRotation45"
+
+[node name="RotationStickyBlock8" parent="RotationStickyBlocks" index="17" instance=ExtResource( 2 )]
+position = Vector2( 1425, 581 )
+rotation = -0.523599
+_type = "IRotation60"
+
+[node name="RotationStickyBlock12" parent="RotationStickyBlocks" index="18" instance=ExtResource( 2 )]
+position = Vector2( 1680, 261 )
+_type = "Rotation90"
+
+[node name="RotationStickyBlock13" parent="RotationStickyBlocks" index="19" instance=ExtResource( 2 )]
+position = Vector2( 1425, 916 )
+_type = "Rotation45"
+
+[node name="PlayerBlock" parent="." index="2"]
+position = Vector2( 139, 421 )
+
+[node name="Name" parent="HUDLayer" index="1"]
+text = "IN THE MIDDLE"
+
+[node name="Position2D" parent="." index="6"]
+position = Vector2( 1049, 416 )

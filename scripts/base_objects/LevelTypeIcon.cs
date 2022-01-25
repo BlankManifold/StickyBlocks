@@ -25,19 +25,20 @@ public class LevelTypeIcon : VBoxContainer
 
     public async override void _Ready()
     {
-        _gameManager = GetTree().Root.GetNode<GameManager>("Main/GameManager");
-        _button = GetNode<TextureButton>("CenterContainer/TextureButton");
-        _label = GetNode<Label>("Label");
-        _lockedRect = GetNode<TextureRect>("CenterContainer/LockedRect");
-        _typeLabel = _button.GetNode<Label>("Label");
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-
+        _gameManager = GetTree().Root.GetNode<GameManager>("Main/GameManager");
+        
+        _button = GetNode<TextureButton>("CenterContainer/TextureButton");
         _button.Name = this.Name;
-        _typeLabel.Text = this.Name;
-        _modulateColor = _button.SelfModulate;
-
-        _isUnlocked = _gameManager.IsLevelUnlocked(_button.Name);
         _button.TextureNormal = _texture;
+        _modulateColor = _button.SelfModulate;
+        
+        _label = GetNode<Label>("Label");
+        _label.Text = $"{_gameManager.NumberOfCompleted(Name)}/{_gameManager.NumberOfLevel(Name)}";
+                
+        _typeLabel = _button.GetNode<Label>("Label");
+        _typeLabel.Text = this.Name;
+        
 
         if (_gameManager.JustUnLocked[Name])
         {
@@ -48,18 +49,20 @@ public class LevelTypeIcon : VBoxContainer
         }
         
         
+        _lockedRect = GetNode<TextureRect>("CenterContainer/LockedRect");
+        _isUnlocked = _gameManager.IsLevelUnlocked(_button.Name);
+        
         if (_isUnlocked)
         {
            _lockedRect.Hide();
         }
 
-        _label.Text = $"{_gameManager.NumberOfCompleted(Name)}/{_gameManager.NumberOfLevel(Name)}";
         
+        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b, 0.2f);
         if (_button.HasFocus())
         {
         _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b);
         }
-        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b, 0.2f);
 
     }
     public void _on_TextureButton_focus_entered()

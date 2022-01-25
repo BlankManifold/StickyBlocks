@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/menus/LevelTypeMenu.cs" type="Script" id=1]
-[ext_resource path="res://assets/graphic/mainMenu/return.svg" type="Texture" id=4]
+[ext_resource path="res://assets/graphic/mainMenu/back.png" type="Texture" id=2]
 [ext_resource path="res://scene/base_objects/LevelTypeIcon.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -21,11 +21,18 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
+[node name="Return" type="TextureButton" parent="." groups=["buttons"]]
+modulate = Color( 0.560784, 0.243137, 0.243137, 0.784314 )
+anchor_top = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0.0745098, 0.160784, 0.235294, 1 )
+margin_left = 21.0
+margin_top = -87.0
+margin_right = 288.0
+margin_bottom = 180.0
+rect_scale = Vector2( 0.25, 0.25 )
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -68,53 +75,37 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/NinePatchRect/ScrollContainer"]
-margin_right = 636.0
-margin_bottom = 130.0
+margin_right = 690.0
+margin_bottom = 163.0
 custom_constants/separation = 150
 alignment = 1
 
-[node name="Easy" parent="MarginContainer/NinePatchRect/ScrollContainer/HBoxContainer" groups=["type"] instance=ExtResource( 5 )]
+[node name="EASY" parent="MarginContainer/NinePatchRect/ScrollContainer/HBoxContainer" groups=["type"] instance=ExtResource( 5 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 0.0
-margin_right = 112.0
-margin_bottom = 130.0
+margin_right = 130.0
+margin_bottom = 163.0
 
-[node name="Medium" parent="MarginContainer/NinePatchRect/ScrollContainer/HBoxContainer" groups=["type"] instance=ExtResource( 5 )]
+[node name="MEDIUM" parent="MarginContainer/NinePatchRect/ScrollContainer/HBoxContainer" groups=["type"] instance=ExtResource( 5 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 262.0
+margin_left = 280.0
 margin_top = 0.0
-margin_right = 374.0
-margin_bottom = 130.0
+margin_right = 410.0
+margin_bottom = 163.0
 
-[node name="Hard" parent="MarginContainer/NinePatchRect/ScrollContainer/HBoxContainer" groups=["type"] instance=ExtResource( 5 )]
+[node name="HARD" parent="MarginContainer/NinePatchRect/ScrollContainer/HBoxContainer" groups=["type"] instance=ExtResource( 5 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 524.0
+margin_left = 560.0
 margin_top = 0.0
-margin_right = 636.0
-margin_bottom = 130.0
-
-[node name="Return" type="TextureButton" parent="MarginContainer/NinePatchRect" groups=["buttons"]]
-modulate = Color( 0.6, 0.6, 0.6, 1 )
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = -8.0
-margin_top = -29.0
-margin_right = 233.0
-margin_bottom = 49.0
-rect_scale = Vector2( 0.3, 0.3 )
-focus_mode = 0
-enabled_focus_mode = 0
-texture_normal = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_right = 690.0
+margin_bottom = 163.0

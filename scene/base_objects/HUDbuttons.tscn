@@ -1,63 +1,69 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/graphic/mainMenu/pause.png" type="Texture" id=1]
+[ext_resource path="res://assets/graphic/mainMenu/reset2.png" type="Texture" id=1]
 [ext_resource path="res://scripts/base_objects/HUDbuttons.cs" type="Script" id=2]
+[ext_resource path="res://assets/graphic/mainMenu/undo2.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphic/mainMenu/pause2.png" type="Texture" id=4]
 
 [node name="NinePatchRect" type="NinePatchRect"]
-self_modulate = Color( 0.6, 0.6, 0.6, 1 )
-anchor_left = 1.0
+modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
 anchor_right = 1.0
-margin_left = -32.0
-margin_top = 7.0
-margin_right = -8.0
-margin_bottom = 39.0
+margin_top = 2.0
+margin_bottom = 50.0
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_horizontal_guides_": [ 55.0, 4.0 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 1040.0 ]
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Pause" type="TextureButton" parent="." groups=["buttons"]]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -115.0
-margin_bottom = 32.0
-custom_constants/separation = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Pause" type="TextureButton" parent="HBoxContainer" groups=["buttons"]]
-self_modulate = Color( 0.6, 0.6, 0.6, 1 )
-margin_right = 25.0
-margin_bottom = 32.0
+margin_left = -42.0
+margin_top = 16.0
+margin_right = 14.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 56, 56 )
+rect_scale = Vector2( 0.5, 0.5 )
 action_mode = 0
-texture_normal = ExtResource( 1 )
+texture_normal = ExtResource( 4 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Undo" type="TextureButton" parent="HBoxContainer" groups=["buttons"]]
-self_modulate = Color( 0.6, 0.6, 0.6, 1 )
-margin_left = 45.0
-margin_right = 70.0
-margin_bottom = 32.0
+[node name="Undo" type="TextureButton" parent="." groups=["buttons"]]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -84.0
+margin_top = 9.0
+margin_right = -11.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 64, 70 )
+rect_scale = Vector2( 0.5, 0.5 )
 action_mode = 0
-texture_normal = ExtResource( 1 )
+texture_normal = ExtResource( 3 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset" type="TextureButton" parent="HBoxContainer" groups=["buttons"]]
-self_modulate = Color( 0.6, 0.6, 0.6, 1 )
-margin_left = 90.0
-margin_right = 115.0
-margin_bottom = 32.0
+[node name="Reset" type="TextureButton" parent="." groups=["buttons"]]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -132.0
+margin_top = 9.0
+margin_right = -47.0
+margin_bottom = 90.0
+rect_scale = Vector2( 0.5, 0.5 )
 focus_mode = 0
 texture_normal = ExtResource( 1 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="HBoxContainer/Pause" to="." method="_on_Pause_pressed"]
-[connection signal="pressed" from="HBoxContainer/Undo" to="." method="_on_Undo_pressed"]
-[connection signal="button_down" from="HBoxContainer/Reset" to="." method="_on_Reset_button_down"]
+[connection signal="pressed" from="Pause" to="." method="_on_Pause_pressed"]
+[connection signal="pressed" from="Undo" to="." method="_on_Undo_pressed"]
+[connection signal="button_down" from="Reset" to="." method="_on_Reset_button_down"]

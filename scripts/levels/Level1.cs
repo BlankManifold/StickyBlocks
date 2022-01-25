@@ -1,21 +1,17 @@
 using Godot;
 using System;
 
-public class Level1 : Level
+public class Level1 : LevelWithTutorial
 {
-    private String[] _texts = new String[] {"Different colors represent different rotation angles. \n\n Press SPACEBAR to continue", 
-                                            "LEFT CLICK on the StickyBlock to rotate it back and forth" };
-    private Label _label;
     private InputPausedAnimation _animationPlayer;
 
     private Vector2 _position;
+
+    [Export(PropertyHint.MultilineText)]
+    protected String _text1;
     public override void _Ready()
     {
         base._Ready();
-
-        CanvasLayer layer = (CanvasLayer)FindNode("HUDLayer");
-        _label = layer.GetNode<Label>("Label");
-        _label.Text = _texts[0];
 
         RotationStickyBlock initialBlock = (RotationStickyBlock)FindNode("InitialBlock");
 
@@ -34,7 +30,7 @@ public class Level1 : Level
     {
         _animationPlayer.Stop();
         _animationPlayer.Play("RESET");
-        _label.Text = _texts[1];
+        _label.Text = _text1;
 
         RotationStickyBlock initialBlock = (RotationStickyBlock)FindNode("InitialBlock");
         initialBlock.RemoveChild(_playerBlock);

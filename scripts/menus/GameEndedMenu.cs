@@ -19,7 +19,7 @@ public class GameEndedMenu : MenuTemplates
     public void Init(int level, bool owned, int moves, int best)
     {
 
-        _outcomeText = $"Level {level} Completed!";
+        _outcomeText = $"LEVEL {level} COMPLETED!";
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _animationPlayer.Play("RESET");
 
@@ -27,14 +27,20 @@ public class GameEndedMenu : MenuTemplates
         if (owned)
         {
             _animationPlayer.Play("glow");
-            _outcomeText = $"Level {level} owned!";
+            _outcomeText = $"LEVEL {level} OWNED!";
         }
 
-        _movesText = $"Moves: {moves}";
-        _bestText = $"Best: {best}";
+        _movesText = $"MOVES: {moves}";
+        
+        if (moves > 99)
+        {
+        _movesText = $"MOVES: DUMB";
+        }
+
+        _bestText = $"BEST: {best}";
         if (best == -1)
         {
-            _bestText = "Best: -";
+            _bestText = "BEST: -";
         }
 
     }

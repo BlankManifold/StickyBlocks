@@ -39,7 +39,7 @@ public class RotationStickyBlock : StickyBlock
     {
         {0, new  Color(0.89f, 0.96f, 1f)}, {30,new Color(0.62f, 0.84f, 1f)},
         {45,new Color(0.25f, 0.69f, 1f)},{60, new Color(0.08f, 0.40f, 0.62f)},
-        {90,new Color(0.12f, 0.25f, 0.34f)},{180,new Color(0.05f, 0.08f, 0.11f)}
+        {90,new Color(0.12f, 0.25f, 0.34f)},{180,new Color(0.008f, 0.04f, 0.07f)}//Color(0.05f, 0.08f, 0.11f)}
     };
 
     public override void _Ready()

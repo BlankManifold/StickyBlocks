@@ -63,7 +63,11 @@ public class Main : Control
     public void GoToOptionsMenu()
     {
         _menu.QueueFree();
-        AddMenu(_optionsMenuScene, "OptionsMenu");
+
+        OptionsMenu menu = _optionsMenuScene.Instance<OptionsMenu>();
+        AddChild(menu);
+        menu.Name = "OptionsMenu";
+        _menu = menu;
     }
     public void GoToGameEndedMenu(int level, bool owned, int moves, int best)
     {
@@ -79,59 +83,46 @@ public class Main : Control
     public async void _on_MainMenu_button_pressed(string name)
     {
         MainMenu menu = (MainMenu)_menu;
-        menu.StartAnimation(name);
-        await ToSignal(menu, "AnimationFinished");
 
         switch (name)
         {
             case "Play":
+                menu.StartAnimation(name);
+                await ToSignal(menu, "AnimationFinished");
                 GoToLevelMenu();
                 break;
-            case "Options":
+            case "Settings":
                 GoToOptionsMenu();
                 break;
         }
     }
-    public async void _on_OptionsMenu_button_pressed(string name)
+    public void _on_OptionsMenu_Return_Pressed()
     {
-        switch (name)
-        {
-            case "Return":
-                GoToMainMenu();
-                break;
-            case "Reset":
-                _gameManager.LoadDefaultPlayerData();
-                _gameManager.SavePlayerData();
-
-                _menu.Hide();
-                await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
-                _menu.Show();
-                break;
-        }
+        GoToMainMenu();
     }
     public void _on_LevelTypeMenu_button_pressed(string name)
     {
 
         switch (name)
         {
-            case "Easy":
+            case "EASY":
                 if (_gameManager.IsLevelUnlocked(name))
                 {
-                    _gameManager.CurrentLevelType = "Easy";
+                    _gameManager.CurrentLevelType = "EASY";
                     GoToLevelGrid();
                 }
                 break;
-            case "Medium":
+            case "MEDIUM":
                 if (_gameManager.IsLevelUnlocked(name))
                 {
-                    _gameManager.CurrentLevelType = "Medium";
+                    _gameManager.CurrentLevelType = "MEDIUM";
                     GoToLevelGrid();
                 }
                 break;
-            case "Hard":
+            case "HARD":
                 if (_gameManager.IsLevelUnlocked(name))
                 {
-                    _gameManager.CurrentLevelType = "Hard";
+                    _gameManager.CurrentLevelType = "HARD";
                     GoToLevelGrid();
                 }
                 break;
@@ -183,7 +174,7 @@ public class Main : Control
                 GoToLevel(_gameManager.CurrentLevelType, _gameManager.CurrentLevelNumber);
                 break;
             case "Return":
-                GoToMainMenu();
+                GoToLevelMenu();
                 break;
         }
 

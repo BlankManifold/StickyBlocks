@@ -8,18 +8,18 @@ using PlayerDataType = Godot.Collections.Dictionary;
 public class GameManager : Node2D
 {
     [Export]
-    private Dictionary<string, int> _maxLevel = new Dictionary<string, int>() { { "Easy", 0 }, { "Medium", 0 }, { "Hard", 0 } };
+    private Dictionary<string, int> _maxLevel = new Dictionary<string, int>() { { "EASY", 0 }, { "MEDIUM", 0 }, { "HARD", 0 } };
     public Dictionary<string, int> MaxLevel { get { return _maxLevel; } }
-    private Dictionary<string,   bool> _justUnLocked = new Dictionary<string, bool>() {{ "Easy", false },{ "Medium", false }, { "Hard", false } };
+    private Dictionary<string,   bool> _justUnLocked = new Dictionary<string, bool>() {{ "EASY", false },{ "MEDIUM", false }, { "HARD", false } };
     public Dictionary<string, bool> JustUnLocked { get { return _justUnLocked; } }
 
     private Level _currentLevel;
     private int _currentLevelNumber = 0;
     public int CurrentLevelNumber { get { return _currentLevelNumber; }}
-    private string _currentLevelType = "Easy";
+    private string _currentLevelType = "EASY";
     public string CurrentLevelType { get { return _currentLevelType; } set { _currentLevelType = value;}}
-    private string[] _levelTypes = { "Easy", "Medium", "Hard" };
-    private Dictionary<string, string> _levelChain = new Dictionary<string, string>()  { { "Easy", "Medium"}, { "Medium", "Hard" },{ "Hard", null }};
+    private string[] _levelTypes = { "EASY", "MEDIUM", "HARD" };
+    private Dictionary<string, string> _levelChain = new Dictionary<string, string>()  { { "EASY", "MEDIUM"}, { "MEDIUM", "HARD" },{ "HARD", null }};
     private Godot.Collections.Dictionary _levelLockDictionary = new Godot.Collections.Dictionary() { };
     private string _levelLockPath = "user://levelLock.dat";
     private PlayerDataType _playerDataDictionary = new PlayerDataType() { };
@@ -48,7 +48,7 @@ public class GameManager : Node2D
             Dictionary<string, Dictionary<string, int>> typeDictionary = new Dictionary<string, Dictionary<string, int>>();
             Godot.Collections.Dictionary levelDataDictionary = new Godot.Collections.Dictionary();
 
-            if (type == "Easy")
+            if (type == "EASY")
             {
                 levelDataDictionary.Add("Unlocked", true);
             }
@@ -249,7 +249,7 @@ public class GameManager : Node2D
         switch (name)
         {
             case "Resume":
-                _currentLevel.ScaleModulate(0.75f, false);
+                _currentLevel.ScaleModulate(false);
                 break;
             case "Quit":
                 _currentLevel.QueueFree();
