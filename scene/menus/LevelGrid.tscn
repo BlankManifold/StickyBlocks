@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/menus/LevelGrid.cs" type="Script" id=1]
 [ext_resource path="res://assets/graphic/mainMenu/back.png" type="Texture" id=4]
@@ -10,44 +10,6 @@
 [sub_resource type="Theme" id=3]
 HScrollBar/styles/scroll = SubResource( 1 )
 VScrollBar/styles/scroll = SubResource( 2 )
-
-[sub_resource type="Environment" id=4]
-background_mode = 4
-glow_enabled = true
-glow_strength = 0.9
-glow_blend_mode = 0
-glow_bicubic_upscale = true
-
-[sub_resource type="Animation" id=5]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("WorldEnvironment:environment:glow_strength")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.9 ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "glow"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("WorldEnvironment:environment:glow_strength")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.9, 1.1 ]
-}
 
 [node name="LevelGrid" type="Control"]
 anchor_right = 1.0
@@ -67,6 +29,9 @@ margin_left = -306.0
 margin_top = -340.0
 margin_right = 306.0
 margin_bottom = 340.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ScrollContainer" type="ScrollContainer" parent="NinePatchRect"]
 anchor_left = 0.5
@@ -90,7 +55,7 @@ __meta__ = {
 custom_constants/separation = 50
 alignment = 1
 
-[node name="Return" type="TextureButton" parent="." groups=["buttons"]]
+[node name="Return" type="TextureButton" parent="." groups=["buttons", "hoverableButton"]]
 self_modulate = Color( 0.560784, 0.243137, 0.243137, 0.784314 )
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -105,12 +70,3 @@ texture_normal = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 4 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 5 )
-anims/glow = SubResource( 6 )
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

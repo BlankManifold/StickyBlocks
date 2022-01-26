@@ -134,6 +134,9 @@ public class Main : Control
     }
     public void _on_LevelGrid_button_pressed(string name)
     {
+        _gameManager.ResetAnimation();
+
+
         if (name[0] == 'L')
         {
             string number = name.Split('l').Last();
@@ -153,6 +156,7 @@ public class Main : Control
     }
     public void _on_GameEndedMenu_button_pressed(string name)
     {
+        _gameManager.ResetAnimation();
 
         switch (name)
         {
@@ -167,7 +171,7 @@ public class Main : Control
                 {
                     GoToLevelMenu();
                 }
-
+                
 
                 break;
             case "Retry":

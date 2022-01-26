@@ -3,7 +3,7 @@ using System;
 
 public class Level0 : LevelWithTutorial
 {
-    private AnimationPlayer _animationPlayer;
+     private InputPausedAnimation _animationPlayer;
 
     [Export(PropertyHint.MultilineText)]
     protected String _text1;
@@ -12,7 +12,7 @@ public class Level0 : LevelWithTutorial
     {
         base._Ready();
 
-        _animationPlayer = (AnimationPlayer)FindNode("AnimationPlayer");
+        _animationPlayer = GetNode<InputPausedAnimation>("AnimationPlayer");
         _animationPlayer.Play("tutorial");
         
         GetTree().Paused = true;

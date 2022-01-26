@@ -23,7 +23,7 @@ public class Level : Node2D
 
 
     [Export]
-    protected int _movesRequired;
+    protected int _movesRequired = 99;
 
     [Export]
     protected int _number;

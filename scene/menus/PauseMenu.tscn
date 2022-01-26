@@ -80,7 +80,7 @@ margin_bottom = 444.0
 custom_constants/separation = 50
 alignment = 1
 
-[node name="Quit" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer" groups=["buttons"]]
+[node name="Quit" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer" groups=["buttons", "hoverableButton"]]
 self_modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
 margin_left = 139.0
 margin_right = 414.0
@@ -111,7 +111,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Resume" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer" groups=["buttons"]]
+[node name="Resume" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer" groups=["buttons", "hoverableButton"]]
 self_modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
 margin_left = 464.0
 margin_right = 739.0

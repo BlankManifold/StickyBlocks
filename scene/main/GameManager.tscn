@@ -1,6 +1,45 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/main/GameManager.cs" type="Script" id=3]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 5.0
+glow_hdr_threshold = 1.2
+glow_hdr_scale = 1.0
+glow_bicubic_upscale = true
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("WorldEnvironment:environment:glow_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "glow"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("WorldEnvironment:environment:glow_strength")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.2, 1.4 ]
+}
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource( 3 )
@@ -9,3 +48,13 @@ _maxLevel = {
 "HARD": 0,
 "MEDIUM": 0
 }
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="GameManagerAnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
+anims/RESET = SubResource( 2 )
+anims/glow = SubResource( 3 )
+
+[connection signal="animation_finished" from="GameManagerAnimationPlayer" to="." method="_on_GameManagerAnimationPlayer_animation_finished"]

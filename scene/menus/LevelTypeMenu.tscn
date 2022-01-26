@@ -21,7 +21,7 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Return" type="TextureButton" parent="." groups=["buttons"]]
+[node name="Return" type="TextureButton" parent="." groups=["buttons", "hoverableButton"]]
 modulate = Color( 0.560784, 0.243137, 0.243137, 0.784314 )
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -62,13 +62,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -318.0
-margin_top = -65.0
-margin_right = 319.0
-margin_bottom = 65.0
+margin_left = -345.0
+margin_top = -81.5
+margin_right = 345.0
+margin_bottom = 81.5
 rect_clip_content = false
 theme = SubResource( 3 )
 follow_focus = true
+scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false

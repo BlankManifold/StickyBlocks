@@ -12,21 +12,22 @@ public class GameEndedMenu : MenuTemplates
     private Label _movesLabel;
     private TextureRect _starsRect;
 
-    private AnimationPlayer _animationPlayer;
-    private bool _animationBackwards = false;
+    private bool _owned = false;
+
+    [Signal]
+    delegate void PlayAnimation();
+
 
 
     public void Init(int level, bool owned, int moves, int best)
     {
 
         _outcomeText = $"LEVEL {level} COMPLETED!";
-        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        _animationPlayer.Play("RESET");
 
 
         if (owned)
         {
-            _animationPlayer.Play("glow");
+            _owned = true;
             _outcomeText = $"LEVEL {level} OWNED!";
         }
 
@@ -49,6 +50,17 @@ public class GameEndedMenu : MenuTemplates
     {
         base._Ready();
 
+        _gameManager.ResetAnimation();
+
+         Connect(nameof(PlayAnimation), _gameManager, "_on_GameEndedMenu_PlayAnimation");
+
+        if (_owned)
+        {
+            EmitSignal(nameof(PlayAnimation));
+        }
+
+
+
         _outcomeLabel = (Label)FindNode("Outcome");
         _bestLabel = (Label)FindNode("Best");
         _movesLabel = (Label)FindNode("Moves");
@@ -59,23 +71,6 @@ public class GameEndedMenu : MenuTemplates
         _movesLabel.Text = _movesText;
 
 
-    }
-
-    public void _on_AnimationPlayer_animation_finished(string name)
-    {
-        if (name == "glow")
-        {
-            if (_animationBackwards)
-            {
-                _animationPlayer.Play("glow");
-            }
-            else
-            {
-                _animationPlayer.PlayBackwards("glow");
-            }
-
-            _animationBackwards = !_animationBackwards;
-        }
     }
 
 }

@@ -10,12 +10,13 @@ public class LevelGrid : MenuTemplates
     private int _rowCount;
     private int _remainder;
     private Texture _star_texture;
-    private AnimationPlayer _animationPlayer;
 
     private VBoxContainer _container;
-    private bool _animationBackwards = false;
 
     private PackedScene _levelNumberIcon;
+
+    [Signal]
+    delegate void PlayAnimation();
 
     public void Init(string type)
     {
@@ -23,11 +24,11 @@ public class LevelGrid : MenuTemplates
     }
     public override void _Ready()
     {
-        base._Ready();
+         base._Ready();
         // _animationPlayer.Play("RESET");
 
         _container = GetNode<VBoxContainer>("NinePatchRect/ScrollContainer/VBoxContainer");
-        _star_texture = ResourceLoader.Load<Texture>("res://assets/graphic/mainMenu/star.png");
+        // _star_texture = ResourceLoader.Load<Texture>("res://assets/graphic/mainMenu/star.png");
 
         _levelNumberIcon = ResourceLoader.Load<PackedScene>("res://scene/base_objects/LevelNumberIcon.tscn");
         _gameManager.CurrentLevelType = _levelType;
@@ -49,9 +50,9 @@ public class LevelGrid : MenuTemplates
         TextureButton firstButton = firstIcon.Button;
         firstButton.GrabFocus();
 
-        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        _animationPlayer.Play("RESET");
-        _animationPlayer.Play("glow");
+        Connect(nameof(PlayAnimation),_gameManager, "_on_LevelGrid_PlayAnimation");
+        EmitSignal(nameof(PlayAnimation));
+        
     }
 
     public void AddRow(int currentRow, int remainder = 0)
@@ -84,7 +85,7 @@ public class LevelGrid : MenuTemplates
             button.Name = icon.Name;
 
             TextureRect stars = icon.StarsRect;
-            stars.Texture = _star_texture;
+            //stars.Texture = _star_texture;
             SetOwned(stars, num);
             SetCompleted(stars, num);
 
@@ -106,24 +107,40 @@ public class LevelGrid : MenuTemplates
         int owned = _gameManager.GetOwned(_levelType, levelNumber);
         if (best != -1 && owned != 1)
         {
-            star.SelfModulate = new Color(0.79f, 0.74f, 0.49f);
+            star.SelfModulate = new Color(0.88f, 0.82f, 0.54f);
         }
     }
 
-    public void _on_AnimationPlayer_animation_finished(string name)
+    public override void ConnectButtons()
     {
-        if (name == "glow")
+        string nodeName = this.Name;
+        string targetMethod = $"_on_{nodeName}_button_pressed";
+        foreach (TextureButton button in _buttons)
         {
-            if (_animationBackwards)
-            {
-                _animationPlayer.Play("glow");
-            }
-            else
-            {
-                _animationPlayer.PlayBackwards("glow");
-            }
-
+            button.Connect("pressed", GetTree().Root.GetChild(0), targetMethod, new Godot.Collections.Array { button.Name });
+            button.Connect("mouse_exited", this, "_on_mouse_exited", new Godot.Collections.Array { button });
+            button.Connect("mouse_entered", this, "_on_mouse_entered", new Godot.Collections.Array { button });
         }
     }
 
+    public override void _on_mouse_entered(TextureButton button)
+    {
+        if (button.IsInGroup("hoverableButton"))
+        {
+            _modulate = button.SelfModulate;
+            button.SelfModulate *= 1.1f;
+            return;
+        }
+        button.GrabFocus();
+    }
+    public override void _on_mouse_exited(TextureButton button)
+    {
+        if (button.IsInGroup("hoverableButton"))
+        {
+            button.SelfModulate = _modulate;
+            return;
+        }
+
+
+    }
 }

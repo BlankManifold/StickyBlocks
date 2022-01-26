@@ -27,7 +27,6 @@ tracks/0/keys = {
 [node name="Level" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 _name = "BEGINNING: TUTORIAL 0"
-_movesRequired = -144
 _intialZoom = 1.0
 _maxZoomConstraint = 1.0
 _zoomable = false

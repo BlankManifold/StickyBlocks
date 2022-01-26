@@ -20,7 +20,7 @@ public class Level1 : LevelWithTutorial
         initialBlock.AddChild(_playerBlock);
         _playerBlock.GlobalPosition = _position;
 
-        _animationPlayer = (InputPausedAnimation)FindNode("AnimationPlayer");
+        _animationPlayer = GetNode<InputPausedAnimation>("AnimationPlayer");
         _animationPlayer.PlayBackAndForth = true;
         _animationPlayer.Play("tutorial");
         

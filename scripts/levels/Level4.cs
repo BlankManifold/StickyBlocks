@@ -12,7 +12,7 @@ public class Level4 : LevelWithTutorial
     {
         base._Ready();
 
-        _animationPlayer = (InputPausedAnimation)FindNode("AnimationPlayer");
+        _animationPlayer = GetNode<InputPausedAnimation>("AnimationPlayer");
         _animationPlayer.PlayBackAndForth = true;
         _animationPlayer.Play("tutorial");
         

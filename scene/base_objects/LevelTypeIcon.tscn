@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/base_objects/LevelTypeIcon.cs" type="Script" id=2]
 [ext_resource path="res://fonts/unsteady oversteer.ttf" type="DynamicFontData" id=4]
@@ -15,7 +15,7 @@ size = 23
 extra_spacing_char = 3
 font_data = ExtResource( 4 )
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=6]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("CenterContainer/LockedRect:self_modulate")
@@ -30,7 +30,7 @@ tracks/0/keys = {
 "values": [ Color( 0.894118, 0.956863, 1, 0.392157 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=7]
 resource_name = "unlock"
 length = 1.5
 tracks/0/type = "value"
@@ -43,12 +43,8 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.894118, 0.956863, 1, 0.392157 ), Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 0.894118, 0.956863, 1, 0.392157 ), Color( 3, 3, 3, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-
-[sub_resource type="Environment" id=3]
-background_mode = 4
-glow_enabled = true
 
 [node name="VBoxContainer" type="VBoxContainer"]
 anchor_left = 0.5
@@ -132,11 +128,8 @@ align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
-anims/RESET = SubResource( 1 )
-anims/unlock = SubResource( 2 )
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 3 )
+anims/RESET = SubResource( 6 )
+anims/unlock = SubResource( 7 )
 
 [connection signal="focus_entered" from="CenterContainer/TextureButton" to="." method="_on_TextureButton_focus_entered"]
 [connection signal="focus_exited" from="CenterContainer/TextureButton" to="." method="_on_TextureButton_focus_exited"]

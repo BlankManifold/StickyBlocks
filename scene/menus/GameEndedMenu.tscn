@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/menus/GameEndedMenu.cs" type="Script" id=1]
 [ext_resource path="res://assets/graphic/mainMenu/block_button.png" type="Texture" id=2]
-[ext_resource path="res://assets/graphic/mainMenu/star.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphic/mainMenu/star8.png" type="Texture" id=3]
 [ext_resource path="res://fonts/unsteady oversteer.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=8]
@@ -19,44 +19,6 @@ font_data = ExtResource( 4 )
 size = 23
 extra_spacing_char = 3
 font_data = ExtResource( 4 )
-
-[sub_resource type="Environment" id=4]
-background_mode = 4
-glow_enabled = true
-glow_strength = 0.9
-glow_blend_mode = 0
-glow_bicubic_upscale = true
-
-[sub_resource type="Animation" id=5]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("WorldEnvironment:environment:glow_strength")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.9 ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "glow"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("WorldEnvironment:environment:glow_strength")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.9, 1.1 ]
-}
 
 [node name="GameEndedMenu" type="Control"]
 anchor_right = 1.0
@@ -114,7 +76,7 @@ self_modulate = Color( 1.09, 1.04, 0.79, 1 )
 margin_top = 76.0
 margin_right = 356.0
 margin_bottom = 126.0
-rect_min_size = Vector2( 50, 50 )
+rect_min_size = Vector2( 0, 50 )
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
@@ -149,7 +111,7 @@ margin_right = 985.0
 margin_bottom = 576.0
 custom_constants/separation = 80
 
-[node name="Return" type="TextureButton" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
+[node name="Return" type="TextureButton" parent="VBoxContainer/HBoxContainer" groups=["buttons", "hoverableButton"]]
 self_modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
 margin_right = 275.0
 margin_bottom = 45.0
@@ -179,7 +141,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Retry" type="TextureButton" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
+[node name="Retry" type="TextureButton" parent="VBoxContainer/HBoxContainer" groups=["buttons", "hoverableButton"]]
 self_modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
 margin_left = 355.0
 margin_right = 630.0
@@ -210,7 +172,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Continue" type="TextureButton" parent="VBoxContainer/HBoxContainer" groups=["buttons"]]
+[node name="Continue" type="TextureButton" parent="VBoxContainer/HBoxContainer" groups=["buttons", "hoverableButton"]]
 self_modulate = Color( 0.117647, 0.247059, 0.337255, 1 )
 margin_left = 710.0
 margin_right = 985.0
@@ -240,15 +202,3 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 4 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 5 )
-anims/glow = SubResource( 6 )
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

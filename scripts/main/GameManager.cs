@@ -29,13 +29,15 @@ public class GameManager : Node2D
     public string LevelLockPath { get { return _levelLockPath; } }
     public string PlayerDataPath { get { return _playerDataPath; } }
 
+    private AnimationPlayer _gameManagerAnimationPlayer;
+    private bool _animationBackwards = false;
+
 
     [Signal]
     public delegate void LevelCompleted(int level, bool owned, int moves, int best);
     [Signal]
     public delegate void QuitPressed();
-
-
+    
 
     public void LoadDefaultPlayerData()
     {
@@ -208,6 +210,7 @@ public class GameManager : Node2D
     public override void _Ready()
     {
         LoadPlayerData();
+        _gameManagerAnimationPlayer = GetNode<AnimationPlayer>("GameManagerAnimationPlayer");
         // LoadDefaultPlayerData(); SavePlayerData();
     }
 
@@ -258,6 +261,39 @@ public class GameManager : Node2D
         }
     }
 
+    public void _on_GameManagerAnimationPlayer_animation_finished(string name)
+    {
+        if (name == "glow")
+        {
+            if (_animationBackwards)
+            {
+                _gameManagerAnimationPlayer.Play("glow");
+            }
+            else
+            {
+                _gameManagerAnimationPlayer.PlayBackwards("glow");
+            }
+
+            _animationBackwards = !_animationBackwards;
+            return;
+        }
+
+    }
+     public void _on_LevelGrid_PlayAnimation()
+    {
+        _gameManagerAnimationPlayer.Play("RESET");
+        _gameManagerAnimationPlayer.Play("glow");
+    }
+     public void _on_GameEndedMenu_PlayAnimation()
+    {
+        _gameManagerAnimationPlayer.Play("glow");
+    }
+
+    public void ResetAnimation()
+    {
+        _gameManagerAnimationPlayer.Play("RESET");
+        _gameManagerAnimationPlayer.Advance(0);
+    }
 
 
 }
