@@ -5,10 +5,14 @@
 [ext_resource path="res://fonts/newTutorialFont.tres" type="DynamicFont" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 638.698, 360 )
+extents = Vector2( 522.5, 228 )
 
 [node name="Level" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+_name = "ROTATION: TUTORIAL 2"
+_movesRequired = 1
+_intialZoom = 1.0
+_maxZoomConstraint = 1.0
 _zoomable = false
 _text0 = "You can rotate every StickyBlock, even the last one
 
@@ -21,7 +25,7 @@ input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 638.698, 360 )
+position = Vector2( 661.5, 359 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
@@ -57,4 +61,4 @@ __meta__ = {
 text = "ROTATION: TUTORIAL 2"
 
 [node name="Position2D" parent="." index="6"]
-position = Vector2( 639, 360 )
+position = Vector2( 660, 360 )

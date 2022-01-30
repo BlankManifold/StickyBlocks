@@ -13,7 +13,7 @@ public class Level1 : LevelWithTutorial
     {
         base._Ready();
 
-        RotationStickyBlock initialBlock = (RotationStickyBlock)FindNode("InitialBlock");
+        RotationStickyBlock initialBlock = GetNode<RotationStickyBlock>("RotationStickyBlocks/InitialBlock");
 
         Vector2 _position = _playerBlock.GlobalPosition;
         RemoveChild(_playerBlock);
@@ -32,7 +32,7 @@ public class Level1 : LevelWithTutorial
         _animationPlayer.Play("RESET");
         _label.Text = _text1;
 
-        RotationStickyBlock initialBlock = (RotationStickyBlock)FindNode("InitialBlock");
+        RotationStickyBlock initialBlock = GetNode<RotationStickyBlock>("RotationStickyBlocks/InitialBlock");
         initialBlock.RemoveChild(_playerBlock);
         AddChild(_playerBlock);
         ResetLevel();

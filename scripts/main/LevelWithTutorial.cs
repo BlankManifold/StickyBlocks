@@ -13,7 +13,7 @@ public class LevelWithTutorial : Level
         base._Ready();
 
         _gotoAnim = "gotoLevelsWithTutorial";
-        CanvasLayer layer = (CanvasLayer)FindNode("HUDLayer");
+        CanvasLayer layer = GetNode<CanvasLayer>("HUDLayer");
         _label = layer.GetNode<Label>("Label");
         _label.Text = _text0;   
     }

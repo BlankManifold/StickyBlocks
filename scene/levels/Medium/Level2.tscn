@@ -9,9 +9,10 @@ extents = Vector2( 837, 393.5 )
 [node name="Level" instance=ExtResource( 2 )]
 _type = "MEDIUM"
 _name = "ON THE LEFT"
-_intialZoom = 1.2
-_minimumZoom = 1.2
-_maxZoomConstraint = 1.6
+_movesRequired = 2
+_intialZoom = 1.25
+_minimumZoom = 1.25
+_maxZoomConstraint = 1.65
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0

@@ -9,7 +9,7 @@ colors = PoolColorArray( 0.00784314, 0.0666667, 0.105882, 1, 0.0745098, 0.160784
 
 [sub_resource type="GradientTexture" id=3]
 gradient = SubResource( 2 )
-width = 1080
+width = 1104
 
 [node name="Main" type="Control"]
 anchor_left = 0.5
@@ -34,8 +34,10 @@ layer = -2
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -200.0
-margin_bottom = 132.0
+margin_left = -14.0
+margin_top = -11.0
+margin_right = -190.0
+margin_bottom = 137.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_rotation = 89.881
@@ -50,8 +52,8 @@ __meta__ = {
 [node name="GameManager" parent="." instance=ExtResource( 1 )]
 _maxLevel = {
 "EASY": 9,
-"HARD": 5,
-"MEDIUM": 5
+"HARD": 6,
+"MEDIUM": 6
 }
 
 [connection signal="LevelCompleted" from="GameManager" to="." method="_on_GameManager_LevelCompleted"]

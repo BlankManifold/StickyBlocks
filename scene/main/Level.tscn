@@ -7,7 +7,7 @@
 [ext_resource path="res://scene/menus/PauseMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scene/base_objects/HUDData.tscn" type="PackedScene" id=6]
 [ext_resource path="res://animation/gotoLevelsWithTutorial.anim" type="Animation" id=7]
-[ext_resource path="res://assets/graphic/block/player_block.png" type="Texture" id=8]
+[ext_resource path="res://assets/graphic/block/playerBlock3.png" type="Texture" id=8]
 [ext_resource path="res://scripts/base_objects/LevelCamera.cs" type="Script" id=9]
 [ext_resource path="res://fonts/unsteady oversteer.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://animation/pausedReset.tres" type="Animation" id=11]
@@ -192,7 +192,7 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 540, 360 )
+position = Vector2( 640, 360 )
 
 [node name="Camera2DLevel" type="Camera2D" parent="Position2D"]
 current = true

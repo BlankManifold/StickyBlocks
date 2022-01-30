@@ -9,7 +9,7 @@ extents = Vector2( 639.5, 405 )
 [node name="Level" instance=ExtResource( 2 )]
 _type = "MEDIUM"
 _name = "SHORT"
-_number = 8
+_movesRequired = 3
 _zoomable = false
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
@@ -46,7 +46,6 @@ _type = "IRotation60"
 [node name="PlayerBlock" parent="." index="2"]
 position = Vector2( 345, 530 )
 rotation = -0.523599
-Debug = true
 
 [node name="HUDData" parent="HUDLayer" index="0"]
 anchor_left = 0.5

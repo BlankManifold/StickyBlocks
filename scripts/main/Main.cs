@@ -15,13 +15,14 @@ public class Main : Control
 
     public override void _Ready()
     {
+
+        VisualServer.TextureSetShrinkAllX2OnSetData(true);
         _gameManager = GetNode<GameManager>("GameManager");
         _mainMenuScene = ResourceLoader.Load<PackedScene>("res://scene/menus/MainMenu.tscn");
         _optionsMenuScene = ResourceLoader.Load<PackedScene>("res://scene/menus/OptionsMenu.tscn");
         _levelTypeMenuScene = ResourceLoader.Load<PackedScene>("res://scene/menus/LevelTypeMenu.tscn");
         _levelGridScene = ResourceLoader.Load<PackedScene>("res://scene/menus/LevelGrid.tscn");
         _gameEndedMenuscene = ResourceLoader.Load<PackedScene>("res://scene/menus/GameEndedMenu.tscn");
-        //_levelPauseMenu = ResourceLoader.Load<PackedScene>();
 
         AddMenu(_mainMenuScene, "MainMenu");
     }
@@ -152,6 +153,8 @@ public class Main : Control
     }
     public void _on_GameManager_LevelCompleted(int level, bool owned, int moves, int best)
     {
+        _gameManager.ResetAnimation();
+        
         GoToGameEndedMenu(level, owned, moves, best);
     }
     public void _on_GameEndedMenu_button_pressed(string name)
@@ -185,7 +188,7 @@ public class Main : Control
     }
     public void _on_GameManager_QuitPressed()
     {
-        AddMenu(_mainMenuScene, "MainMenu");
+       AddMenu(_levelTypeMenuScene, "LevelTypeMenu");
     }
 
 }

@@ -9,7 +9,7 @@ public class LevelCamera : Camera2D
     private float _zoomValue = 1f;
     public float ZoomValue { get { return _zoomValue; } set { SetZoom(value); } }
 
-    private Vector2 _zoomLimits = new Vector2(1f, 1f);
+    private Vector2 _zoomLimits;
     public Vector2 ZoomLimits { get { return _zoomLimits; } set { _zoomLimits = value; } }
 
     private float _zoomStep = 0.4f;
@@ -24,8 +24,6 @@ public class LevelCamera : Camera2D
     private Vector2 _initialZoom;
     public Vector2 InitialZoom { get { return _initialZoom; } set { _initialZoom = value; } }
 
-
-    private Vector2 _lastZoom = Vector2.One;
     private Vector2 _lastOffset = Vector2.Zero;
 
 

@@ -9,11 +9,13 @@ public class LevelGrid : MenuTemplates
 
     private int _rowCount;
     private int _remainder;
-    private Texture _star_texture;
 
     private VBoxContainer _container;
 
     private PackedScene _levelNumberIcon;
+
+    private Color _OnGlowColor = new Color(1.09f, 1.04f, 0.79f);
+    private Color _OffGlowColor = new Color(0.88f, 0.82f, 0.54f);
 
     [Signal]
     delegate void PlayAnimation();
@@ -98,7 +100,7 @@ public class LevelGrid : MenuTemplates
 
         if (owned == 1)
         {
-            star.SelfModulate = new Color(1.09f, 1.04f, 0.79f);
+            star.SelfModulate = _OnGlowColor;
         }
     }
     public void SetCompleted(TextureRect star, int levelNumber)
@@ -107,7 +109,7 @@ public class LevelGrid : MenuTemplates
         int owned = _gameManager.GetOwned(_levelType, levelNumber);
         if (best != -1 && owned != 1)
         {
-            star.SelfModulate = new Color(0.88f, 0.82f, 0.54f);
+            star.SelfModulate = _OffGlowColor;
         }
     }
 

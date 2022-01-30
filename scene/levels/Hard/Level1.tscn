@@ -4,68 +4,63 @@
 [ext_resource path="res://scene/main/Level.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 637.5, 817.5 )
+extents = Vector2( 637.5, 730.5 )
 
 [node name="Level" instance=ExtResource( 2 )]
 _type = "HARD"
 _name = "LADDER"
+_movesRequired = 13
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
 collision_mask = 2
 input_pickable = false
 monitorable = false
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 637.5, 817.5 )
+position = Vector2( 637.5, 733.5 )
 shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
-position = Vector2( 645, 1286 )
+position = Vector2( 643, 1206 )
 rotation = -0.785398
 _type = "Rotation90"
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 780, 1501 )
+position = Vector2( 778, 1421 )
 rotation = 1.5708
 
 [node name="RotationStickyBlock6" parent="RotationStickyBlocks" index="2" instance=ExtResource( 1 )]
-position = Vector2( 1005, 321 )
+position = Vector2( 1003, 241 )
 _type = "IRotation30"
 
 [node name="RotationStickyBlock7" parent="RotationStickyBlocks" index="3" instance=ExtResource( 1 )]
-position = Vector2( 690, 181 )
+position = Vector2( 688, 101 )
 rotation = 1.5708
 _type = "Rotation60"
 
 [node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="4" instance=ExtResource( 1 )]
-position = Vector2( 1005, 706 )
+position = Vector2( 1003, 626 )
 _type = "IRotation30"
 
 [node name="RotationStickyBlock3" parent="RotationStickyBlocks" index="5" instance=ExtResource( 1 )]
-position = Vector2( 285, 706 )
+position = Vector2( 283, 626 )
 _type = "Rotation45"
 
 [node name="RotationStickyBlock4" parent="RotationStickyBlocks" index="6" instance=ExtResource( 1 )]
-position = Vector2( 1005, 1026 )
+position = Vector2( 1003, 946 )
 _type = "IRotation60"
 
 [node name="RotationStickyBlock5" parent="RotationStickyBlocks" index="7" instance=ExtResource( 1 )]
-position = Vector2( 285, 1036 )
+position = Vector2( 283, 956 )
 _type = "Rotation30"
 
 [node name="PlayerBlock" parent="." index="2"]
-position = Vector2( 667, 1260 )
+position = Vector2( 665, 1180 )
 rotation = -0.785398
 
 [node name="Name" parent="HUDLayer" index="1"]
 text = "LADDER"
 
 [node name="Position2D" parent="." index="6"]
-position = Vector2( 641, 823 )
+position = Vector2( 639, 732 )

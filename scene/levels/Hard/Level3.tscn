@@ -9,6 +9,7 @@ extents = Vector2( 922.5, 577.5 )
 [node name="Level" instance=ExtResource( 2 )]
 _type = "HARD"
 _name = "ARROW"
+_movesRequired = 5
 _intialZoom = 1.7
 _maxZoomConstraint = 1.7
 

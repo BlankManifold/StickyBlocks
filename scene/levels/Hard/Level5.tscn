@@ -4,12 +4,12 @@
 [ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 660, 663 )
+extents = Vector2( 640, 630 )
 
 [node name="Level" instance=ExtResource( 1 )]
 _type = "HARD"
-_name = "HOOK"
-_movesRequired = 5
+_name = "SETUP THEN...NO ROTATION"
+_movesRequired = 12
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -21,52 +21,63 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 660, 543 )
+position = Vector2( 640, 470 )
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
-position = Vector2( 75, 361 )
+position = Vector2( 160, 541 )
+rotation = -0.523599
+_type = "Rotation60"
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 865, 1042 )
+position = Vector2( 651, -119 )
+rotation = 1.5708
 
 [node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 2 )]
-position = Vector2( 450, 256 )
-_type = "IRotation60"
+position = Vector2( 662, 81 )
+rotation = 1.5708
+_type = "Rotation30"
 
 [node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="3" instance=ExtResource( 2 )]
-position = Vector2( 525, 466 )
-_type = "IRotation60"
+position = Vector2( 1042, 221 )
+rotation = -0.785398
+_type = "Rotation45"
 
 [node name="RotationStickyBlock3" parent="RotationStickyBlocks" index="4" instance=ExtResource( 2 )]
-position = Vector2( 1245, 361 )
+position = Vector2( 1165, 541 )
+_type = "IRotation45"
+
+[node name="RotationStickyBlock5" parent="RotationStickyBlocks" index="5" instance=ExtResource( 2 )]
+position = Vector2( 282, 861 )
+rotation = -0.785398
 _type = "IRotation60"
 
-[node name="RotationStickyBlock4" parent="RotationStickyBlocks" index="5" instance=ExtResource( 2 )]
-position = Vector2( 906, -44 )
+[node name="RotationStickyBlock7" parent="RotationStickyBlocks" index="6" instance=ExtResource( 2 )]
+position = Vector2( 662, 1001 )
 rotation = 1.5708
-_type = "Rotation30"
-
-[node name="RotationStickyBlock5" parent="RotationStickyBlocks" index="6" instance=ExtResource( 2 )]
-position = Vector2( 862, 766 )
-rotation = 1.5708
-_type = "IRotation30"
+_type = "Rotation45"
 
 [node name="RotationStickyBlock6" parent="RotationStickyBlocks" index="7" instance=ExtResource( 2 )]
-position = Vector2( 1155, 76 )
-rotation = -0.523599
+position = Vector2( 1042, 861 )
+rotation = 0.785398
 _type = "IRotation30"
 
-[node name="RotationStickyBlock7" parent="RotationStickyBlocks" index="8" instance=ExtResource( 2 )]
-position = Vector2( 1155, 646 )
-rotation = 0.523599
-_type = "Rotation30"
+[node name="RotationStickyBlock4" parent="RotationStickyBlocks" index="8" instance=ExtResource( 2 )]
+position = Vector2( 282, 221 )
+rotation = 0.785398
 
 [node name="PlayerBlock" parent="." index="2"]
-position = Vector2( 109, 360 )
+position = Vector2( 242, 613 )
+rotation = -0.523599
+
+[node name="PauseMenu" parent="ButtonsLayer" index="1"]
+visible = false
 
 [node name="Name" parent="HUDLayer" index="1"]
-text = "HOOK"
+text = "SETUP THEN...NO ROTATION"
 
 [node name="Position2D" parent="." index="6"]
-position = Vector2( 660, 543 )
+position = Vector2( 640, 450 )

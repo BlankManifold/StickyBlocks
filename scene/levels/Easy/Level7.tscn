@@ -11,6 +11,7 @@ extents = Vector2( 637.5, 420 )
 [node name="Level" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 _name = "SHORT-SIDE: TUTORIAL 6"
+_movesRequired = 3
 _zoomable = false
 _text0 = "The red block can stick also on the short-side of the StickyBlocks"
 

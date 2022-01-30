@@ -11,6 +11,7 @@ extents = Vector2( 637.5, 405 )
 [node name="Level" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 _name = "BUG: TUTORIAL 7"
+_movesRequired = 2
 _intialZoom = 1.5
 _maxZoomConstraint = 1.5
 _zoomable = false
@@ -41,7 +42,7 @@ position = Vector2( 210, 315 )
 position = Vector2( 473, 646 )
 
 [node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 2 )]
-position = Vector2( 960, 286 )
+position = Vector2( 960, 285 )
 _type = "Rotation90"
 
 [node name="RotationStickyBlock2" parent="RotationStickyBlocks" index="3" instance=ExtResource( 2 )]

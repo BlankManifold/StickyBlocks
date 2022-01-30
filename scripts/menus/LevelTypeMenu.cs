@@ -6,7 +6,7 @@ public class LevelTypeMenu : MenuTemplates
     {
         base._Ready();
         VBoxContainer easy = (VBoxContainer)FindNode("EASY");
-        TextureButton firstbutton = (TextureButton)easy.FindNode("EASY");
+        TextureButton firstbutton = easy.GetNode<TextureButton>("CenterContainer/EASY");
         firstbutton.GrabFocus();
     }
 

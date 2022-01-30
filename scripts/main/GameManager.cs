@@ -1,25 +1,23 @@
 using Godot;
 using System.Collections.Generic;
 using PlayerDataType = Godot.Collections.Dictionary;
-//System.Collections.Generic.Dictionary<string,
-//                             System.Collections.Generic.Dictionary<string,
-//                                 System.Collections.Generic.Dictionary<string, int>>>;
+
 
 public class GameManager : Node2D
 {
     [Export]
     private Dictionary<string, int> _maxLevel = new Dictionary<string, int>() { { "EASY", 0 }, { "MEDIUM", 0 }, { "HARD", 0 } };
     public Dictionary<string, int> MaxLevel { get { return _maxLevel; } }
-    private Dictionary<string,   bool> _justUnLocked = new Dictionary<string, bool>() {{ "EASY", false },{ "MEDIUM", false }, { "HARD", false } };
+    private Dictionary<string, bool> _justUnLocked = new Dictionary<string, bool>() { { "EASY", false }, { "MEDIUM", false }, { "HARD", false } };
     public Dictionary<string, bool> JustUnLocked { get { return _justUnLocked; } }
 
     private Level _currentLevel;
     private int _currentLevelNumber = 0;
-    public int CurrentLevelNumber { get { return _currentLevelNumber; }}
+    public int CurrentLevelNumber { get { return _currentLevelNumber; } }
     private string _currentLevelType = "EASY";
-    public string CurrentLevelType { get { return _currentLevelType; } set { _currentLevelType = value;}}
+    public string CurrentLevelType { get { return _currentLevelType; } set { _currentLevelType = value; } }
     private string[] _levelTypes = { "EASY", "MEDIUM", "HARD" };
-    private Dictionary<string, string> _levelChain = new Dictionary<string, string>()  { { "EASY", "MEDIUM"}, { "MEDIUM", "HARD" },{ "HARD", null }};
+    private Dictionary<string, string> _levelChain = new Dictionary<string, string>() { { "EASY", "MEDIUM" }, { "MEDIUM", "HARD" }, { "HARD", null } };
     private Godot.Collections.Dictionary _levelLockDictionary = new Godot.Collections.Dictionary() { };
     private string _levelLockPath = "user://levelLock.dat";
     private PlayerDataType _playerDataDictionary = new PlayerDataType() { };
@@ -32,12 +30,13 @@ public class GameManager : Node2D
     private AnimationPlayer _gameManagerAnimationPlayer;
     private bool _animationBackwards = false;
 
+    private WorldEnvironment _worldEnvironment;
 
     [Signal]
     public delegate void LevelCompleted(int level, bool owned, int moves, int best);
     [Signal]
     public delegate void QuitPressed();
-    
+
 
     public void LoadDefaultPlayerData()
     {
@@ -146,7 +145,6 @@ public class GameManager : Node2D
         dict2[dataType] = data;
     }
 
-
     public bool IsLevelUnlocked(string type)
     {
         Godot.Collections.Dictionary dict1 = (Godot.Collections.Dictionary)_levelLockDictionary[type];
@@ -195,14 +193,26 @@ public class GameManager : Node2D
     {
         string nextType = _levelChain[type];
         if (nextType != null)
-        {   
+        {
             _justUnLocked[nextType] = true;
             SetLevelUnlocked(nextType);
         }
     }
     public bool UnlockedCondtion(string type)
     {
-        return (NumberOfCompleted(type) == _maxLevel[type]);
+        switch (type)
+        {
+            case "EASY":
+                {
+                    return (NumberOfCompleted(type) == _maxLevel[type]);
+                }
+            case "MEDIUM":
+                {
+                    return (NumberOfCompleted(type) == _maxLevel[type]/2);
+                }
+        }
+
+        return false;
     }
 
 
@@ -211,6 +221,7 @@ public class GameManager : Node2D
     {
         LoadPlayerData();
         _gameManagerAnimationPlayer = GetNode<AnimationPlayer>("GameManagerAnimationPlayer");
+        _worldEnvironment = GetNode<WorldEnvironment>("WorldEnvironment");
         // LoadDefaultPlayerData(); SavePlayerData();
     }
 
@@ -238,7 +249,7 @@ public class GameManager : Node2D
         {
             SetOwned(type, _currentLevelNumber, 1);
         }
-        
+
         SavePlayerData();
         _currentLevel.QueueFree();
 
@@ -248,7 +259,7 @@ public class GameManager : Node2D
     {
         pauseMenu.Hide();
         GetTree().Paused = false;
-        
+
         switch (name)
         {
             case "Resume":
@@ -279,22 +290,29 @@ public class GameManager : Node2D
         }
 
     }
-     public void _on_LevelGrid_PlayAnimation()
+    public void _on_LevelGrid_PlayAnimation()
     {
-        _gameManagerAnimationPlayer.Play("RESET");
+        ResetAnimation();
         _gameManagerAnimationPlayer.Play("glow");
     }
-     public void _on_GameEndedMenu_PlayAnimation()
+    public void _on_GameEndedMenu_PlayAnimation()
     {
+        ResetAnimation();
         _gameManagerAnimationPlayer.Play("glow");
     }
 
     public void ResetAnimation()
     {
+        _animationBackwards = false;
         _gameManagerAnimationPlayer.Play("RESET");
         _gameManagerAnimationPlayer.Advance(0);
     }
 
+    public void SetGlowStrength(float strength)
+    {
+        Environment env = _worldEnvironment.Environment;
+        env.GlowStrength = strength;
+    }
 
 }
 

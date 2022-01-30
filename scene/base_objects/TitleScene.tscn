@@ -1,13 +1,14 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/unsteady oversteer.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/graphic/block/player_block.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphic/block/playerBlock3.png" type="Texture" id=2]
 
 [sub_resource type="Theme" id=5]
 
 [sub_resource type="DynamicFont" id=6]
 size = 90
 outline_size = 2
+use_filter = true
 extra_spacing_char = -1
 extra_spacing_space = -15
 font_data = ExtResource( 1 )
@@ -80,12 +81,11 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -89.0
-margin_top = -485.0
-margin_right = 471.002
-margin_bottom = 75.0
+margin_left = -83.9998
+margin_top = -483.0
+margin_right = -27.9998
+margin_bottom = -427.0
 rect_rotation = -36.8
-rect_scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

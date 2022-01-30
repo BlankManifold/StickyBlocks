@@ -9,6 +9,7 @@ extents = Vector2( 638.376, 360 )
 [node name="Level" instance=ExtResource( 2 )]
 scale = Vector2( 1.00176, 1 )
 _name = "ONE-EIGHTY"
+_movesRequired = 2
 _intialZoom = 1.0
 _maxZoomConstraint = 1.0
 _zoomable = false

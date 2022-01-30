@@ -43,7 +43,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.894118, 0.956863, 1, 0.392157 ), Color( 3, 3, 3, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 0.894118, 0.956863, 1, 0.392157 ), Color( 5, 5, 5, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="VBoxContainer" type="VBoxContainer"]

@@ -11,6 +11,10 @@ extents = Vector2( 639.5, 405 )
 [node name="Level" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 _name = "ANGULATIONS"
+_movesRequired = 3
+_intialZoom = 1.25
+_minimumZoom = 1.25
+_maxZoomConstraint = 1.25
 _zoomable = false
 _text0 = "Manipulate the collision point  on the StickyBlocks using the different angulations"
 

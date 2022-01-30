@@ -3,7 +3,7 @@
 [ext_resource path="res://fonts/unsteady oversteer.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="DynamicFont" id=1]
-size = 20
+size = 21
 use_filter = true
 extra_spacing_char = 3
 font_data = ExtResource( 1 )
@@ -36,7 +36,7 @@ __meta__ = {
 
 [node name="Moves" type="Label" parent="HBoxContainer"]
 margin_right = 200.0
-margin_bottom = 25.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 200, 0 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 1 )
@@ -46,7 +46,7 @@ clip_text = true
 [node name="Level" type="Label" parent="HBoxContainer"]
 margin_left = 900.0
 margin_right = 1050.0
-margin_bottom = 25.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 150, 0 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 1 )

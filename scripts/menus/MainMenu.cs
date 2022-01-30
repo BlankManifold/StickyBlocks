@@ -12,11 +12,8 @@ public class MainMenu : MenuTemplates
     public override void _Ready()
     {
         base._Ready();
-        _animationPlayer = (AnimationPlayer)FindNode("AnimationPlayer");
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _animationPlayer.Play("RESET");
-
-        TextureRect block = (TextureRect)FindNode("Block");
-        // block.RectPosition = new Vector2(467, 327);
     }
 
     public void StartAnimation(string name)

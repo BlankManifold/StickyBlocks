@@ -9,6 +9,7 @@ extents = Vector2( 1083.75, 495 )
 [node name="Level" instance=ExtResource( 1 )]
 _type = "MEDIUM"
 _name = "FAITH-180"
+_movesRequired = 5
 _intialZoom = 1.5
 _maxZoomConstraint = 1.5
 _zoomable = false

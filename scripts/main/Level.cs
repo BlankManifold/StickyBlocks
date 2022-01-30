@@ -8,11 +8,11 @@ public class Level : Node2D
 
     [Export(PropertyHint.Enum, "EASY,MEDIUM,HARD")]
     protected string _type = "EASY";
-    public string Type { get {return _type; }}
-    
+    public string Type { get { return _type; } }
+
     [Export]
     private string _name;
-    
+
     protected RotationStickyBlock _currentStickyBlock;
     protected Godot.Collections.Array _allStickyBlocks;
 
@@ -32,12 +32,11 @@ public class Level : Node2D
     private Line2D _line;
 
     private LevelCamera _cameraLevel;
-    private Vector2 _offsetCamera = Vector2.Zero;
     private Vector2 _areaSize;
     private Vector2 _centerArea;
 
     private Tween _tween;
-    
+
 
     [Export]
     protected float _intialZoom = 0f;
@@ -77,13 +76,13 @@ public class Level : Node2D
     public override void _Ready()
     {
 
-        _playerBlock = (PlayerBlock)FindNode("PlayerBlock");
+        _playerBlock = GetNode<PlayerBlock>("PlayerBlock");
         // _background = GetNode<TextureRect>("Background/TextureRect");
-        Node2D nodes = (Node2D)FindNode("RotationStickyBlocks");
+        Node2D nodes = GetNode<Node2D>("RotationStickyBlocks");
         _allStickyBlocks = nodes.GetChildren();
         _tween = _playerBlock.GetNode<Tween>("Tween");
 
-        _cameraLevel = (LevelCamera)FindNode("Camera2DLevel");
+        _cameraLevel = GetNode<LevelCamera>("Position2D/Camera2DLevel");
         _cameraLevel.Current = true;
 
         _animationPlayerLast = GetNode<AnimationPlayer>("ImOnLastPlayer");
@@ -99,10 +98,10 @@ public class Level : Node2D
         _playerBlock.CurrentBlock = _currentStickyBlock;
         _currentStickyBlock.UpdateState();
 
-        _movesLabel = (Label)FindNode("Moves");
+        _movesLabel = GetNode<Label>("HUDLayer/HUDData/HBoxContainer/Moves");
         SetLabels();
 
-        Area2D area = (Area2D)FindNode("Area2D");
+        Area2D area = GetNode<Area2D>("Area2D");
         area.Connect("body_exited", this, nameof(_on_Area2D_body_exited));
 
         SetCameraLimits();
@@ -152,7 +151,7 @@ public class Level : Node2D
         _movesLabel.Text = $"MOVES: 0";
 
         _currentStickyBlock.IsCurrentBlock = false;
-        RotationStickyBlock initialBlock = (RotationStickyBlock)FindNode("InitialBlock");
+        RotationStickyBlock initialBlock = GetNode<RotationStickyBlock>("RotationStickyBlocks/InitialBlock");
         initialBlock.IsCurrentBlock = true;
         _currentStickyBlock = initialBlock;
 
@@ -172,20 +171,20 @@ public class Level : Node2D
     }
     private void SetLabels()
     {
-        Label levelLabel = (Label)FindNode("Level");
+        Label levelLabel = GetNode<Label>("HUDLayer/HUDData/HBoxContainer/Level");
         levelLabel.Text = $"LEVEL: {_number}";
         _movesLabel.Text = $"MOVES: 0";
-        
+
         if (_name != null)
         {
-            Label nameLabel = (Label)FindNode("Name");
+            Label nameLabel = GetNode<Label>("HUDLayer/Name");
             nameLabel.Text = _name;
         }
 
     }
     private void SetCameraLimits()
     {
-        CollisionShape2D shape = (CollisionShape2D)FindNode("CollisionShape2D");
+        CollisionShape2D shape = GetNode<CollisionShape2D>("Area2D/CollisionShape2D");
         RectangleShape2D rect = (RectangleShape2D)shape.Shape;
 
         Vector2 center = shape.Position;
@@ -196,23 +195,23 @@ public class Level : Node2D
         _bounds["left"] = (int)(center[0] - rect.Extents[0]); ;
         _bounds["right"] = (int)(center[0] + rect.Extents[0]);
 
-        Vector2 size = GetViewport().Size;
+        Vector2 size = new Vector2(1280,720);//GetViewport().Size;
         _areaSize = rect.Extents * 2;
-        
+
         float maxLevelZoomValue = _maxZoomConstraint;
 
         if (_maxZoomConstraint == 0)
         {
             maxLevelZoomValue = Mathf.Max(_areaSize.y / size.y, _areaSize.x / size.x) + 0.3f;
-        } 
-        
+        }
+
         _cameraLevel.Init(maxLevelZoomValue, _intialZoom, _zoomable, _minimumZoom);
 
     }
 
     protected void SetInitialCurrentBlock()
     {
-        RotationStickyBlock initialBlock = (RotationStickyBlock)FindNode("InitialBlock");
+        RotationStickyBlock initialBlock = GetNode<RotationStickyBlock>("RotationStickyBlocks/InitialBlock");
         initialBlock.IsCurrentBlock = true;
         _currentStickyBlock = initialBlock;
     }
@@ -251,10 +250,10 @@ public class Level : Node2D
     {
         if (down)
         {
-           _animationPlayerLast.Play("paused");
-           return;
+            _animationPlayerLast.Play("paused");
+            return;
         }
-        
+
         _animationPlayerLast.Play("pausedReset");
 
     }
@@ -292,10 +291,10 @@ public class Level : Node2D
             owned = true;
         }
 
-        
+
         _animationPlayerLast.Play(_gotoAnim);
-        await ToSignal(this, nameof(AnimationFinished)); 
-       
+        await ToSignal(this, nameof(AnimationFinished));
+
         EmitSignal(nameof(GameCompleted), owned, movesCounter);
     }
 
@@ -315,17 +314,23 @@ public class Level : Node2D
     public async void _on_HUDbuttons_PausePressed()
     {
         ScaleModulate(true);
-        await ToSignal(this, nameof(AnimationFinished)); 
+        await ToSignal(this, nameof(AnimationFinished));
         GetTree().Paused = true;
         GetNode<Control>("ButtonsLayer/PauseMenu").Show();
     }
     public void _on_HUDbuttons_ResetPressed()
     {
-        ResetLevel();
+        if (!_playerBlock.Moving && !_playerBlock.Blocked)
+        {
+            ResetLevel();
+        }
     }
     public void _on_HUDbuttons_UndoPressed()
     {
-        BackOneMove();
+        if (!_playerBlock.Moving && !_playerBlock.Blocked)
+        {
+            BackOneMove();
+        }
     }
     public void _on_Area2D_body_exited(Node body)
     {

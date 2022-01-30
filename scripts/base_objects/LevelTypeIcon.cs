@@ -6,8 +6,6 @@ public class LevelTypeIcon : VBoxContainer
     [Export]
     protected Texture _texture;
 
-    [Export]
-    protected Texture _lockedTexture;
     protected TextureButton _button;
 
     protected TextureRect _lockedRect;
@@ -18,11 +16,14 @@ public class LevelTypeIcon : VBoxContainer
     private Label _typeLabel;
 
     private Color _modulateColor;
+    private Color _offFocusColor;
     protected GameManager _gameManager;
     private bool _isUnlocked = false;
     public bool IsUnlocked { get { return _isUnlocked; } set { _isUnlocked = value; } }
 
 
+    [Signal]
+    delegate void JustUnLocked();
     public async override void _Ready()
     {
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -32,6 +33,7 @@ public class LevelTypeIcon : VBoxContainer
         _button.Name = this.Name;
         _button.TextureNormal = _texture;
         _modulateColor = _button.SelfModulate;
+        _offFocusColor = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b, 0.2f);
         
         _label = GetNode<Label>("Label");
         _label.Text = $"{_gameManager.NumberOfCompleted(Name)}/{_gameManager.NumberOfLevel(Name)}";
@@ -43,9 +45,11 @@ public class LevelTypeIcon : VBoxContainer
         if (_gameManager.JustUnLocked[Name])
         {
             _gameManager.JustUnLocked[Name] = false;
-            await ToSignal(GetTree().CreateTimer(1f), "timeout");
+            await ToSignal(GetTree().CreateTimer(0.7f), "timeout");
+            _gameManager.SetGlowStrength(1.35f);
             _animationPlayer.Play("unlock");
             await ToSignal(_animationPlayer,"animation_finished");
+            _gameManager.SetGlowStrength(1f);
         }
         
         
@@ -58,20 +62,20 @@ public class LevelTypeIcon : VBoxContainer
         }
 
         
-        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b, 0.2f);
         if (_button.HasFocus())
         {
-        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b);
+            return;
         }
+        _button.SelfModulate = _offFocusColor;
 
     }
     public void _on_TextureButton_focus_entered()
     {
-        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b);
+        _button.SelfModulate = _modulateColor;
     }
     public void _on_TextureButton_focus_exited()
     {
-        _button.SelfModulate = new Color(_modulateColor.r, _modulateColor.g, _modulateColor.b, 0.2f);
+        _button.SelfModulate = _offFocusColor;
     }
 
 

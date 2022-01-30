@@ -9,6 +9,7 @@ extents = Vector2( 1042.5, 772.5 )
 [node name="Level" instance=ExtResource( 1 )]
 _type = "HARD"
 _name = "IN THE MIDDLE"
+_movesRequired = 10
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -53,11 +54,11 @@ rotation = 1.5708
 _type = "Rotation60"
 
 [node name="RotationStickyBlock4" parent="RotationStickyBlocks" index="7" instance=ExtResource( 2 )]
-position = Vector2( 1195, 121 )
+position = Vector2( 1195, 89 )
 _type = "IRotation45"
 
 [node name="RotationStickyBlock10" parent="RotationStickyBlocks" index="8" instance=ExtResource( 2 )]
-position = Vector2( 1195, 721 )
+position = Vector2( 1195, 753 )
 _type = "Rotation45"
 
 [node name="RotationStickyBlock11" parent="RotationStickyBlocks" index="9" instance=ExtResource( 2 )]

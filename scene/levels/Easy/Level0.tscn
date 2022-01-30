@@ -21,17 +21,20 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 406, 358 ) ]
+"values": [ Vector2( 406, 389 ) ]
 }
 
 [node name="Level" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 _name = "BEGINNING: TUTORIAL 0"
+_movesRequired = 1
 _intialZoom = 1.0
 _maxZoomConstraint = 1.0
 _zoomable = false
 _text0 = "Objective: the red block must reach the StickyBlock with the small red block,
-complete the level in as few moves as possible to owned it
+complete the level in as few moves as possible to owned it.
+
+Complete half of the easy levels to unlock the medium-difficulty ones
 
 PRESS SPACEBAR TO CONTINUE"
 _text1 = "press SPACEBAR to dash along the perpendicular direction"
@@ -50,13 +53,13 @@ position = Vector2( 639.5, 360 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]
-position = Vector2( 372.392, 358.592 )
+position = Vector2( 372.392, 390.592 )
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 912.392, 358.592 )
+position = Vector2( 912.392, 390.592 )
 
 [node name="PlayerBlock" parent="." index="2"]
-position = Vector2( 406, 358 )
+position = Vector2( 406, 389 )
 
 [node name="HUDData" parent="HUDLayer" index="0"]
 margin_left = 22.0
@@ -73,7 +76,9 @@ rect_scale = Vector2( 1, 1.2 )
 custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
 custom_fonts/font = ExtResource( 5 )
 text = "Objective: the red block must reach the StickyBlock with the small red block,
-complete the level in as few moves as possible to owned it
+complete the level in as few moves as possible to owned it.
+
+Complete half of the easy levels to unlock the medium-difficulty ones
 
 PRESS SPACEBAR TO CONTINUE"
 align = 1

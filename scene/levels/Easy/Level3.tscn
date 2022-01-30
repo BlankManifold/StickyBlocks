@@ -11,6 +11,7 @@ extents = Vector2( 639.5, 360 )
 [node name="Level" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 _name = "ROTATION: TUTORIAL 3"
+_movesRequired = 2
 _intialZoom = 1.0
 _maxZoomConstraint = 1.0
 _zoomable = false

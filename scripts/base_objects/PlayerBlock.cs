@@ -29,11 +29,6 @@ public class PlayerBlock : KinematicBody2D
     private RotationStickyBlock _currentBlock;
     public RotationStickyBlock CurrentBlock { get { return _currentBlock;} set { _currentBlock = value; }}
 
-    [Export]
-    public Texture selectedTexture;
-    [Export]
-    public Texture unselectedTexture;
-
     public Vector2 DashDirection
     {
         get { return _dashDirection; }
@@ -43,6 +38,9 @@ public class PlayerBlock : KinematicBody2D
     private Vector2 _initialPosition;
     private Vector2 _initialDirection;
     private float _initialRotation;
+
+    private bool _blocked = false;
+    public bool Blocked {get { return Blocked; }}
 
 
     [Signal]
@@ -152,12 +150,13 @@ public class PlayerBlock : KinematicBody2D
                 EmitSignal(nameof(AddLine), pivot, normal);
             }
 
+            CollideAndRotate(normal, pivot);
+            
             if (collider.IsLast)
             {
+                _blocked = true;
                 EmitSignal(nameof(ImOnLast), _movesCounter);
             }
-
-            CollideAndRotate(normal, pivot);
 
             EmitSignal(nameof(ChangeStickyBlock), collider);
             _currentBlock = collider;

@@ -28,11 +28,12 @@ tracks/0/keys = {
 [node name="Level" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 _name = "ZOOM: TUTORIAL 4"
+_movesRequired = 2
 _intialZoom = 1.0
 _text0 = "In some level you might want to zoom-in or zoom-out the camera
 
 PRESS SPACEBAR TO CONTINUE"
-_text1 = "use the MOUSE-WHEEL to handle the zoom"
+_text1 = "use the MOUSE-WHEEL (or UP-DOWN ARROW) to handle the zoom"
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0

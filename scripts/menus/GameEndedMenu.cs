@@ -50,9 +50,7 @@ public class GameEndedMenu : MenuTemplates
     {
         base._Ready();
 
-        _gameManager.ResetAnimation();
-
-         Connect(nameof(PlayAnimation), _gameManager, "_on_GameEndedMenu_PlayAnimation");
+        Connect(nameof(PlayAnimation), _gameManager, "_on_GameEndedMenu_PlayAnimation");
 
         if (_owned)
         {
