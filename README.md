@@ -1,12 +1,6 @@
 # StickyBlocks
 
 A first game without ambitions (especially from the point of view of aesthetics and graphics). First attempt to use Godot.
-
-
-<center>
-<img src="Schermata 2022-01-25 alle 09.57.36.png" alt="Title Screen" style="height: 270px; width:480px; "/>
-</center>
-
 ## Objectives
 
 * Build and complete a little puzzle game. 
@@ -82,7 +76,8 @@ Refactoring would take too much time, I want to move on!
 * Testing export in HTML5
 * Tested on itch.io
 
-### 30/01/2022
+### 1/02/2022
 
-* `StickyBlocks` is now public in itch.io, see [StickBlocks on itch.io](https://www.itch.io)
+* `StickyBlocks` is now public in itch.io, see [StickBlocks on itch.io](https://neurodivergentgames.itch.io/stickyblocks))
 * Updated itch.io project draft 
+* Exported but with Allow hdpi off
