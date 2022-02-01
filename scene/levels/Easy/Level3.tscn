@@ -34,7 +34,7 @@ rotation = 1.0472
 _type = "Rotation60"
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 640, 525 )
+position = Vector2( 656, 525 )
 
 [node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 2 )]
 position = Vector2( 910, 300 )

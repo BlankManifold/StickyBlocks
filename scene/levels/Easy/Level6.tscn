@@ -16,7 +16,7 @@ _intialZoom = 1.25
 _minimumZoom = 1.25
 _maxZoomConstraint = 1.25
 _zoomable = false
-_text0 = "Manipulate the collision point  on the StickyBlocks using the different angulations"
+_text0 = "Manipulate the collision point on the StickyBlocks using the different angulations"
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0

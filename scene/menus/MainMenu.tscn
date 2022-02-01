@@ -251,10 +251,10 @@ anchor_left = 0.949
 anchor_top = -0.335
 anchor_right = 0.949
 anchor_bottom = -0.335
-margin_left = -9.10986
-margin_top = -63.575
-margin_right = 46.8901
-margin_bottom = -7.57501
+margin_left = 531.82
+margin_top = -177.81
+margin_right = 587.82
+margin_bottom = -121.81
 rect_rotation = 53.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

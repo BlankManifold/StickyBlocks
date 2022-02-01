@@ -3,7 +3,7 @@
 [ext_resource path="res://fonts/Other F.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 20
+size = 22
 use_filter = true
 extra_spacing_top = -4
 extra_spacing_char = 2

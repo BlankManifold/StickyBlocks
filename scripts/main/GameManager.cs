@@ -204,7 +204,7 @@ public class GameManager : Node2D
         {
             case "EASY":
                 {
-                    return (NumberOfCompleted(type) == _maxLevel[type]);
+                    return (NumberOfCompleted(type) == 4);//_maxLevel[type]);
                 }
             case "MEDIUM":
                 {

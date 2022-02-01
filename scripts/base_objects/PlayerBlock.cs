@@ -40,7 +40,7 @@ public class PlayerBlock : KinematicBody2D
     private float _initialRotation;
 
     private bool _blocked = false;
-    public bool Blocked {get { return Blocked; }}
+    public bool Blocked {get { return _blocked; }}
 
 
     [Signal]

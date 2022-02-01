@@ -33,11 +33,11 @@ rotation = -0.523599
 _type = "Rotation60"
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 651, -119 )
+position = Vector2( 636, -119 )
 rotation = 1.5708
 
 [node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 2 )]
-position = Vector2( 662, 81 )
+position = Vector2( 675, 81 )
 rotation = 1.5708
 _type = "Rotation30"
 

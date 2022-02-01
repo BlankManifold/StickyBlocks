@@ -39,7 +39,7 @@ __meta__ = {
 position = Vector2( 210, 315 )
 
 [node name="FinalBlock" parent="RotationStickyBlocks" index="1"]
-position = Vector2( 473, 646 )
+position = Vector2( 358, 646 )
 
 [node name="RotationStickyBlock" parent="RotationStickyBlocks" index="2" instance=ExtResource( 2 )]
 position = Vector2( 960, 285 )

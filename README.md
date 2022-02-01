@@ -2,10 +2,15 @@
 
 A first game without ambitions (especially from the point of view of aesthetics and graphics). First attempt to use Godot.
 
+
+<center>
+<img src="Schermata 2022-01-25 alle 09.57.36.png" alt="Title Screen" style="height: 270px; width:480px; "/>
+</center>
+
 ## Objectives
 
-* To build and complete a little puzzle game. 
-* A pretext to learn some basic of Godot and C# (coming from C++/Python/Julia): how to structure a scalable game (multi-levels ect...), a saving-system, level/scene switching, how to export a godot-project and a lot more in the process.
+* Build and complete a little puzzle game. 
+* A pretext to learn some basics of Godot and C# (coming from C++/Python/Julia): how to structure a scalable game (multi-levels ect...), a saving-system, level/scene switching, how to export a godot-project and a lot more in the process.
 
 ## Progress updates
 
@@ -53,6 +58,11 @@ A first game without ambitions (especially from the point of view of aesthetics 
 
 ### 18/01/2022
 
+Code is getting messier and messier but... never mind... 
+Bad/superficial/hurried choices in the basic structure and architecture of the code
+are showing up.
+Refactoring would take too much time, I want to move on!
+
 * Resized screen
 * New background, title screen, fonts
 * New basic button scene `ButtonOptions` 
@@ -61,3 +71,18 @@ A first game without ambitions (especially from the point of view of aesthetics 
 * New `OptionsMenu`
 * New pause, undo, return and reset buttons-graphics
 
+### 25/01/2022
+
+* Added `mouse_entered`/ `mouse_exited` for every buttons in `buttonsHoverable` group (changing the modulate) and for buttons in `LevelGrid` and `LeveTypeIconMenu` scene (grabbing focus) 
+* Fixed some bugs: star glow, some centering/scroll problem, star.png size
+* Fixed warning for `WorldEnviroment` (star glow), now glowing-star animation is handled only by the `GameManager` 
+* Create some more levels  
+* Better TextureRect quality (rotation) (without allow hdpi on)  
+* Fixed a problem with `GetViewport().Size()`, `Zoom` and "allow hdpi on" relation → Allow hdpi on
+* Testing export in HTML5
+* Tested on itch.io
+
+### 30/01/2022
+
+* `StickyBlocks` is now public in itch.io, see [StickBlocks on itch.io](https://www.itch.io)
+* Updated itch.io project draft 
