@@ -32,9 +32,9 @@ _intialZoom = 1.0
 _maxZoomConstraint = 1.0
 _zoomable = false
 _text0 = "Objective: the red block must reach the StickyBlock with the small red block,
-complete the level in as few moves as possible to owned it.
+complete the level in as few moves as possible to owned it
 
-Complete half of the easy levels to unlock the medium-difficulty ones
+Complete at least four easy levels to unlock the medium-difficulty ones
 
 PRESS SPACEBAR TO CONTINUE"
 _text1 = "press SPACEBAR to dash along the perpendicular direction"
@@ -76,9 +76,9 @@ rect_scale = Vector2( 1, 1.2 )
 custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
 custom_fonts/font = ExtResource( 5 )
 text = "Objective: the red block must reach the StickyBlock with the small red block,
-complete the level in as few moves as possible to owned it.
+complete the level in as few moves as possible to owned it
 
-Complete half of the easy levels to unlock the medium-difficulty ones
+Complete at least four easy levels to unlock the medium-difficulty ones
 
 PRESS SPACEBAR TO CONTINUE"
 align = 1

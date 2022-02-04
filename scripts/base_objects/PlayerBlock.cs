@@ -27,7 +27,7 @@ public class PlayerBlock : KinematicBody2D
     public Godot.Collections.Dictionary LastState { get { return _lastState; } }
 
     private RotationStickyBlock _currentBlock;
-    public RotationStickyBlock CurrentBlock { get { return _currentBlock;} set { _currentBlock = value; }}
+    public RotationStickyBlock CurrentBlock { get { return _currentBlock; } set { _currentBlock = value; } }
 
     public Vector2 DashDirection
     {
@@ -40,7 +40,7 @@ public class PlayerBlock : KinematicBody2D
     private float _initialRotation;
 
     private bool _blocked = false;
-    public bool Blocked {get { return _blocked; }}
+    public bool Blocked { get { return _blocked; } }
 
 
     [Signal]
@@ -77,26 +77,25 @@ public class PlayerBlock : KinematicBody2D
 
     public override void _Input(InputEvent inputEvent)
     {
-        if (inputEvent.IsActionPressed("leave_block"))
+        if (_isSelected && !_moving && !_rotating)
         {
-            if (_isSelected && !_moving && !_rotating)
+            if (inputEvent.IsActionPressed("leave_block"))
             {
                 _lastStationaryPosition = GlobalPosition;
-                
+
                 UpdateTransform();
                 UpdateBlock(_currentBlock);
 
                 _moving = true;
                 _movesCounter++;
-                
+
                 EmitSignal(nameof(MoveMade));
+
+                inputEvent.Dispose();
+                return;
             }
-            inputEvent.Dispose();
-            return;
         }
-
         inputEvent.Dispose();
-
     }
 
     public void BackOneMove()
@@ -151,7 +150,7 @@ public class PlayerBlock : KinematicBody2D
             }
 
             CollideAndRotate(normal, pivot);
-            
+
             if (collider.IsLast)
             {
                 _blocked = true;

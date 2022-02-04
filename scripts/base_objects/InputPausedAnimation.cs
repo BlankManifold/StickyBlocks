@@ -24,9 +24,12 @@ public class InputPausedAnimation : AnimationPlayer
             {
                 GetTree().Paused = false;
                 EmitSignal(nameof(ActionPressed));
-            }
+                inputEvent.Dispose();
 
+                return;
+            }
         }
+        
         inputEvent.Dispose();
     }
 
