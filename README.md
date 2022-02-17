@@ -1,6 +1,6 @@
 # StickyBlocks
 <p align="center">
-<img width= 350px src="stuffForREADME/title.png">
+<img width= 400px src="stuffForREADME/title.png">
 </p>
 
 A first game without ambitions (especially from the point of view of aesthetics and graphics). First attempt to use Godot.
@@ -11,9 +11,9 @@ A first game without ambitions (especially from the point of view of aesthetics 
 * A pretext to learn some basics of Godot and C# (coming from C++/Python/Julia): how to structure a scalable game (multi-levels ect...), a saving-system, level/scene switching, how to export a godot-project and a lot more in the process.
 
 <p align="center">
- <img align="center"  style ="padding: 10px" width= 350px src="stuffForREADME/gif1.gif">
- <img align="center" style ="padding: 10px" width= 350px src="stuffForREADME/gif2.gif">
- <img align="center"  style ="padding: 10px"width= 350px src="stuffForREADME/gif3.gif">
+ <img align="center"  style ="padding: 10px" width= 400px src="stuffForREADME/gif1.gif">
+ <img align="center" style ="padding: 10px" width= 400px src="stuffForREADME/gif2.gif">
+ <img align="center"  style ="padding: 10px"width= 400px src="stuffForREADME/gif3.gif">
 </p>
 
 
