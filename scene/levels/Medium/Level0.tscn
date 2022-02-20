@@ -6,7 +6,7 @@
 [ext_resource path="res://scripts/main/LevelWithTutorial.cs" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 593, 597 )
+extents = Vector2( 593, 609 )
 
 [node name="Level" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
@@ -24,7 +24,7 @@ input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 595, 365 )
+position = Vector2( 595, 353 )
 shape = SubResource( 1 )
 
 [node name="InitialBlock" parent="RotationStickyBlocks" index="0"]

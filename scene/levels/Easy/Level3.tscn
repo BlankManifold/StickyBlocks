@@ -47,9 +47,9 @@ rotation = 1.0472
 [node name="Label" type="Label" parent="HUDLayer" index="1"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -601.0
+margin_left = -611.0
 margin_top = 80.0
-margin_right = 613.0
+margin_right = 623.0
 margin_bottom = 140.0
 custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
 custom_fonts/font = ExtResource( 4 )

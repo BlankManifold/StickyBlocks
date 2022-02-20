@@ -58,10 +58,10 @@ text = "BUG: TUTORIAL 7"
 [node name="Label" type="Label" parent="HUDLayer" index="2"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -587.0
+margin_left = -628.0
 margin_top = 80.0
-margin_right = 587.0
-margin_bottom = 128.0
+margin_right = 628.0
+margin_bottom = 137.0
 custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "StickBlocks have round corners, sticking on a corner will cause unique orientations

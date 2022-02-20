@@ -4,7 +4,7 @@
 [ext_resource path="res://scene/base_objects/RotationStickyBlock.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1147.5, 555 )
+extents = Vector2( 1147.5, 563.5 )
 
 [node name="Level" instance=ExtResource( 1 )]
 _type = "MEDIUM"
@@ -21,7 +21,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 1155, 360 )
+position = Vector2( 1155, 360.5 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -89,11 +89,7 @@ _type = "Rotation90"
 position = Vector2( 2175, 1 )
 _type = "Rotation90"
 
-[node name="RotationStickyBlock17" parent="RotationStickyBlocks" index="15" instance=ExtResource( 2 )]
-position = Vector2( 1830, 1 )
-_type = "Rotation90"
-
-[node name="RotationStickyBlock4" parent="RotationStickyBlocks" index="16" instance=ExtResource( 2 )]
+[node name="RotationStickyBlock4" parent="RotationStickyBlocks" index="15" instance=ExtResource( 2 )]
 position = Vector2( 765, 377 )
 _type = "Rotation90"
 

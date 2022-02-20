@@ -57,10 +57,10 @@ position = Vector2( 359, 267 )
 [node name="Label" type="Label" parent="HUDLayer" index="1"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -483.0
-margin_top = 86.0
-margin_right = 484.0
-margin_bottom = 101.0
+margin_left = -632.0
+margin_top = 72.0
+margin_right = 632.0
+margin_bottom = 89.0
 custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "Manipulate the collision point on the StickyBlocks using the different angulations"

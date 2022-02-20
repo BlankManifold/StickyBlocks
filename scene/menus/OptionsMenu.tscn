@@ -90,12 +90,12 @@ custom_constants/separation = 100
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_left = 265.0
-margin_right = 435.0
+margin_left = 258.0
+margin_right = 442.0
 margin_bottom = 22.0
 custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "VERSION: 0.1"
+text = "VERSION: 0.1.1"
 
 [node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 222.0

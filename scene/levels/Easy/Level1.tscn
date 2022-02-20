@@ -71,9 +71,9 @@ margin_bottom = 340.0
 [node name="Label" type="Label" parent="HUDLayer" index="1"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -582.0
+margin_left = -632.0
 margin_top = 96.0
-margin_right = 586.0
+margin_right = 636.0
 margin_bottom = 177.0
 custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
 custom_fonts/font = ExtResource( 5 )

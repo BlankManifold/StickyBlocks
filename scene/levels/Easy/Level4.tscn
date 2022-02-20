@@ -64,10 +64,10 @@ rotation = 1.5708
 [node name="Label" type="Label" parent="HUDLayer" index="1"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -544.0
+margin_left = -597.0
 margin_top = 78.0
-margin_right = 544.0
-margin_bottom = 126.0
+margin_right = 597.0
+margin_bottom = 135.0
 custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
 custom_fonts/font = ExtResource( 6 )
 text = "In some level you might want to zoom-in or zoom-out the camera
